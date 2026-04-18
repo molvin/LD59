@@ -7,10 +7,16 @@ public class PolaroidCamera : MonoBehaviour
     public bool Enabled;
     public int Width = 512;
     public int Height = 512;
+    public GameObject VisualObject;
     public Transform CameraPoint;
     public Image Output;
 
+    public float PreWaitTime;
+    public float TakingPictureWaitTime;
+    public float PostWaitTime;
+
     private bool takingPicture;
+    private Vector3 visualObjectStartPos;
 
     private void Update()
     {
@@ -27,14 +33,26 @@ public class PolaroidCamera : MonoBehaviour
 
 
         takingPicture = true;
+        VisualObject.SetActive(true);
+        Output.sprite = null;
 
-        yield return new WaitForEndOfFrame();
+        visualObjectStartPos = VisualObject.transform.localPosition;
+        for (float t = 0; t < PreWaitTime; t += Time.deltaTime)
+        {
+            VisualObject.transform.localPosition = Vector3.Lerp(visualObjectStartPos, Vector3.zero, t / PreWaitTime);
+            yield return null;
+        }
+        VisualObject.transform.localPosition = Vector3.zero;
 
+        Transform parent = transform.parent;
+        transform.SetParent(null);
         Camera cam = Camera.main;
         Vector3 startPos = cam.transform.position;
         Quaternion startRot = cam.transform.rotation;
-        cam.transform.position = CameraPoint.position;
-        cam.transform.rotation = CameraPoint.rotation;
+
+        yield return new WaitForEndOfFrame();
+
+        cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
         RenderTexture rt = new(Width, Height, 24);
         cam.targetTexture = rt;
         cam.Render();
@@ -54,6 +72,18 @@ public class PolaroidCamera : MonoBehaviour
         if (Output.sprite != null)
             Destroy(Output.sprite.texture);
         Output.sprite = sprite;
+
+        transform.parent = parent;
+
+        yield return new WaitForSeconds(TakingPictureWaitTime);
+
+        for (float t = 0; t < PostWaitTime; t += Time.deltaTime)
+        {
+            VisualObject.transform.localPosition = Vector3.Lerp(Vector3.zero, visualObjectStartPos, t / PostWaitTime);
+            yield return null;
+        }
+        VisualObject.SetActive(false);
+        VisualObject.transform.localPosition = visualObjectStartPos;
 
         takingPicture = false;
     }
