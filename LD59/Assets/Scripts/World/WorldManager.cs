@@ -48,7 +48,7 @@ public class WorldManager : Subsystem<WorldManager>
         Bounds tileBounds = Utils.GetBounds(water.gameObject);
         cellSize = new(tileBounds.size.x, tileBounds.size.z);
 
-        visibleCellDims = new (Mathf.CeilToInt(VIEW_DISTANCE / cellSize.x), Mathf.CeilToInt(VIEW_DISTANCE / cellSize.y));
+        visibleCellDims = new (Mathf.CeilToInt(VIEW_DISTANCE * 2 / cellSize.x), Mathf.CeilToInt(VIEW_DISTANCE * 2 / cellSize.y));
 
         float width = visibleCellDims.x * cellSize.x;
         float depth = visibleCellDims.y * cellSize.y;

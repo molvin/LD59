@@ -129,4 +129,5 @@ MonoBehaviour:
   Deceleration: 0.35
   TurnSpeed: 0.6
   WheelSpeed: 0.4
+  WheelReset: 0.8
   GearSpeed: 0.6
