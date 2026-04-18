@@ -28,8 +28,15 @@ public abstract class Interactable : MonoBehaviour
             return;
         }
 
-        // Occlusion test
         RaycastHit hit;
+        if (Physics.Raycast(interactorTransform.position, interactorTransform.forward, out hit, toObject.magnitude))
+        {
+            if (hit.collider.gameObject == gameObject)
+            {
+                Interact(interactorTransform);
+            }
+        }
+
         if (Physics.Raycast(interactorTransform.position, toObject.normalized, out hit, toObject.magnitude))
         {
             if (hit.collider.gameObject != gameObject)
@@ -41,7 +48,7 @@ public abstract class Interactable : MonoBehaviour
         // Within interaction range
         float angle = Mathf.Deg2Rad * Vector3.Angle(toObject, interactorTransform.forward);
         float reach = toObject.magnitude * Mathf.Tan(angle);
-        if (reach < InteractError)
+        if (Mathf.Abs(reach) < InteractError)
         {
             Interact(interactorTransform);
         }
