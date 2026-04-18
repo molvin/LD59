@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 8792666101348386370}
   - component: {fileID: 1495132868816788719}
   - component: {fileID: 8659860395804055036}
-  - component: {fileID: 8910032743428051251}
+  - component: {fileID: 7855345370594713096}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
   nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
---- !u!114 &8910032743428051251
+--- !u!114 &7855345370594713096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,7 +214,7 @@ MonoBehaviour:
       Data4: -2080754490
     Path: event:/MainMusic
   Event: 
-  EventPlayTrigger: 11
+  EventPlayTrigger: 1
   EventStopTrigger: 0
   AllowFadeout: 1
   TriggerOnce: 0
