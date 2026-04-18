@@ -7,6 +7,7 @@ Shader "Custom/SineWave"
         _LineColor ("Line Color", Color) = (1, 1, 1, 1)
         _BgTex ("Background Texture", 2D) = "black" {}
         _Thickness ("Line Thickness", Float) = 0.01
+        _ScrollSpeed ("Scroll Speed", Float) = 1.0
     }
     SubShader
     {
@@ -41,6 +42,7 @@ Shader "Custom/SineWave"
                 float4 _LineColor;
                 float4 _BgTex_ST;
                 float _Thickness;
+                float _ScrollSpeed;
             CBUFFER_END
 
             Varyings vert(Attributes IN)
@@ -55,7 +57,8 @@ Shader "Custom/SineWave"
             {
                 float2 uv = IN.uv;
                 float y = uv.y - 0.5;
-                float waveY = _Amplitude * sin(_Frequency * 3.1415926535 * 2.0 * uv.x);
+                float tau = 3.141592653579893238 * 2;
+                float waveY = _Amplitude * sin(_Frequency * tau * uv.x - _Time.y * _ScrollSpeed);
                 float dist = abs(y - waveY);
                 float mask = step(dist, _Thickness);
                 float4 bg = SAMPLE_TEXTURE2D(_BgTex, sampler_BgTex, TRANSFORM_TEX(uv, _BgTex));
