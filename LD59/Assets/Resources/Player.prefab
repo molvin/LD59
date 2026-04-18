@@ -193,34 +193,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3967911293691158527}
     m_Modifications:
-    - target: {fileID: 1456753612595502718, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.63466
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456753612595502718, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.63466
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456753612595502718, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.63466
-      objectReference: {fileID: 0}
-    - target: {fileID: 2548643236612779039, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2548643236612779039, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.105
-      objectReference: {fileID: 0}
-    - target: {fileID: 4192536396937093846, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5191552601876936298, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.376
-      objectReference: {fileID: 0}
     - target: {fileID: 5338625340976321783, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
       propertyPath: m_Name
       value: PolaroidCamera
@@ -264,18 +236,6 @@ PrefabInstance:
     - target: {fileID: 6175802525417493322, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: Width
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: Height
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 7085348862078263750, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

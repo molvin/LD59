@@ -41,7 +41,6 @@ public class Boat : MonoBehaviour
         steering = Mathf.Clamp(steering + turnJerk, -1.0f, 1.0f);
 
         isSteering = true;
-        Debug.Log(input);
     }
 
     void Start()
