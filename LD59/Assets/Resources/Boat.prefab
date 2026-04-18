@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4072990146059056959}
-  m_Father: {fileID: 1893441068722668657}
+  m_Father: {fileID: 5355420929151293198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3300030749580985545
 MeshFilter:
@@ -161,7 +161,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3239552839628573816}
-  m_Father: {fileID: 1893441068722668657}
+  m_Father: {fileID: 5355420929151293198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2890794538120694238
 MeshFilter:
@@ -274,7 +274,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1893441068722668657}
+  m_Father: {fileID: 5355420929151293198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9013236971454410377
 MeshFilter:
@@ -368,6 +368,124 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BoatStickInteractable
   InteractDistance: 1.6
   InteractError: 0.2
+--- !u!1 &4356976732765547699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3814950330688351382}
+  - component: {fileID: 1853082167153262688}
+  m_Layer: 0
+  m_Name: EngineNoise
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3814950330688351382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4356976732765547699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5355420929151293198}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1853082167153262688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4356976732765547699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1279200488
+      Data2: 1125064916
+      Data3: 1574533052
+      Data4: 1859154639
+    Path: event:/Engine
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: RPM
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!1 &4771961469525503301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5355420929151293198}
+  - component: {fileID: 5310677554791032881}
+  m_Layer: 0
+  m_Name: Floater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5355420929151293198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771961469525503301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4214026922294767761}
+  - {fileID: 7344213148805718751}
+  - {fileID: 8341215532005804094}
+  - {fileID: 1555008772165103675}
+  - {fileID: 2182558023027081513}
+  - {fileID: 3814950330688351382}
+  m_Father: {fileID: 1893441068722668657}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5310677554791032881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771961469525503301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 755f2707a6e6b5242b99b3d13a1cfc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Floater
+  WaterMaterial: {fileID: 2100000, guid: 4f0e353a81b656e4988f728702788bba, type: 2}
+  WaterBaseY: 0
+  TiltStrength: 0.05
 --- !u!1 &6111212724217866198
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1893441068722668657}
   - component: {fileID: 7098719332587587478}
+  - component: {fileID: 8232102860769504419}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -510,11 +629,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4214026922294767761}
-  - {fileID: 7344213148805718751}
-  - {fileID: 8341215532005804094}
-  - {fileID: 1555008772165103675}
-  - {fileID: 2182558023027081513}
+  - {fileID: 5355420929151293198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7098719332587587478
@@ -537,6 +652,39 @@ MonoBehaviour:
   WheelSpeed: 0.4
   WheelReset: 0.8
   GearSpeed: 0.6
+  engineNoise: {fileID: 1853082167153262688}
+--- !u!114 &8232102860769504419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168733051973625407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.1
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 99d0c7fa1fc102c4cbb38efb807765c5, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &8832944073520666446
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +803,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1893441068722668657}
+    m_TransformParent: {fileID: 5355420929151293198}
     m_Modifications:
     - target: {fileID: 100163809033986937, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -729,7 +877,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1893441068722668657}
+    m_TransformParent: {fileID: 5355420929151293198}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
       propertyPath: m_LocalScale.x
@@ -761,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
       propertyPath: m_LocalRotation.y
@@ -769,7 +917,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

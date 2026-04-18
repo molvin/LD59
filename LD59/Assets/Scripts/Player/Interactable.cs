@@ -12,11 +12,6 @@ public abstract class Interactable : MonoBehaviour
         InteractionSubsystem.Get().Register(this);
     }
 
-    private void OnDisable()
-    {
-        InteractionSubsystem.Get().Unregister(this);
-    }
-
     protected abstract void Interact(Transform interactorTransform);
 
     public void TryInteract(Transform interactorTransform)
