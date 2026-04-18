@@ -50,6 +50,12 @@ public class PolaroidCamera : MonoBehaviour
         Vector3 startPos = cam.transform.position;
         Quaternion startRot = cam.transform.rotation;
 
+        var polaroidControlled = FindObjectsByType<PolaroidControlled>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach(var obj in polaroidControlled)
+        {
+            obj.gameObject.SetActive(obj.Enabled);
+        }
+
         yield return new WaitForEndOfFrame();
 
         cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
@@ -74,6 +80,11 @@ public class PolaroidCamera : MonoBehaviour
         Output.sprite = sprite;
 
         transform.parent = parent;
+
+        foreach(var obj in polaroidControlled)
+        {
+            obj.gameObject.SetActive(!obj.Enabled);
+        }
 
         yield return new WaitForSeconds(TakingPictureWaitTime);
 
