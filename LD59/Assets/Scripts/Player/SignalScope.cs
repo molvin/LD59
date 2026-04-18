@@ -1,13 +1,21 @@
 using TMPro;
 using UnityEngine;
 
-public class SignalScope : MonoBehaviour
+public class SignalScope : Interactable
 {
+    [System.Serializable]
+    public struct Setting
+    {
+        public float Amplitude;
+        public float Frequency;
+    }
+
     public TextMeshProUGUI Text;
     public Transform AmplitudeDial;
     public Transform FrequencyDial;
+    public Renderer SineWaveRenderer;
     public Material SineWaveMat;
-    public float MinAmplitude;
+    public float MinAmplitude;  
     public float MaxAmplitude;
     public float MinFrequency;
     public float MaxFrequency;
@@ -17,13 +25,52 @@ public class SignalScope : MonoBehaviour
     public float MinDialAngle = -135f;
     public float MaxDialAngle = 135f;
 
+    public Transform CameraPoint;
     public float Amplitude;
     public float Frequency;
     public bool Enabled;
 
+    public Setting[] CorrectSettings;
+    public float CorrectSettingsPercentageMargin = 0.05f;
+
+    private Player player;
+    private Camera cam;
+    private Transform camOriginalParent;
+    private Vector3 camOriginalLocalPos;
+    private Quaternion camOriginalLocalRot;
+    private PolaroidCamera polaroidCamera;
+    private PolaroidBook polaroidBook;
+
+    protected override void Interact(Transform interactorTransform)
+    {
+        cam = Camera.main;
+        camOriginalParent = cam.transform.parent;
+        camOriginalLocalPos = cam.transform.localPosition;
+        camOriginalLocalRot = cam.transform.localRotation;
+
+        cam.transform.SetParent(null);
+        cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
+
+        polaroidCamera = FindFirstObjectByType<PolaroidCamera>();
+        if (polaroidCamera != null) polaroidCamera.Enabled = false;
+
+        polaroidBook = FindFirstObjectByType<PolaroidBook>();
+        if (polaroidBook != null)
+        {
+            polaroidBook.Open(false);
+            polaroidBook.Enabled = false;
+        }
+        player = FindFirstObjectByType<Player>();
+        player.MovementEnabled = false;
+        Enabled = true;
+    }
+
     private void Start()
     {
         SineWaveMat = new Material(SineWaveMat);
+        var mats = SineWaveRenderer.materials;
+        mats[1] = SineWaveMat;
+        SineWaveRenderer.materials = mats;
         SineWaveMat.SetFloat("_Amplitude", Amplitude);
         SineWaveMat.SetFloat("_Frequency", Frequency);
     }
@@ -32,6 +79,19 @@ public class SignalScope : MonoBehaviour
     {
         if(Enabled)
         {
+            cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Enabled = false;
+                cam.transform.SetParent(camOriginalParent);
+                cam.transform.SetLocalPositionAndRotation(camOriginalLocalPos, camOriginalLocalRot);
+                player.MovementEnabled = true;
+                if (polaroidCamera != null) polaroidCamera.Enabled = true;
+                if (polaroidBook != null) polaroidBook.Enabled = true;
+                return;
+            }
+
             if (Input.GetKey(KeyCode.W))
             {
                 Amplitude = Mathf.Clamp(Amplitude + Time.deltaTime * AmplitudeChangeSpeed, MinAmplitude, MaxAmplitude);
@@ -61,6 +121,16 @@ public class SignalScope : MonoBehaviour
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
 
             Text.text = $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}";
+
+            for (int i = 0; i < CorrectSettings.Length; i++)
+            {
+                float ampRange = MaxAmplitude - MinAmplitude;
+                float freqRange = MaxFrequency - MinFrequency;
+                float ampError = ampRange > 0f ? Mathf.Abs(Amplitude - CorrectSettings[i].Amplitude) / ampRange : 0f;
+                float freqError = freqRange > 0f ? Mathf.Abs(Frequency - CorrectSettings[i].Frequency) / freqRange : 0f;
+                float totalError = (ampError + freqError) * 0.5f;
+                Debug.Log($"Setting {i}: amp error {ampError * 100f:F1}%, freq error {freqError * 100f:F1}%, total {totalError * 100f:F1}%");
+            }
         }
     }
 }
