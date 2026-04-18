@@ -1,19 +1,43 @@
 using System;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
-    public float InteractDistance = 1.0f;
+    public float InteractDistance = 1.6f;
+    public float InteractError = 0.4f;
 
-    public Action<float> OnInteracted;
 
-    public void TryInteract(Vector3 interactionPoint, Vector3 lookDirection, float action)
+    private void OnEnable()
     {
-        Vector3 toObject = transform.position - interactionPoint;
+        InteractionSubsystem.Get().Register(this);
+    }
 
-        // Occlusion test
+    private void OnDisable()
+    {
+        InteractionSubsystem.Get().Unregister(this);
+    }
+
+    protected abstract void Interact(Transform interactorTransform);
+
+    public void TryInteract(Transform interactorTransform)
+    {
+        Vector3 toObject = transform.position - interactorTransform.position;
+
+        if (toObject.sqrMagnitude > InteractDistance * InteractDistance)
+        {
+            return;
+        }
+
         RaycastHit hit;
-        if (Physics.Raycast(interactionPoint, toObject.normalized, out hit, toObject.magnitude))
+        if (Physics.Raycast(interactorTransform.position, interactorTransform.forward, out hit, toObject.magnitude))
+        {
+            if (hit.collider.gameObject == gameObject)
+            {
+                Interact(interactorTransform);
+            }
+        }
+
+        if (Physics.Raycast(interactorTransform.position, toObject.normalized, out hit, toObject.magnitude))
         {
             if (hit.collider.gameObject != gameObject)
             {
@@ -22,11 +46,11 @@ public class Interactable : MonoBehaviour
         }
 
         // Within interaction range
-        float angle = Mathf.Deg2Rad * Vector3.Angle(toObject, lookDirection);
-        float reach = toObject.magnitude / Mathf.Cos(angle);
-        if (reach < InteractDistance)
+        float angle = Mathf.Deg2Rad * Vector3.Angle(toObject, interactorTransform.forward);
+        float reach = toObject.magnitude * Mathf.Tan(angle);
+        if (Mathf.Abs(reach) < InteractError)
         {
-            OnInteracted?.Invoke(action);
+            Interact(interactorTransform);
         }
     }
 }
