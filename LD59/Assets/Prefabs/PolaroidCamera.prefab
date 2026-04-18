@@ -192,6 +192,9 @@ MonoBehaviour:
   TakingPictureWaitTime: 0.5
   PostWaitTime: 0.5
   Anim: {fileID: 50255217102856190}
+  IgnoredRenderers:
+  - {fileID: 1240759473348217491}
+  - {fileID: 9021142577950298107}
 --- !u!95 &50255217102856190
 Animator:
   serializedVersion: 7
@@ -528,5 +531,10 @@ PrefabInstance:
 --- !u!4 &104494245238338044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
+  m_PrefabInstance: {fileID: 502579665982821911}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1240759473348217491 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
   m_PrefabInstance: {fileID: 502579665982821911}
   m_PrefabAsset: {fileID: 0}

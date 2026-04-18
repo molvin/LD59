@@ -28,6 +28,8 @@ public class SignalScope : Interactable
     private Transform camOriginalParent;
     private Vector3 camOriginalLocalPos;
     private Quaternion camOriginalLocalRot;
+    private PolaroidCamera polaroidCamera;
+    private PolaroidBook polaroidBook;
 
     protected override void Interact(Transform interactorTransform)
     {
@@ -41,6 +43,16 @@ public class SignalScope : Interactable
 
         cam.transform.SetParent(null);
         cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
+
+        polaroidCamera = FindFirstObjectByType<PolaroidCamera>();
+        if (polaroidCamera != null) polaroidCamera.Enabled = false;
+
+        polaroidBook = FindFirstObjectByType<PolaroidBook>();
+        if (polaroidBook != null)
+        {
+            polaroidBook.Open(false);
+            polaroidBook.Enabled = false;
+        }
 
         Enabled = true;
     }
@@ -59,12 +71,16 @@ public class SignalScope : Interactable
     {
         if(Enabled)
         {
+            cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Enabled = false;
                 cam.transform.SetParent(camOriginalParent);
                 cam.transform.SetLocalPositionAndRotation(camOriginalLocalPos, camOriginalLocalRot);
                 player.MovementEnabled = true;
+                if (polaroidCamera != null) polaroidCamera.Enabled = true;
+                if (polaroidBook != null) polaroidBook.Enabled = true;
                 return;
             }
 
