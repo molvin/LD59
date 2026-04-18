@@ -23,7 +23,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 2665565506681887661}
   cacheVersion: 131859
-  cacheTime: 639121409586696698
+  cacheTime: 639121413407036700
   SerializableEventsDict:
   - key: event:/MainMusic
     index: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: ../Fmod/LD59/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639121409586696698
+  lastModified: 639121413407026671
   FileSizes:
   - Name: Desktop
     Value: 944800
@@ -62,7 +62,7 @@ MonoBehaviour:
   Path: ../Fmod/LD59/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639121409586696698
+  lastModified: 639121413407036700
   FileSizes:
   - Name: Desktop
     Value: 770

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300030749580985545}
   - component: {fileID: 7198385592107823643}
   - component: {fileID: 6981388749967995533}
-  - component: {fileID: 937890731276293559}
+  - component: {fileID: 211281674726347761}
   m_Layer: 0
   m_Name: Wheel
   m_TagString: Untagged
@@ -114,7 +114,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &937890731276293559
+--- !u!114 &211281674726347761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,10 +123,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3014800593641483487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfea4679891777a4b86e78ecf148f165, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a543e005e65c8f4fa65b2e9747ae27c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  InteractDistance: 1
+  m_EditorClassIdentifier: Assembly-CSharp::WheelInteractable
+  InteractDistance: 2
+  InteractError: 0.5
 --- !u!1 &3049610441372518756
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0cd3909bdcbe549acdcc92a9be5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boat
-  Wheel: {fileID: 937890731276293559}
+  Wheel: {fileID: 211281674726347761}
   DeckLevel: 0.5
   Acceleration: 3.5
   Deceleration: 0.35
