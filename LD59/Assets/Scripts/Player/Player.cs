@@ -1,11 +1,16 @@
-using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private new Camera camera;
-    private float playerHeight = 1.7f;
+    const float PLAYER_HEIGHT = 1.7f;
 
+    [Header("Config")]
+    public float MouseSensitivity = 60;
+    public float MovementSpeed = 2;
+
+    private new Camera camera;
+
+    private float rotation;
     private bool boated = true;
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
 
@@ -17,16 +22,40 @@ public class Player : MonoBehaviour
             camera = new GameObject("Camera", typeof(Camera)).GetComponent<Camera>();
         }
         camera.transform.SetParent(transform);
-        camera.transform.SetLocalPositionAndRotation(new (0, playerHeight, 0), Quaternion.LookRotation(transform.forward, Vector3.up));
+        camera.transform.SetLocalPositionAndRotation(new (0, PLAYER_HEIGHT, 0), Quaternion.LookRotation(transform.forward, Vector3.up));
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
+        float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
+
+        rotation -= mouseY;
+        rotation = Mathf.Clamp(rotation, -90f, 90f);
+
+        camera.transform.localRotation = Quaternion.Euler(rotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
+
+        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        input = Vector3.ClampMagnitude(input, 1.0f);
+
+        transform.position += transform.rotation * input * MovementSpeed * Time.deltaTime;
+
         if (boated)
         {
             Boat boat = GameManager.Get().Boat;
             //boat.Throttle(Input.GetAxisRaw("Vertical"));
             //boat.Steer(Input.GetAxisRaw("Horizontal"));
+            if (Input.GetMouseButton(0))
+            {
+                float toWheel = Vector3.Dot((boat.Wheel.transform.position - transform.position).normalized, boat.Wheel.transform.right);
+                float lookAtWheel = Vector3.Dot((boat.Wheel.transform.position - transform.position).normalized, boat.Wheel.transform.right);
+                float action = lookAtWheel > toWheel ? -1.0f : 1.0f;
+                boat.Wheel.TryInteract(transform.position, camera.transform.forward, action);
+            }
 
             transform.position += boat.DeltaVelocity;
             transform.rotation *= Quaternion.AngleAxis(-Mathf.Rad2Deg * boat.DeltaRotation, Vector3.up);
@@ -35,7 +64,7 @@ public class Player : MonoBehaviour
 
             Vector3 clampedPos = transform.position;
             clampedPos.x = Mathf.Clamp(clampedPos.x, boatBounds.min.x, boatBounds.max.x);
-            clampedPos.y = boatBounds.max.y;
+            clampedPos.y = boat.DeckLevel;
             clampedPos.z = Mathf.Clamp(clampedPos.z, boatBounds.min.z, boatBounds.max.z);
 
             transform.position = clampedPos;

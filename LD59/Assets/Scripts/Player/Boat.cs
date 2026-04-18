@@ -3,7 +3,8 @@ using UnityEngine;
 public class Boat : MonoBehaviour
 {
     [Header("References")]
-    public GameObject Wheel;
+    public Interactable Wheel;
+    public float DeckLevel = 0.5f;
     [Header("Steering")]
     public float Acceleration = 3.5f;
     public float Deceleration = 0.35f;
@@ -39,7 +40,12 @@ public class Boat : MonoBehaviour
         float turnJerk = input * WheelSpeed * Time.deltaTime;
         steering = Mathf.Clamp(steering + turnJerk, -1.0f, 1.0f);
 
-        isSteering = Mathf.Abs(input) > float.Epsilon;
+        isSteering = true;
+    }
+
+    void Start()
+    {
+        Wheel.OnInteracted += Steer;
     }
 
     void Update()
@@ -51,6 +57,7 @@ public class Boat : MonoBehaviour
         {
             steering *= Mathf.Pow(WheelReset, Time.deltaTime);
         }
+        isSteering = false;
 
         angularVelocity += steering * Mathf.Rad2Deg * TurnSpeed * Time.deltaTime;
         angularVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);

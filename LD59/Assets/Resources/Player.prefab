@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a088c7d0252714583c182a6d340431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  MouseSensitivity: 60
