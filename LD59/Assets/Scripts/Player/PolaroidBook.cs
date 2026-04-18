@@ -7,6 +7,8 @@ public class PolaroidBook : MonoBehaviour
     public List<Image> Pictures = new List<Image>();
     public GameObject Root;
 
+    public bool IsOpen { get; private set; }
+
     private List<Texture2D> polaroids = new ();
 
     private int currentPage;
@@ -21,7 +23,9 @@ public class PolaroidBook : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Open(!Root.activeSelf);
+            PolaroidCamera cam = FindFirstObjectByType<PolaroidCamera>();
+            if (cam == null || !cam.TakingPicture)
+                Open(!IsOpen);
         }
     }
 
@@ -33,6 +37,7 @@ public class PolaroidBook : MonoBehaviour
 
     public void Open(bool open)
     {
+        IsOpen = open;
         Root.SetActive(open);
         UpdatePictures();
     }

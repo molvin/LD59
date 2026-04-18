@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     private float rotation;
     private bool boated = true;
+    public bool MovementEnabled = true;
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
 
     void Start()
@@ -30,6 +31,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!MovementEnabled) return;
+
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 

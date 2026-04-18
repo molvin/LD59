@@ -18,12 +18,13 @@ public class PolaroidCamera : MonoBehaviour
     public float PostWaitTime;
 
     public Animator Anim;
-    private bool takingPicture;
+    public bool TakingPicture { get; private set; }
     private Vector3 visualObjectStartPos;
 
     private void Update()
     {
-        if(Enabled && Input.GetKeyDown(KeyCode.T) && !takingPicture)
+        PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
+        if(Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen))
         {
             StartCoroutine(TakePicture());
         }
@@ -35,7 +36,7 @@ public class PolaroidCamera : MonoBehaviour
         //       also do something with the output image
 
 
-        takingPicture = true;
+        TakingPicture = true;
         VisualObject.SetActive(true);
         Output.sprite = null;
         PolaroidPicture.SetActive(false);
@@ -110,6 +111,6 @@ public class PolaroidCamera : MonoBehaviour
         VisualObject.SetActive(false);
         VisualObject.transform.localPosition = visualObjectStartPos;
 
-        takingPicture = false;
+        TakingPicture = false;
     }
 }

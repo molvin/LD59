@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
 
-public class SignalScope : MonoBehaviour
+public class SignalScope : Interactable
 {
     public TextMeshProUGUI Text;
     public Transform AmplitudeDial;
     public Transform FrequencyDial;
+    public Renderer SineWaveRenderer;
     public Material SineWaveMat;
-    public float MinAmplitude;
+    public float MinAmplitude;  
     public float MaxAmplitude;
     public float MinFrequency;
     public float MaxFrequency;
@@ -17,13 +18,39 @@ public class SignalScope : MonoBehaviour
     public float MinDialAngle = -135f;
     public float MaxDialAngle = 135f;
 
+    public Transform CameraPoint;
     public float Amplitude;
     public float Frequency;
     public bool Enabled;
 
+    private Player player;
+    private Camera cam;
+    private Transform camOriginalParent;
+    private Vector3 camOriginalLocalPos;
+    private Quaternion camOriginalLocalRot;
+
+    protected override void Interact(Transform interactorTransform)
+    {
+        player = FindFirstObjectByType<Player>();
+        player.MovementEnabled = false;
+
+        cam = Camera.main;
+        camOriginalParent = cam.transform.parent;
+        camOriginalLocalPos = cam.transform.localPosition;
+        camOriginalLocalRot = cam.transform.localRotation;
+
+        cam.transform.SetParent(null);
+        cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
+
+        Enabled = true;
+    }
+
     private void Start()
     {
         SineWaveMat = new Material(SineWaveMat);
+        var mats = SineWaveRenderer.materials;
+        mats[1] = SineWaveMat;
+        SineWaveRenderer.materials = mats;
         SineWaveMat.SetFloat("_Amplitude", Amplitude);
         SineWaveMat.SetFloat("_Frequency", Frequency);
     }
@@ -32,6 +59,15 @@ public class SignalScope : MonoBehaviour
     {
         if(Enabled)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Enabled = false;
+                cam.transform.SetParent(camOriginalParent);
+                cam.transform.SetLocalPositionAndRotation(camOriginalLocalPos, camOriginalLocalRot);
+                player.MovementEnabled = true;
+                return;
+            }
+
             if (Input.GetKey(KeyCode.W))
             {
                 Amplitude = Mathf.Clamp(Amplitude + Time.deltaTime * AmplitudeChangeSpeed, MinAmplitude, MaxAmplitude);
