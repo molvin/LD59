@@ -33,9 +33,6 @@ public class SignalScope : Interactable
 
     protected override void Interact(Transform interactorTransform)
     {
-        player = FindFirstObjectByType<Player>();
-        player.MovementEnabled = false;
-
         cam = Camera.main;
         camOriginalParent = cam.transform.parent;
         camOriginalLocalPos = cam.transform.localPosition;
@@ -53,7 +50,8 @@ public class SignalScope : Interactable
             polaroidBook.Open(false);
             polaroidBook.Enabled = false;
         }
-
+        player = FindFirstObjectByType<Player>();
+        player.MovementEnabled = false;
         Enabled = true;
     }
 
@@ -73,7 +71,7 @@ public class SignalScope : Interactable
         {
             cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetMouseButtonDown(1))
             {
                 Enabled = false;
                 cam.transform.SetParent(camOriginalParent);
