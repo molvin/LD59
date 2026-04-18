@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 public class WorldManager : Subsystem<WorldManager>
 {
-    const float VIEW_DISTANCE = 50;
+    const float VIEW_DISTANCE = 500;
 
     private Transform worldTransfrom;
     private Tile[] tileAssets;
