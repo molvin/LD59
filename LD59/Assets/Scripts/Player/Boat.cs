@@ -43,11 +43,6 @@ public class Boat : MonoBehaviour
         isSteering = true;
     }
 
-    void Start()
-    {
-        Wheel.OnInteracted += Steer;
-    }
-
     void Update()
     {
         Vector3 currentPosition = transform.position;
