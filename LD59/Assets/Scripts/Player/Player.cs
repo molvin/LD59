@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         camera.transform.SetLocalPositionAndRotation(new (0, PLAYER_HEIGHT, 0), Quaternion.LookRotation(transform.forward, Vector3.up));
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     void Update()
@@ -47,13 +47,12 @@ public class Player : MonoBehaviour
         if (boated)
         {
             Boat boat = GameManager.Get().Boat;
-            //boat.Throttle(Input.GetAxisRaw("Vertical"));
-            //boat.Steer(Input.GetAxisRaw("Horizontal"));
+
             if (Input.GetMouseButton(0))
             {
                 float toWheel = Vector3.Dot((boat.Wheel.transform.position - transform.position).normalized, boat.Wheel.transform.right);
-                float lookAtWheel = Vector3.Dot((boat.Wheel.transform.position - transform.position).normalized, boat.Wheel.transform.right);
-                float action = lookAtWheel > toWheel ? -1.0f : 1.0f;
+                float lookAtWheel = Vector3.Dot(camera.transform.forward, boat.Wheel.transform.right);
+                float action = lookAtWheel > toWheel ? 1.0f : -1.0f;
                 boat.Wheel.TryInteract(transform.position, camera.transform.forward, action);
             }
 
