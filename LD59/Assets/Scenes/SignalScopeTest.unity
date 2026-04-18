@@ -438,11 +438,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100163809033986937, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 100163809033986937, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.94
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 100163809033986937, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -476,17 +476,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: MaxFrequency
-      value: 15
+    - target: {fileID: 5511306428339291124, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.172
       objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: AmplitudeChangeSpeed
-      value: 0.3
+    - target: {fileID: 5511306428339291124, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.1978
       objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: FrequencyChangeSpeed
-      value: 5
+    - target: {fileID: 5511306428339291124, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.2813
       objectReference: {fileID: 0}
     - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_Name

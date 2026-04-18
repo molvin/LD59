@@ -23,6 +23,7 @@ public class SignalScope : MonoBehaviour
 
     private void Start()
     {
+        SineWaveMat = new Material(SineWaveMat);
         SineWaveMat.SetFloat("_Amplitude", Amplitude);
         SineWaveMat.SetFloat("_Frequency", Frequency);
     }
@@ -54,10 +55,10 @@ public class SignalScope : MonoBehaviour
 
             float ampT = Mathf.InverseLerp(MinAmplitude, MaxAmplitude, Amplitude);
             float freqT = Mathf.InverseLerp(MinFrequency, MaxFrequency, Frequency);
-            float ampAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, ampT);
-            float freqAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, freqT);
-            // AmplitudeDial.localRotation = Quaternion.Euler(0f, 0f, ampAngle);
-            // FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
+            float ampAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - ampT);
+            float freqAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - freqT);
+            AmplitudeDial.localRotation = Quaternion.Euler(0f, 0f, ampAngle);
+            FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
 
             Text.text = $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}";
         }
