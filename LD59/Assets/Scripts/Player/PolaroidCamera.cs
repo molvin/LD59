@@ -10,11 +10,14 @@ public class PolaroidCamera : MonoBehaviour
     public GameObject VisualObject;
     public Transform CameraPoint;
     public Image Output;
+    public GameObject PolaroidPicture;
 
     public float PreWaitTime;
+    public float IntermediateWaitTime;
     public float TakingPictureWaitTime;
     public float PostWaitTime;
 
+    public Animator Anim;
     private bool takingPicture;
     private Vector3 visualObjectStartPos;
 
@@ -35,13 +38,12 @@ public class PolaroidCamera : MonoBehaviour
         takingPicture = true;
         VisualObject.SetActive(true);
         Output.sprite = null;
+        PolaroidPicture.SetActive(false);
 
         visualObjectStartPos = VisualObject.transform.localPosition;
-        for (float t = 0; t < PreWaitTime; t += Time.deltaTime)
-        {
-            VisualObject.transform.localPosition = Vector3.Lerp(visualObjectStartPos, Vector3.zero, t / PreWaitTime);
-            yield return null;
-        }
+        
+        Anim.SetTrigger("MakeReady");
+        yield return new WaitForSeconds(PreWaitTime);
         VisualObject.transform.localPosition = Vector3.zero;
 
         Transform parent = transform.parent;
@@ -79,6 +81,10 @@ public class PolaroidCamera : MonoBehaviour
             Destroy(Output.sprite.texture);
         Output.sprite = sprite;
 
+        PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
+        if (book != null)
+            book.AddPicture(photo);
+
         transform.parent = parent;
 
         foreach(var obj in polaroidControlled)
@@ -88,11 +94,19 @@ public class PolaroidCamera : MonoBehaviour
 
         yield return new WaitForSeconds(TakingPictureWaitTime);
 
-        for (float t = 0; t < PostWaitTime; t += Time.deltaTime)
+        Anim.SetTrigger("LookAt");
+
+        yield return new WaitForSeconds(IntermediateWaitTime);
+        PolaroidPicture.SetActive(true);
+
+        while (!Input.GetKeyDown(KeyCode.T))
         {
-            VisualObject.transform.localPosition = Vector3.Lerp(Vector3.zero, visualObjectStartPos, t / PostWaitTime);
             yield return null;
         }
+        PolaroidPicture.SetActive(false);
+
+        Anim.SetTrigger("PutAway");
+        yield return new WaitForSeconds(PostWaitTime);
         VisualObject.SetActive(false);
         VisualObject.transform.localPosition = visualObjectStartPos;
 
