@@ -12,9 +12,14 @@ public class GameManager : Subsystem<GameManager>
     private Vector3 startPosition = new(0, 0.5f, 0);
 
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnGameStart()
     {
+        if (!SceneConfig.InitializePlayScene())
+        {
+            return;
+        }
+
         GameManager gameManager = Get();
         gameManager.LoadAssets();
     }
