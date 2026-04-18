@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
     const float PLAYER_HEIGHT = 1.7f;
 
     [Header("Config")]
-    public float MouseSensitivity = 60;
+    public float MouseSensitivity = 80;
     public float MovementSpeed = 2;
 
     private new Camera camera;
@@ -50,10 +50,7 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                float toWheel = Vector3.Dot((boat.Wheel.transform.position - transform.position).normalized, boat.transform.right);
-                float lookAtWheel = Vector3.Dot(camera.transform.forward, boat.transform.right);
-                float action = lookAtWheel > toWheel ? 1.0f : -1.0f;
-                boat.Wheel.TryInteract(camera.transform.position, camera.transform.forward, action);
+                InteractionSubsystem.Get().Interact(camera.transform);
             }
 
             transform.position += boat.DeltaVelocity;
