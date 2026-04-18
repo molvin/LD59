@@ -1,8 +1,10 @@
-using NUnit.Framework;
 using UnityEngine;
 
 public class Boat : MonoBehaviour
 {
+    [Header("References")]
+    public GameObject Wheel;
+    [Header("Steering")]
     public float Acceleration = 3.5f;
     public float Deceleration = 0.35f;
     public float TurnSpeed = 0.6f;

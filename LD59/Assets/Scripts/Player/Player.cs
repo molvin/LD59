@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
         if (boated)
         {
             Boat boat = GameManager.Get().Boat;
-            boat.Throttle(Input.GetAxisRaw("Vertical"));
-            boat.Steer(Input.GetAxisRaw("Horizontal"));
+            //boat.Throttle(Input.GetAxisRaw("Vertical"));
+            //boat.Steer(Input.GetAxisRaw("Horizontal"));
 
             transform.position += boat.DeltaVelocity;
             transform.rotation *= Quaternion.AngleAxis(-Mathf.Rad2Deg * boat.DeltaRotation, Vector3.up);

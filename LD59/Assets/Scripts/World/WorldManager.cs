@@ -15,9 +15,14 @@ public class WorldManager : Subsystem<WorldManager>
     private List<GameObject> waterTiles = new(); 
 
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnGameStart()
     {
+        if (!SceneConfig.InitializePlayScene())
+        {
+            return;
+        }
+
         WorldManager worldManager = Get();
         worldManager.LoadAssets();
     }
@@ -25,10 +30,6 @@ public class WorldManager : Subsystem<WorldManager>
     private void LoadAssets()
     {
         tileAssets = Resources.LoadAll("Tiles", typeof(Tile)).Cast<Tile>().ToArray();
-    }
-
-    private void Start()
-    {
         worldTransfrom = new GameObject("World").transform;
         SetupTiles();
     }
