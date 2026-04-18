@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,12 +19,14 @@ public class PolaroidCamera : MonoBehaviour
     public float PostWaitTime;
 
     public Animator Anim;
-    private bool takingPicture;
+    public List<Renderer> IgnoredRenderers = new();
+    public bool TakingPicture { get; private set; }
     private Vector3 visualObjectStartPos;
 
     private void Update()
     {
-        if(Enabled && Input.GetKeyDown(KeyCode.T) && !takingPicture)
+        PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
+        if(Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen))
         {
             StartCoroutine(TakePicture());
         }
@@ -35,7 +38,7 @@ public class PolaroidCamera : MonoBehaviour
         //       also do something with the output image
 
 
-        takingPicture = true;
+        TakingPicture = true;
         VisualObject.SetActive(true);
         Output.sprite = null;
         PolaroidPicture.SetActive(false);
@@ -60,10 +63,12 @@ public class PolaroidCamera : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
 
-        cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
+        // cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
+        foreach (var r in IgnoredRenderers) r.enabled = false;
         RenderTexture rt = new(Width, Height, 24);
         cam.targetTexture = rt;
         cam.Render();
+        foreach (var r in IgnoredRenderers) r.enabled = true;
         cam.transform.position = startPos;
         cam.transform.rotation = startRot;
 
@@ -110,6 +115,6 @@ public class PolaroidCamera : MonoBehaviour
         VisualObject.SetActive(false);
         VisualObject.transform.localPosition = visualObjectStartPos;
 
-        takingPicture = false;
+        TakingPicture = false;
     }
 }
