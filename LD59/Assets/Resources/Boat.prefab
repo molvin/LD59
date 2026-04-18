@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6361195177147618534}
   - component: {fileID: 3202477474319785976}
   - component: {fileID: 5092725717334653913}
+  - component: {fileID: 7098719332587587478}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -112,3 +113,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7098719332587587478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168733051973625407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cd3909bdcbe549acdcc92a9be5110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Boat
+  Acceleration: 3.5
+  Deceleration: 0.35
+  TurnSpeed: 0.6
+  WheelSpeed: 0.4
+  GearSpeed: 0.6

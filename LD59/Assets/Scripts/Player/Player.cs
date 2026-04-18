@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -6,7 +7,7 @@ public class Player : MonoBehaviour
     private float playerHeight = 1.7f;
 
     private bool boated = true;
-    public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat);
+    public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
 
     void Start()
     {
@@ -23,12 +24,19 @@ public class Player : MonoBehaviour
     {
         if (boated)
         {
-            Bounds boat = BoatBounds;
+            Boat boat = GameManager.Get().Boat;
+            boat.Throttle(Input.GetAxisRaw("Vertical"));
+            boat.Steer(Input.GetAxisRaw("Horizontal"));
+
+            transform.position += boat.DeltaVelocity;
+            transform.rotation *= Quaternion.AngleAxis(-Mathf.Rad2Deg * boat.DeltaRotation, Vector3.up);
+
+            Bounds boatBounds = BoatBounds;
 
             Vector3 clampedPos = transform.position;
-            clampedPos.x = Mathf.Clamp(clampedPos.x, boat.min.x, boat.max.x);
-            clampedPos.y = boat.max.y;
-            clampedPos.z = Mathf.Clamp(clampedPos.z, boat.min.z, boat.max.z);
+            clampedPos.x = Mathf.Clamp(clampedPos.x, boatBounds.min.x, boatBounds.max.x);
+            clampedPos.y = boatBounds.max.y;
+            clampedPos.z = Mathf.Clamp(clampedPos.z, boatBounds.min.z, boatBounds.max.z);
 
             transform.position = clampedPos;
         }
