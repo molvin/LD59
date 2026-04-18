@@ -50,10 +50,10 @@ public class Player : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                float toWheel = Vector3.Dot((boat.Wheel.transform.position - transform.position).normalized, boat.Wheel.transform.right);
-                float lookAtWheel = Vector3.Dot(camera.transform.forward, boat.Wheel.transform.right);
+                float toWheel = Vector3.Dot((boat.Wheel.transform.position - transform.position).normalized, boat.transform.right);
+                float lookAtWheel = Vector3.Dot(camera.transform.forward, boat.transform.right);
                 float action = lookAtWheel > toWheel ? 1.0f : -1.0f;
-                boat.Wheel.TryInteract(transform.position, camera.transform.forward, action);
+                boat.Wheel.TryInteract(camera.transform.position, camera.transform.forward, action);
             }
 
             transform.position += boat.DeltaVelocity;

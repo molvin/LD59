@@ -58,7 +58,7 @@ public class Boat : MonoBehaviour
             steering *= Mathf.Pow(WheelReset, Time.deltaTime);
         }
         isSteering = false;
-        //Wheel.transform.localRotation = Quaternion.Euler(0, 0, 300 * steering);
+        Wheel.transform.localRotation = Quaternion.Euler(0, 0, -300 * steering);
         //Wheel.transform.rotation = Quaternion.AngleAxis(300 * steering, Vector3.forward);
 
         angularVelocity += steering * Mathf.Rad2Deg * TurnSpeed * Time.deltaTime;
