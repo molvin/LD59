@@ -121,4 +121,12 @@ MonoBehaviour:
   GridSize: 100
   CellSize: 0.2
   MeshFilter: {fileID: 2185292543409745995}
+  WaterRenderer: {fileID: 3339993930268071993}
   MeshSavePath: Assets/Generated/WaterTileMesh.asset
+  BakeLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  FadeDistance: 2
+  TextureSize: 256
+  RaycastHeight: 50
+  MaxDepth: 1

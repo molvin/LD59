@@ -17,6 +17,11 @@ Shader "Custom/Water"
         _WaveNoiseScale     ("Wave Noise Scale (m)", Float)      = 10.0
         _WaveNoiseStrength  ("Wave Noise Strength",  Float)      = 0.3
 
+        [Header(Dropoff)]
+        _MinDistance        ("Dropoff Min Distance", Float)      = 100
+        _MaxDistance        ("Dropoff Max Distance", Float)      = 200
+        _MaxDropoff         ("Dropoff Max Height",   Float)      = 50
+
         [Header(Normal Maps)]
         _NormalMapA         ("Normal Map A",         2D)         = "bump" {}
         _NormalMapB         ("Normal Map B",         2D)         = "bump" {}
@@ -75,11 +80,6 @@ Shader "Custom/Water"
             TEXTURE2D(_FoamMap);    SAMPLER(sampler_FoamMap);
             TEXTURE2D(_FoamNoise);  SAMPLER(sampler_FoamNoise);
 
-            // set globally by Dropoff.cs — must live outside CBUFFER so globals aren't shadowed
-            float  _MinDistance;
-            float  _MaxDistance;
-            float  _DropoffHeight;
-
             CBUFFER_START(UnityPerMaterial)
                 float3 _ShallowColor;
                 float3 _DeepColor;
@@ -98,6 +98,9 @@ Shader "Custom/Water"
                 float  _WaveSpeed;
                 float  _WaveNoiseScale;
                 float  _WaveNoiseStrength;
+                float  _MinDistance;
+                float  _MaxDistance;
+                float  _DropoffHeight;
                 float4 _FoamMapParams;
                 float3 _FoamColor;
                 float  _FoamNoiseScale;
