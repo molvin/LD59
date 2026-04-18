@@ -490,6 +490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1893441068722668657}
   - component: {fileID: 7098719332587587478}
+  - component: {fileID: 8232102860769504419}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -537,6 +538,38 @@ MonoBehaviour:
   WheelSpeed: 0.4
   WheelReset: 0.8
   GearSpeed: 0.6
+--- !u!114 &8232102860769504419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168733051973625407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.1
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 99d0c7fa1fc102c4cbb38efb807765c5, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &8832944073520666446
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SocialPlatforms;
 
 public class Player : MonoBehaviour
 {
@@ -6,12 +8,15 @@ public class Player : MonoBehaviour
 
     [Header("Config")]
     public float MouseSensitivity = 80;
-    public float MovementSpeed = 2;
+    public float MoveAcceleration = 8;
+    public float MoveDeceleration = 0.03f;
 
     private new Camera camera;
 
     private float rotation;
     private bool boated = true;
+    private Vector3 localSpaceOffset = new Vector3(0, 0.5f, 0);
+    private Vector3 velocity;
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
 
     void Start()
@@ -42,28 +47,43 @@ public class Player : MonoBehaviour
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         input = Vector3.ClampMagnitude(input, 1.0f);
 
-        transform.position += transform.rotation * input * MovementSpeed * Time.deltaTime;
+        velocity += transform.rotation * input * MoveAcceleration * Time.deltaTime;
+        velocity *= Mathf.Pow(MoveDeceleration, Time.deltaTime);
+
+        Vector3 displacement = velocity * Time.deltaTime;
 
         if (boated)
         {
             Boat boat = GameManager.Get().Boat;
 
-            if (Input.GetMouseButton(0))
-            {
-                InteractionSubsystem.Get().Interact(camera.transform);
-            }
+            Vector3 effectiveWorldPosition = boat.transform.position + boat.transform.rotation * localSpaceOffset;
 
-            transform.position += boat.DeltaVelocity;
+            displacement += effectiveWorldPosition - transform.position;
             transform.rotation *= Quaternion.AngleAxis(-Mathf.Rad2Deg * boat.DeltaRotation, Vector3.up);
+        }
 
-            Bounds boatBounds = BoatBounds;
+        transform.position += displacement;
 
-            Vector3 clampedPos = transform.position;
-            clampedPos.x = Mathf.Clamp(clampedPos.x, boatBounds.min.x, boatBounds.max.x);
-            clampedPos.y = boat.DeckLevel;
-            clampedPos.z = Mathf.Clamp(clampedPos.z, boatBounds.min.z, boatBounds.max.z);
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            // TODO: Normal force
+            transform.position = hit.position;
+        }
+        else
+        {
+            velocity = Vector3.zero;
+        }
 
-            transform.position = clampedPos;
+        if (boated)
+        {
+            Boat boat = GameManager.Get().Boat;
+            localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            InteractionSubsystem.Get().Interact(camera.transform);
         }
     }
 }
