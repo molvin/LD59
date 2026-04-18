@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{393a26ce-5ea1-4086-a6fb-50a650524417}">
+		<property name="assetPath">
+			<value>Seagul3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.1873015873015873</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b5fe82f2-2694-469f-a433-715e4a7470c0}</destination>
+		</relationship>
+	</object>
+</objects>
