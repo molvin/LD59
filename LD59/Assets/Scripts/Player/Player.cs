@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float MoveAcceleration = 8;
     public float MoveDeceleration = 0.03f;
 
+    [HideInInspector] public bool MovementEnabled = true;
+
     private new Camera camera;
 
     private float rotation;
@@ -34,22 +36,25 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
+        if (MovementEnabled)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
-        rotation -= mouseY;
-        rotation = Mathf.Clamp(rotation, -90f, 90f);
+            rotation -= mouseY;
+            rotation = Mathf.Clamp(rotation, -90f, 90f);
 
-        camera.transform.localRotation = Quaternion.Euler(rotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+            camera.transform.localRotation = Quaternion.Euler(rotation, 0f, 0f);
+            transform.Rotate(Vector3.up * mouseX);
 
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        input = Vector3.ClampMagnitude(input, 1.0f);
+            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            input = Vector3.ClampMagnitude(input, 1.0f);
 
-        velocity += transform.rotation * input * MoveAcceleration * Time.deltaTime;
-        velocity *= Mathf.Pow(MoveDeceleration, Time.deltaTime);
+            velocity += transform.rotation * input * MoveAcceleration * Time.deltaTime;
+            velocity *= Mathf.Pow(MoveDeceleration, Time.deltaTime);
+        }
 
-        Vector3 displacement = velocity * Time.deltaTime;
+        Vector3 displacement = MovementEnabled ? velocity * Time.deltaTime : Vector3.zero;
 
         if (boated)
         {
