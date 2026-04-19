@@ -1,5 +1,8 @@
+using Cysharp.Threading.Tasks.Triggers;
 using TMPro;
 using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
 
 public class SignalScope : Interactable
 {
@@ -29,6 +32,21 @@ public class SignalScope : Interactable
     public float Amplitude;
     public float Frequency;
     public bool Enabled;
+
+    [Header("Beep")]
+    public Renderer LightRenderer;
+    public Material LightOnMaterial;
+    public Material LightOffMaterial;
+    public float BeepMaxInterval = 2f;
+    public float BeepMinInterval = 0.1f;
+    public EventReference BeepSound;
+    public EventReference FullBeepSound;
+
+    public float FullBeepThreshold;
+
+    private float beepTimer;
+    private bool lightOn;
+    private EventInstance fullBeepInstance;
 
     public Setting[] CorrectSettings;
     public float CorrectSettingsPercentageMargin = 0.05f;
@@ -124,13 +142,110 @@ public class SignalScope : Interactable
 
             for (int i = 0; i < CorrectSettings.Length; i++)
             {
-                float ampRange = MaxAmplitude - MinAmplitude;
-                float freqRange = MaxFrequency - MinFrequency;
-                float ampError = ampRange > 0f ? Mathf.Abs(Amplitude - CorrectSettings[i].Amplitude) / ampRange : 0f;
-                float freqError = freqRange > 0f ? Mathf.Abs(Frequency - CorrectSettings[i].Frequency) / freqRange : 0f;
-                float totalError = (ampError + freqError) * 0.5f;
-                Debug.Log($"Setting {i}: amp error {ampError * 100f:F1}%, freq error {freqError * 100f:F1}%, total {totalError * 100f:F1}%");
+                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency);
+                Debug.Log($"Setting {i}: amp error {result.ampError * 100f:F1}%, freq error {result.freqError * 100f:F1}%, total {result.totalError * 100f:F1}%");
+            }
+        }
+
+        if (CorrectSettings.Length == WorldManager.Get().Destinations.Count)
+        {
+            int bestSetting = -1;
+            float error = 1;
+            for (int i = 0; i < CorrectSettings.Length; i++)
+            {
+                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency);
+                if (bestSetting == -1 || result.totalError < error)
+                {
+                    bestSetting = i;
+                    error = result.totalError;
+                }
+            }
+
+            if (bestSetting >= 0 && error < 0.05f)
+            {
+                Transform destination = WorldManager.Get().Destinations[bestSetting].transform;
+                Transform origin = GameManager.Get().Boat.transform;
+
+                Vector3 toDestination2D = (destination.position - origin.position);
+                toDestination2D.y = 0;
+                toDestination2D.Normalize();
+
+                float innerProduct = Vector3.Dot(toDestination2D, new Vector3(origin.forward.x, 0, origin.forward.z).normalized);
+
+                float t = (innerProduct + 1.0f) / 2.0f + 0.01f;
+                UpdateBeep(t);
+            }
+            else
+            {
+                UpdateBeep(0);
             }
         }
     }
+
+    private (float ampError, float freqError, float totalError) GetError(float CorrectAmplitude, float CorrectFrequency)
+    {
+        float ampRange = MaxAmplitude - MinAmplitude;
+        float freqRange = MaxFrequency - MinFrequency;
+        float ampError = ampRange > 0f ? Mathf.Abs(Amplitude - CorrectAmplitude) / ampRange : 0f;
+        float freqError = freqRange > 0f ? Mathf.Abs(Frequency - CorrectFrequency) / freqRange : 0f;
+        float totalError = (ampError + freqError) * 0.5f;
+        return (ampError, freqError, totalError);
+    }
+
+    private void UpdateBeep(float t)
+    {
+
+        if (t > 0)
+        {
+            Debug.Log($"BEEP: {t}");
+
+            float interval = Mathf.Lerp(BeepMaxInterval, BeepMinInterval, t);
+            beepTimer -= Time.deltaTime;
+            if (beepTimer <= 0f)
+            {
+                beepTimer = interval;
+                lightOn = !lightOn;
+                if (LightRenderer != null)
+                    LightRenderer.material = lightOn ? LightOnMaterial : LightOffMaterial;
+                if (lightOn && !BeepSound.IsNull && t < FullBeepThreshold)
+                {
+                    RuntimeManager.PlayOneShot(BeepSound, transform.position);
+                }
+            }
+            if (t >= FullBeepThreshold)
+            {
+                if (!fullBeepInstance.isValid())
+                {
+                    fullBeepInstance = RuntimeManager.CreateInstance(FullBeepSound);
+                    fullBeepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+                    fullBeepInstance.start();
+                }
+                LightRenderer.material = LightOnMaterial;
+            }
+            else
+            {
+                if (fullBeepInstance.isValid())
+                {
+                    fullBeepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    fullBeepInstance.release();
+                    fullBeepInstance = default;
+                }
+            }
+        }
+        else
+        {
+            if (fullBeepInstance.isValid())
+            {
+                    fullBeepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    fullBeepInstance.release();
+                    fullBeepInstance = default;
+            }
+
+            lightOn = false;
+            if (LightRenderer != null)
+                LightRenderer.material = lightOn ? LightOnMaterial : LightOffMaterial;
+
+        }
+    }
+
 }
