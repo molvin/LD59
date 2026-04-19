@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 06767c99e5820974baa9edf0d80c266b, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -260,6 +260,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
   ShowInPhoto: 0
+--- !u!1 &415542038
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 415542040}
+  - component: {fileID: 415542039}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &415542039
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415542038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6778e4015b299ea4a9ba06df1ff30654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+--- !u!4 &415542040
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415542038}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495597673
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +1042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1692851485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1203,7 +1247,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28690758aae7fbe4c95914095cb9dd21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkyboxController
-  skyboxMaterial: {fileID: 2100000, guid: 06767c99e5820974baa9edf0d80c266b, type: 2}
+  dayTimeSkyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
+  nightTimeSkyboxMaterial: {fileID: 2100000, guid: 06767c99e5820974baa9edf0d80c266b, type: 2}
+  polaroidSun: {fileID: 2101159250}
+  polaroidSunTarget: {fileID: 1110547219}
+  polaroidSunHeight: 35
+  starSigns:
+  - Texture: {fileID: 2800000, guid: 348d2265b48c67342a4db2a7062813fa, type: 3}
+    Height: 36
+    Size: 5
+    Target: {fileID: 682181503}
+  - Texture: {fileID: 2800000, guid: 27533226416c4f549b9bec9c024100f7, type: 3}
+    Height: 25
+    Size: 5
+    Target: {fileID: 1206599299}
+  - Texture: {fileID: 2800000, guid: a4edfa5854cdec34b98b1c55f0562bdd, type: 3}
+    Height: 42
+    Size: 5
+    Target: {fileID: 768141148}
+  moon:
+    Texture: {fileID: 2800000, guid: 509563e7079a6ed4cbf3b3240327e702, type: 3}
+    Height: 50
+    Size: 5
+    Target: {fileID: 682181503}
 --- !u!1 &2101159248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,3 +1423,4 @@ SceneRoots:
   - {fileID: 1733772868}
   - {fileID: 1664418903}
   - {fileID: 1135474992}
+  - {fileID: 415542040}
