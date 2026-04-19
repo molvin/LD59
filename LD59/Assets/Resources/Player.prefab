@@ -50,6 +50,7 @@ MonoBehaviour:
   MoveAcceleration: 12
   MoveDeceleration: 0.01
   MovementEnabled: 1
+  HoldingPickup: 0
 --- !u!1 &4618517213923653630
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,15 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
+    public enum GroundType
+    {
+        None,
+        Boat,
+        Land
+    }
+
     const float PLAYER_HEIGHT = 1.7f;
 
     [Header("Config")]
@@ -20,7 +26,15 @@ public class Player : MonoBehaviour
     private float rotation;
     private Vector3 localSpaceOffset = new Vector3(0, 0.5f, 0);
     private Vector3 velocity;
+    private GroundType standingOn = GroundType.None;
+    public GroundType StandingOn => standingOn;
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
+
+    public void Reset()
+    {
+        localSpaceOffset = transform.position - GameManager.Get().Boat.transform.position;
+        velocity = Vector3.zero;
+    }
 
     void Start()
     {
@@ -38,6 +52,19 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        standingOn = GroundType.None;
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit rayHit))
+        {
+            if (rayHit.collider.gameObject.GetComponentInParent<Boat>() != null)
+            {
+                standingOn = GroundType.Boat;
+            }
+            else
+            {
+                standingOn = GroundType.Land;
+            }
+        }
+
         if (MovementEnabled)
         {
             float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
@@ -57,15 +84,10 @@ public class Player : MonoBehaviour
         }
 
         Boat boat = GameManager.Get().Boat;
-        bool boated = false;
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit rayHit))
-        {
-            boated = rayHit.collider.gameObject.GetComponentInParent<Boat>() != null;
-        }
 
         Vector3 displacement = MovementEnabled && !isSteering ? velocity * Time.deltaTime : Vector3.zero;
 
-        if (boated)
+        if (standingOn == GroundType.Boat)
         {
             Vector3 effectiveWorldPosition = boat.transform.position + boat.transform.rotation * localSpaceOffset;
 
@@ -73,13 +95,21 @@ public class Player : MonoBehaviour
             transform.rotation *= Quaternion.AngleAxis(-Mathf.Rad2Deg * boat.DeltaRotation, Vector3.up);
         }
 
-        transform.position += displacement;
+        Vector3 testPos = transform.position + displacement;
 
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(testPos, out hit, 1.0f, NavMesh.AllAreas))
         {
-            // TODO: Normal force
-            transform.position = hit.position;
+            // Water check
+            if (hit.position.y > -0.5f)
+            {
+                // TODO: Normal force
+                transform.position = hit.position;
+            }
+            else
+            {
+                velocity = Vector3.zero;
+            }
         }
         else
         {
