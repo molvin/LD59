@@ -59,7 +59,7 @@ public class Boat : MonoBehaviour
         throttle = Mathf.Clamp(throttle + throttleJerk, -1.0f, 1.0f);
 
         float t = (throttle + 1.0f) / 2.0f;
-        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-30, 30, t), 0 , 0);
+        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-135, -50, t), 90 , -90);
     }
 
     public void Steer(float input)
@@ -106,7 +106,7 @@ public class Boat : MonoBehaviour
             steering *= Mathf.Pow(WheelReset, Time.deltaTime);
         }
         isSteering = false;
-        Wheel.transform.localRotation = Quaternion.Euler(0, 0, -300 * steering);
+        Wheel.transform.localRotation = Quaternion.Euler(-300 * steering, 0, 0);
         //Wheel.transform.rotation = Quaternion.AngleAxis(300 * steering, Vector3.forward);
 
         angularVelocity += steering * Mathf.Rad2Deg * TurnSpeed * Time.deltaTime;
