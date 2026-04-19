@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks.Triggers;
 using TMPro;
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 public class SignalScope : Interactable
 {
@@ -39,9 +40,13 @@ public class SignalScope : Interactable
     public float BeepMaxInterval = 2f;
     public float BeepMinInterval = 0.1f;
     public EventReference BeepSound;
+    public EventReference FullBeepSound;
+
+    public float FullBeepThreshold;
 
     private float beepTimer;
     private bool lightOn;
+    private EventInstance fullBeepInstance;
 
     public Setting[] CorrectSettings;
     public float CorrectSettingsPercentageMargin = 0.05f;
@@ -166,8 +171,9 @@ public class SignalScope : Interactable
                 toDestination2D.Normalize();
 
                 float innerProduct = Vector3.Dot(toDestination2D, new Vector3(origin.forward.x, 0, origin.forward.z).normalized);
-                Debug.Log($"BEEP: {innerProduct}");
-                UpdateBeep(innerProduct);
+
+                float t = (innerProduct + 1.0f) / 2.0f + 0.01f;
+                UpdateBeep(t);
             }
             else
             {
@@ -186,12 +192,13 @@ public class SignalScope : Interactable
         return (ampError, freqError, totalError);
     }
 
-    public float BeepInterval;
-
     private void UpdateBeep(float t)
     {
+
         if (t > 0)
         {
+            Debug.Log($"BEEP: {t}");
+
             float interval = Mathf.Lerp(BeepMaxInterval, BeepMinInterval, t);
             beepTimer -= Time.deltaTime;
             if (beepTimer <= 0f)
@@ -200,9 +207,44 @@ public class SignalScope : Interactable
                 lightOn = !lightOn;
                 if (LightRenderer != null)
                     LightRenderer.material = lightOn ? LightOnMaterial : LightOffMaterial;
-                if (lightOn && !BeepSound.IsNull)
+                if (lightOn && !BeepSound.IsNull && t < FullBeepThreshold)
+                {
                     RuntimeManager.PlayOneShot(BeepSound, transform.position);
+                }
             }
+            if (t >= FullBeepThreshold)
+            {
+                if (!fullBeepInstance.isValid())
+                {
+                    fullBeepInstance = RuntimeManager.CreateInstance(FullBeepSound);
+                    fullBeepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+                    fullBeepInstance.start();
+                }
+                LightRenderer.material = LightOnMaterial;
+            }
+            else
+            {
+                if (fullBeepInstance.isValid())
+                {
+                    fullBeepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    fullBeepInstance.release();
+                    fullBeepInstance = default;
+                }
+            }
+        }
+        else
+        {
+            if (fullBeepInstance.isValid())
+            {
+                    fullBeepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    fullBeepInstance.release();
+                    fullBeepInstance = default;
+            }
+
+            lightOn = false;
+            if (LightRenderer != null)
+                LightRenderer.material = lightOn ? LightOnMaterial : LightOffMaterial;
+
         }
     }
 

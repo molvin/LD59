@@ -923,6 +923,50 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.842
       objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: BeepSound.Path
+      value: event:/RadioBeeps/RadioBeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: FullBeepThreshold
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: FullBeepSound.Path
+      value: event:/RadioBeeps/FullRadioBeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: BeepSound.Guid.Data1
+      value: -2097094246
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: BeepSound.Guid.Data2
+      value: 1173055990
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: BeepSound.Guid.Data3
+      value: 852340414
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: BeepSound.Guid.Data4
+      value: -168139508
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: FullBeepSound.Guid.Data1
+      value: 121391875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: FullBeepSound.Guid.Data2
+      value: 1174886935
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: FullBeepSound.Guid.Data3
+      value: 466631300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: FullBeepSound.Guid.Data4
+      value: -166360025
+      objectReference: {fileID: 0}
     - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_Name
       value: SignalScope
