@@ -13,6 +13,7 @@ public class WorldManager : Subsystem<WorldManager>
     private Vector2 cellSize;
     private Vector2Int visibleCellDims;
     private List<GameObject> waterTiles = new(); 
+    public List<GameObject> Destinations = new();
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -61,6 +62,23 @@ public class WorldManager : Subsystem<WorldManager>
                 tile.transform.position = new(-width * 0.5f + x * cellSize.x, 0.0f, -depth * 0.5f + y * cellSize.y);
                 waterTiles.Add(tile);
             }
+        }
+    }
+
+    private void Start()
+    {
+        var dropOff = FindFirstObjectByType<Dropoff>();
+        var config = FindFirstObjectByType<SceneConfig>();
+        if (dropOff != null && config != null && config.SetupPlayScene && config.DebugSpawnIsland != null)
+        {
+            GameObject island = Instantiate(config.DebugSpawnIsland);
+            Vector3 dir = Random.onUnitCircle * config.DebugSpawnDistance;
+            dir.z = dir.y;
+            dir.y = 0;
+            island.transform.position = dir;
+
+            Destinations.Add(island);
+            dropOff.AddToDropOff(island);
         }
     }
 

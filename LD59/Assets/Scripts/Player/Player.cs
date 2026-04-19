@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float MoveDeceleration = 0.03f;
 
     [HideInInspector] public bool MovementEnabled = true;
+    private bool isSteering;
 
     private new Camera camera;
 
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
             boated = rayHit.collider.gameObject.GetComponentInParent<Boat>() != null;
         }
 
-        Vector3 displacement = MovementEnabled ? velocity * Time.deltaTime : Vector3.zero;
+        Vector3 displacement = MovementEnabled && !isSteering ? velocity * Time.deltaTime : Vector3.zero;
 
         if (boated)
         {
@@ -86,9 +87,43 @@ public class Player : MonoBehaviour
 
         localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
 
-        if (Input.GetMouseButton(0))
+        if (isSteering)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                ExitSteering();
+            }
+
+            float input = 0;
+            if (Input.GetKey(KeyCode.W)) input += 1;
+            if (Input.GetKey(KeyCode.S)) input -= 1;
+            
+            if (input != 0)
+                boat.Throttle(input);
+
+            input = 0;
+            if (Input.GetKey(KeyCode.D)) input += 1;
+            if (Input.GetKey(KeyCode.A)) input -= 1;
+            
+            if(input != 0)
+                boat.Steer(input);
+
+            transform.position = boat.SteeringPoint.position;
+        }
+        else if (Input.GetMouseButton(0))
         {
             InteractionSubsystem.Get().Interact(camera.transform);
         }
+    }
+
+    public void EnterSteering()
+    {
+        Boat boat = GameManager.Get().Boat;
+        transform.position = boat.SteeringPoint.position;
+        isSteering = true;
+    }
+    private void ExitSteering()
+    {
+        isSteering = false;
     }
 }

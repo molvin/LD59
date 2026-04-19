@@ -60,8 +60,8 @@ Material:
     - _FoamThreshold: 0.151
     - _FresnelPower: 1.45
     - _IntersectionThreshold: 0.3
-    - _MaxDistance: 100
-    - _MaxDropoff: 50
+    - _MaxDistance: 800
+    - _MaxDropoff: 100000
     - _MinDistance: 50
     - _NormalScale: 19.3
     - _NormalStrength: 5.6
