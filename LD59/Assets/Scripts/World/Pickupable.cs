@@ -33,7 +33,7 @@ public class Pickupable : Interactable
         transform.forward = -cam.transform.forward;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!holding)
             return;
