@@ -103,6 +103,7 @@ Material:
     - _CloudPixels: 1024
     - _CloudScale: 0.03
     - _CloudScrollSpeed: 0.015
+    - _CloudScrollSpeedFactor: 0.0012
     - _CloudThreshold: 0.23
     - _Cull: 2
     - _Cutoff: 0.5
@@ -114,6 +115,9 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HazeFalloff: 9.12
+    - _HazePixels: 102.63
+    - _HazeStrength: 0.5
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -138,6 +142,7 @@ Material:
     - _CloudScrollSpeed: {r: 0.5, g: 0.2, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HazeColor: {r: 0.80817604, g: 0.904088, b: 1, a: 1}
     - _SkyColor: {r: 0.18553454, g: 0.53589123, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SunColor: {r: 1, g: 0.89339006, b: 0.58176094, a: 1}

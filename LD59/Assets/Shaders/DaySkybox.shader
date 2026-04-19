@@ -1,4 +1,4 @@
-Shader "Custom/Skybox"
+Shader "Custom/DaySkybox"
 {
     Properties
     {
