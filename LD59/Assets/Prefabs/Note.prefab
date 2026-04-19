@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 3901670262817913771}
   - component: {fileID: 1236552872200127707}
   - component: {fileID: 7954240007286948800}
+  - component: {fileID: 5459582986593328233}
   m_Layer: 7
   m_Name: Note
   m_TagString: Untagged
@@ -405,3 +406,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.4, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5459582986593328233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667050584306987477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e55a63df6038974f9d2764fa7b49402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
+  ShowInPhoto: 0

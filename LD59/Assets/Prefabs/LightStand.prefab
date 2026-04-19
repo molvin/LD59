@@ -95,8 +95,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c81440c58ad2ca4381496e504254ab4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8269124954061038251}
   m_SourcePrefab: {fileID: 100100000, guid: 2c81440c58ad2ca4381496e504254ab4, type: 3}
+--- !u!1 &5911907413671332490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c81440c58ad2ca4381496e504254ab4, type: 3}
+  m_PrefabInstance: {fileID: 6830335186042746843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8269124954061038251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911907413671332490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e55a63df6038974f9d2764fa7b49402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
+  ShowInPhoto: 0
 --- !u!4 &6431281919166550064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2c81440c58ad2ca4381496e504254ab4, type: 3}
