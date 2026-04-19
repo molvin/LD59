@@ -17,6 +17,9 @@ public class Boat : MonoBehaviour
     [Header("Audio")]
     public StudioEventEmitter engineNoise;
 
+    public Transform SteeringPoint;
+    public Transform ThrottlePivot;
+
     private float throttle = 0.0f;
     private float steering = 0.0f;
 
@@ -37,6 +40,9 @@ public class Boat : MonoBehaviour
             throttleJerk *= 0.5f;
         }
         throttle = Mathf.Clamp(throttle + throttleJerk, -1.0f, 1.0f);
+
+        float t = (throttle + 1.0f) / 2.0f;
+        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-30, 30, t), 0 , 0);
     }
 
     public void Steer(float input)

@@ -105,7 +105,7 @@ public class PolaroidCamera : MonoBehaviour
         yield return new WaitForSeconds(IntermediateWaitTime);
         PolaroidPicture.SetActive(true);
 
-        while (!Input.GetKeyDown(KeyCode.T))
+        while (!Input.GetKeyDown(KeyCode.T) && !Input.GetMouseButtonDown(1))
         {
             yield return null;
         }
