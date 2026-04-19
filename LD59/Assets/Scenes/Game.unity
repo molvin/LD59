@@ -2110,11 +2110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28690758aae7fbe4c95914095cb9dd21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkyboxController
-  dayTimeSkyboxMaterial: {fileID: 0}
-  nightTimeSkyboxMaterial: {fileID: 0}
-  polaroidSun: {fileID: 0}
-  polaroidSunTarget: {fileID: 0}
-  polaroidSunHeight: 45
+  dayTimeSkyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
+  nightTimeSkyboxMaterial: {fileID: 2100000, guid: 06767c99e5820974baa9edf0d80c266b, type: 2}
+  polaroidSun: {fileID: 2101159250}
+  polaroidSunTarget: {fileID: 1110547219}
+  polaroidSunHeight: 35
   starSigns: []
   moon:
     Texture: {fileID: 0}
