@@ -914,6 +914,8 @@ MonoBehaviour:
   WheelSpeed: 0.4
   WheelReset: 0.8
   GearSpeed: 0.8
+  driftNoiseScale: 0.01
+  driftStrength: 0.2
   engineNoise: {fileID: 1853082167153262688}
   boatSplashNoise: {fileID: 4989285505834139847}
   MaxSpeed: 5

@@ -23,6 +23,8 @@ public class Boat : MonoBehaviour
     public float WheelSpeed = 0.4f;
     public float WheelReset = 0.8f;
     public float GearSpeed = 0.6f;
+    public float driftNoiseScale = 0.01f;
+    public float driftStrength = 0.2f;
 
     [Header("Audio")]
     public StudioEventEmitter engineNoise;
@@ -105,6 +107,11 @@ public class Boat : MonoBehaviour
             Debug.DrawLine(horizPos, horizPos + transform.right * rayCollisionSettings.right, Color.red);
         }
 
+        if (GameManager.Get().Player.StandingOn == Player.GroundType.Boat)
+        {
+            Drift();
+        }
+
         Vector3 currentPosition = transform.position;
         Vector3 currentPlaneForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
@@ -159,5 +166,14 @@ public class Boat : MonoBehaviour
 
     private void Drift()
     {
+        float xCoord = (transform.position.x + Time.time) * driftNoiseScale;
+        float zCoord = (transform.position.z + Time.time) * driftNoiseScale;
+
+        float noiseSample = Mathf.PerlinNoise(xCoord, zCoord);
+
+        float angle = noiseSample * Mathf.PI * 2f;
+
+        linearVelocity += new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * driftStrength * Time.deltaTime;
+        angularVelocity += angle * driftStrength * Time.deltaTime;
     }
 }
