@@ -707,11 +707,24 @@ MonoBehaviour:
       Data3: 234778496
       Data4: -905664802
     Path: event:/Seagul
+  FullBeepSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  FullBeepThreshold: 0
   CorrectSettings:
-  - Amplitude: 0.32
+  - Amplitude: 0.45
     Frequency: 7.3
-  CorrectSettingsPercentageMargin: 0.05
-  BeepInterval: 0.66
+  - Amplitude: 0.22
+    Frequency: 14
+  - Amplitude: 0.38
+    Frequency: 2
+  - Amplitude: 0.12
+    Frequency: 5
+  CorrectSettingsPercentageMargin: 0.1
 --- !u!1001 &4035153509058005029
 PrefabInstance:
   m_ObjectHideFlags: 0

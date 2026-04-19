@@ -49,6 +49,7 @@ public class PolaroidCamera : MonoBehaviour
         Anim.SetTrigger("MakeReady");
         yield return new WaitForSeconds(PreWaitTime);
         VisualObject.transform.localPosition = Vector3.zero;
+        yield return new WaitForEndOfFrame();
 
         Transform parent = transform.parent;
         transform.SetParent(null);
@@ -59,17 +60,19 @@ public class PolaroidCamera : MonoBehaviour
         var polaroidControlled = FindObjectsByType<PolaroidControlled>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(obj.Enabled);
+            obj.gameObject.SetActive(obj.ShowInPhoto);
         }
 
-        yield return new WaitForEndOfFrame();
+        SkyboxController skybox = FindFirstObjectByType<SkyboxController>(); 
 
         // cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
         foreach (var r in IgnoredRenderers) r.enabled = false;
+        skybox.TakePicture();
         RenderTexture rt = new(Width, Height, 24);
         cam.targetTexture = rt;
         cam.Render();
         foreach (var r in IgnoredRenderers) r.enabled = true;
+        skybox.EndPicture();
         cam.transform.position = startPos;
         cam.transform.rotation = startRot;
 
@@ -95,7 +98,7 @@ public class PolaroidCamera : MonoBehaviour
 
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(!obj.Enabled);
+            obj.gameObject.SetActive(!obj.ShowInPhoto);
         }
 
         yield return new WaitForSeconds(TakingPictureWaitTime);
