@@ -55,6 +55,9 @@ public class PolaroidBook : MonoBehaviour
             if (cam == null || !cam.TakingPicture)
                 Open(!IsOpen);
         }
+
+        if(Enabled && IsOpen && Input.GetMouseButtonDown(1))
+            Open(false);
     }
 
     private void OnPictureClicked(int slot)
