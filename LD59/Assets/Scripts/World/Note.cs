@@ -3,16 +3,15 @@ using UnityEngine;
 
 public class Note : Pickupable
 {
-    public string TextAssetName;
+    public TextAsset TextFile;
     public TextMeshProUGUI CanvasText;
 
     private string text;
 
     private void Start()
     {
-        TextAsset txt = Resources.Load<TextAsset>($"Text/{TextAssetName}");
-        CanvasText.text = txt.text;
-        text = txt.text;
+        CanvasText.text = TextFile.text;
+        text = TextFile.text;
     }
 
     protected override void Drop()
