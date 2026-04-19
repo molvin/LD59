@@ -710,7 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Boat
   Wheel: {fileID: 211281674726347761}
   DeckLevel: 0.5
-  Acceleration: 3.5
+  Acceleration: 4.5
   Deceleration: 0.35
   TurnSpeed: 0.6
   WheelSpeed: 0.4

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks.Triggers;
 using TMPro;
 using UnityEngine;
 
@@ -148,7 +149,11 @@ public class SignalScope : Interactable
                 Transform destination = WorldManager.Get().Destinations[bestSetting].transform;
                 Transform origin = GameManager.Get().Boat.transform;
 
-                float innerProduct = Vector3.Dot((destination.position - origin.position).normalized, origin.forward);
+                Vector3 toDestination2D = (destination.position - origin.position);
+                toDestination2D.y = 0;
+                toDestination2D.Normalize();
+
+                float innerProduct = Vector3.Dot(toDestination2D, new Vector3(origin.forward.x, 0, origin.forward.z).normalized);
                 Debug.Log($"BEEP: {innerProduct}");
             }
         }
