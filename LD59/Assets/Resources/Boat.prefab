@@ -872,12 +872,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Boat
   Wheel: {fileID: 211281674726347761}
   DeckLevel: 0.5
-  Acceleration: 4.5
+  Acceleration: 5
   Deceleration: 0.35
   TurnSpeed: 0.6
   WheelSpeed: 0.4
   WheelReset: 0.8
-  GearSpeed: 0.6
+  GearSpeed: 0.8
   engineNoise: {fileID: 1853082167153262688}
   SteeringPoint: {fileID: 3403220886037509978}
   ThrottlePivot: {fileID: 1887365166047316403}
