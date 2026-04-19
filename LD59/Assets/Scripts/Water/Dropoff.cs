@@ -28,6 +28,12 @@ public class Dropoff : MonoBehaviour
         }
     }
 
+    public void AddToDropOff(GameObject gameObject)
+    {
+        DropoffList.Add(gameObject);
+        startPositions.Add(gameObject.transform.position);
+    }
+
     private void Update()
     {
         for (int i = 0; i < DropoffList.Count; i++)

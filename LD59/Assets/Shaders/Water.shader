@@ -46,6 +46,7 @@ Shader "Custom/Water"
         _SpecularThreshold  ("Specular Threshold",   Float)      = 0.5
         _SpecularStrength   ("Specular Strength",    Float)      = 1.0
         _SpecularDistFade   ("Specular Distance Fade", Float)   = 0.02
+        _SpecularPixelSize  ("Specular Pixel Size (m)", Float)  = 1.0
     }
 
     SubShader
@@ -111,6 +112,7 @@ Shader "Custom/Water"
                 float  _SpecularThreshold;
                 float  _SpecularStrength;
                 float  _SpecularDistFade;
+                float  _SpecularPixelSize;
             CBUFFER_END
 
             struct Attributes { float4 positionOS : POSITION; };
@@ -191,8 +193,17 @@ Shader "Custom/Water"
                 float  camDist   = length(_WorldSpaceCameraPos.xz - IN.worldPos.xz);
                 float  distFade  = exp(-camDist * _SpecularDistFade);
 
+                // Snap world XZ to a grid so the specular normal is constant per cell → pixelated blocks
+                float2 snappedXZ = floor(IN.worldPos.xz / _SpecularPixelSize) * _SpecularPixelSize;
+                float2 suvA = snappedXZ / _NormalScale + _Time.y * normalize(_ScrollDirectionA.xy) * _ScrollSpeedA;
+                float2 suvB = snappedXZ / _NormalScale + _Time.y * normalize(_ScrollDirectionB.xy) * _ScrollSpeedB;
+                float3 snA  = UnpackNormal(SAMPLE_TEXTURE2D(_NormalMapA, sampler_NormalMapA, suvA));
+                float3 snB  = UnpackNormal(SAMPLE_TEXTURE2D(_NormalMapB, sampler_NormalMapB, suvB));
+                float3 specBlended = normalize(snA + snB);
+                float3 specNormal  = normalize(float3(specBlended.x * _NormalStrength, 1.0, specBlended.y * _NormalStrength));
+
                 Light  mainLight = GetMainLight();
-                float  spec      = CalculateSpecular(worldNormal, viewDir, mainLight.direction, _SpecularSmoothness);
+                float  spec      = CalculateSpecular(specNormal, viewDir, mainLight.direction, _SpecularSmoothness);
                 spec = step(_SpecularThreshold, spec);
                 waterColor += _SpecularColor * mainLight.color * spec * _SpecularStrength * distFade;
 

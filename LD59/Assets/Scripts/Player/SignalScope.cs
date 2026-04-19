@@ -1,8 +1,16 @@
+using Cysharp.Threading.Tasks.Triggers;
 using TMPro;
 using UnityEngine;
 
 public class SignalScope : Interactable
 {
+    [System.Serializable]
+    public struct Setting
+    {
+        public float Amplitude;
+        public float Frequency;
+    }
+
     public TextMeshProUGUI Text;
     public Transform AmplitudeDial;
     public Transform FrequencyDial;
@@ -22,6 +30,9 @@ public class SignalScope : Interactable
     public float Amplitude;
     public float Frequency;
     public bool Enabled;
+
+    public Setting[] CorrectSettings;
+    public float CorrectSettingsPercentageMargin = 0.05f;
 
     private Player player;
     private Camera cam;
@@ -111,6 +122,50 @@ public class SignalScope : Interactable
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
 
             Text.text = $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}";
+
+            for (int i = 0; i < CorrectSettings.Length; i++)
+            {
+                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency);
+                Debug.Log($"Setting {i}: amp error {result.ampError * 100f:F1}%, freq error {result.freqError * 100f:F1}%, total {result.totalError * 100f:F1}%");
+            }
         }
+
+        if (CorrectSettings.Length == WorldManager.Get().Destinations.Count)
+        {
+            int bestSetting = -1;
+            float error = 1;
+            for (int i = 0; i < CorrectSettings.Length; i++)
+            {
+                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency);
+                if (bestSetting == -1 || result.totalError < error)
+                {
+                    bestSetting = i;
+                    error = result.totalError;
+                }
+            }
+
+            if (bestSetting >= 0 && error < 0.05f)
+            {
+                Transform destination = WorldManager.Get().Destinations[bestSetting].transform;
+                Transform origin = GameManager.Get().Boat.transform;
+
+                Vector3 toDestination2D = (destination.position - origin.position);
+                toDestination2D.y = 0;
+                toDestination2D.Normalize();
+
+                float innerProduct = Vector3.Dot(toDestination2D, new Vector3(origin.forward.x, 0, origin.forward.z).normalized);
+                Debug.Log($"BEEP: {innerProduct}");
+            }
+        }
+    }
+
+    private (float ampError, float freqError, float totalError) GetError(float CorrectAmplitude, float CorrectFrequency)
+    {
+        float ampRange = MaxAmplitude - MinAmplitude;
+        float freqRange = MaxFrequency - MinFrequency;
+        float ampError = ampRange > 0f ? Mathf.Abs(Amplitude - CorrectAmplitude) / ampRange : 0f;
+        float freqError = freqRange > 0f ? Mathf.Abs(Frequency - CorrectFrequency) / freqRange : 0f;
+        float totalError = (ampError + freqError) * 0.5f;
+        return (ampError, freqError, totalError);
     }
 }

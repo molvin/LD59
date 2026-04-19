@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PolaroidCamera : MonoBehaviour
 {
+    public bool HasCamera;
     public bool Enabled;
     public int Width = 512;
     public int Height = 512;
@@ -26,7 +27,7 @@ public class PolaroidCamera : MonoBehaviour
     private void Update()
     {
         PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
-        if(Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen))
+        if(HasCamera && Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen))
         {
             StartCoroutine(TakePicture());
         }
@@ -104,7 +105,7 @@ public class PolaroidCamera : MonoBehaviour
         yield return new WaitForSeconds(IntermediateWaitTime);
         PolaroidPicture.SetActive(true);
 
-        while (!Input.GetKeyDown(KeyCode.T))
+        while (!Input.GetKeyDown(KeyCode.T) && !Input.GetMouseButtonDown(1))
         {
             yield return null;
         }

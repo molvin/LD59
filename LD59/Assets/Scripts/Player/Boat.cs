@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Boat : MonoBehaviour
@@ -12,6 +13,12 @@ public class Boat : MonoBehaviour
     public float WheelSpeed = 0.4f;
     public float WheelReset = 0.8f;
     public float GearSpeed = 0.6f;
+
+    [Header("Audio")]
+    public StudioEventEmitter engineNoise;
+
+    public Transform SteeringPoint;
+    public Transform ThrottlePivot;
 
     private float throttle = 0.0f;
     private float steering = 0.0f;
@@ -33,6 +40,9 @@ public class Boat : MonoBehaviour
             throttleJerk *= 0.5f;
         }
         throttle = Mathf.Clamp(throttle + throttleJerk, -1.0f, 1.0f);
+
+        float t = (throttle + 1.0f) / 2.0f;
+        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-30, 30, t), 0 , 0);
     }
 
     public void Steer(float input)
@@ -66,5 +76,7 @@ public class Boat : MonoBehaviour
 
         deltaVelocity = transform.position - currentPosition;
         deltaRotation = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, currentPlaneForward, Vector3.up);
+
+        engineNoise.SetParameter("RPM", Mathf.Abs(throttle));
     }
 }
