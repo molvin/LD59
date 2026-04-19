@@ -15,8 +15,13 @@ Shader "Custom/Skybox"
         _CloudPixels ("Cloud Pixel Size", Float) = 32
         _CloudThreshold ("Cloud Threshold", Float) = 0.5
         _CloudContrast ("Cloud Contrast", Float) = 2.0
-        _CloudScrollSpeed ("Cloud Scroll Speed", Vector) = (0.005, 0.002, 0, 0)
-        _CloudScrollSpeedFactor ("Cloud Scroll Speed Factor", Float) = 1.0
+        _CloudScrollSpeed ("Cloud Scroll Speed", Vector) = (0.5, 0.2, 0, 0)
+        _CloudScrollSpeedFactor ("Cloud Scroll Speed Factor", Float) = 0.001
+
+        _HazeColor ("Haze Color", Color) = (0.8, 0.85, 0.9, 1)
+        _HazeStrength ("Haze Strength", Float) = 1.0
+        _HazeFalloff ("Haze Falloff", Float) = 4.0
+        _HazePixels ("Haze Pixel Size", Float) = 64
     }
     SubShader
     {
@@ -46,6 +51,10 @@ Shader "Custom/Skybox"
             float _CloudContrast;
             float4 _CloudScrollSpeed;
             float _CloudScrollSpeedFactor;
+            float4 _HazeColor;
+            float _HazeStrength;
+            float _HazeFalloff;
+            float _HazePixels;
 
             v2f vert(appdata v)
             {
@@ -74,10 +83,15 @@ Shader "Custom/Skybox"
                 cloud = pow(cloud, _CloudContrast);
                 cloud *= smoothstep(0.0, 0.2, dir.y);
 
+                // HAZE
+                float pixDirY = floor(dir.y * _HazePixels) / _HazePixels;
+                float haze = pow(1.0 - saturate(abs(pixDirY)), _HazeFalloff) * _HazeStrength;
+
                 // COMPOSE
                 float3 col = lerp(_SkyColor.rgb, _CloudColor.rgb, cloud);
                 col = lerp(col, _SunColor.rgb, saturate(bloom));
                 col = lerp(col, _SunColor.rgb, sunDisk);
+                col = lerp(col, _HazeColor.rgb, saturate(haze));
 
                 return float4(col, 1);
             }
