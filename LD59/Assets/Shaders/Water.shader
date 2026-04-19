@@ -81,8 +81,8 @@ Shader "Custom/Water"
             TEXTURE2D(_FoamNoise);  SAMPLER(sampler_FoamNoise);
 
             CBUFFER_START(UnityPerMaterial)
-                float3 _ShallowColor;
-                float3 _DeepColor;
+                float4 _ShallowColor;
+                float4 _DeepColor;
                 float  _DepthFactor;
                 float  _FresnelPower;
                 float  _ShoreFadeStrength;
@@ -101,11 +101,11 @@ Shader "Custom/Water"
                 float  _CurveFactor;
                 float  _CurvePower;
                 float4 _FoamMapParams;
-                float3 _FoamColor;
+                float4 _FoamColor;
                 float  _FoamNoiseScale;
                 float4 _FoamNoiseSpeed;
                 float  _FoamThreshold;
-                float3 _SpecularColor;
+                float4 _SpecularColor;
                 float  _SpecularSmoothness;
                 float  _SpecularThreshold;
                 float  _SpecularStrength;
@@ -144,7 +144,7 @@ Shader "Custom/Water"
                 float3 worldPos = TransformObjectToWorld(IN.positionOS.xyz);
                 worldPos.y += WaveHeight(worldPos.xz);
                 float dist = distance(_WorldSpaceCameraPos.xz, worldPos.xz);
-                float dropoff = pow(abs(dist * _CurveFactor), _CurvePower);
+                float dropoff = pow(min(abs(dist * _CurveFactor), 1.0), _CurvePower);
                 worldPos.y -= dropoff;
                 OUT.positionCS = TransformWorldToHClip(worldPos);
                 OUT.screenPos  = ComputeScreenPos(OUT.positionCS);
@@ -154,7 +154,7 @@ Shader "Custom/Water"
 
             float CalculateSpecular(float3 normal, float3 viewDir, float3 lightDir, float smoothness)
             {
-                float angle    = acos(dot(normalize(lightDir - viewDir), normal));
+                float angle    = acos(clamp(dot(normalize(lightDir + viewDir), normal), -1.0, 1.0));
                 float exponent = angle / smoothness;
                 return exp(-exponent * exponent);
             }
@@ -167,8 +167,8 @@ Shader "Custom/Water"
                 // Depth-based water color
                 float sceneDepth   = LinearEyeDepth(SampleSceneDepth(uv), _ZBufferParams);
                 float surfaceDepth = IN.screenPos.w;
-                float depth        = sceneDepth - surfaceDepth;
-                float3 waterColor  = lerp(_ShallowColor, _DeepColor, 1 - exp(-depth * _DepthFactor));
+                float depth        = max(0.0, sceneDepth - surfaceDepth);
+                float3 waterColor  = lerp(_ShallowColor.rgb, _DeepColor.rgb, 1 - exp(-depth * _DepthFactor));
 
                 // Sample two scrolling normal maps in world-space XZ
                 float2 uvA = IN.worldPos.xz / _NormalScale + _Time.y * normalize(_ScrollDirectionA.xy) * _ScrollSpeedA;
@@ -200,7 +200,7 @@ Shader "Custom/Water"
                 Light  mainLight = GetMainLight();
                 float  spec      = CalculateSpecular(specNormal, viewDir, mainLight.direction, _SpecularSmoothness);
                 spec = step(_SpecularThreshold, spec);
-                waterColor += _SpecularColor * mainLight.color * spec * _SpecularStrength * distFade;
+                waterColor += _SpecularColor.rgb * mainLight.color * spec * _SpecularStrength * distFade;
 
                 // Shore foam 
                 // float2 foamUV   = (IN.worldPos.xz - _FoamMapParams.xy) / _FoamMapParams.z;
@@ -215,7 +215,7 @@ Shader "Custom/Water"
                 float fresnel       = lerp(1.0, _AlphaMin, fresnelFactor);
                 float shoreFade     = 1 - exp(-depth * _ShoreFadeStrength);
 
-                return float4(waterColor, fresnel * shoreFade);
+                return float4(saturate(waterColor), fresnel * shoreFade);
             }
             ENDHLSL
         }

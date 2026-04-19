@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PolaroidCamera : MonoBehaviour
@@ -35,9 +36,7 @@ public class PolaroidCamera : MonoBehaviour
 
     private IEnumerator TakePicture()
     {
-        // TODO: animation when attached to player
-        //       also do something with the output image
-
+        Player player = GameManager.Get().Player;
 
         TakingPicture = true;
         VisualObject.SetActive(true);
@@ -51,6 +50,8 @@ public class PolaroidCamera : MonoBehaviour
         VisualObject.transform.localPosition = Vector3.zero;
         yield return new WaitForEndOfFrame();
 
+        player.MovementEnabled = false;
+
         Transform parent = transform.parent;
         transform.SetParent(null);
         Camera cam = Camera.main;
@@ -60,7 +61,10 @@ public class PolaroidCamera : MonoBehaviour
         var polaroidControlled = FindObjectsByType<PolaroidControlled>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(obj.ShowInPhoto);
+            bool isDay = GameManager.Get().IsDay;
+            bool ignore = !isDay && obj.IgnoreIfNightTime;
+            if(!ignore) 
+                obj.gameObject.SetActive(obj.ShowInPhoto);
         }
 
         SkyboxController skybox = FindFirstObjectByType<SkyboxController>(); 
@@ -90,16 +94,17 @@ public class PolaroidCamera : MonoBehaviour
             Destroy(Output.sprite.texture);
         Output.sprite = sprite;
 
-        PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
-        if (book != null)
-            book.AddPicture(photo);
+
 
         transform.parent = parent;
 
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(!obj.ShowInPhoto);
-        }
+            bool isDay = GameManager.Get().IsDay;
+            bool ignore = !isDay && obj.IgnoreIfNightTime;
+            if(!ignore) 
+                obj.gameObject.SetActive(!obj.ShowInPhoto);     
+       }
 
         yield return new WaitForSeconds(TakingPictureWaitTime);
 
@@ -108,8 +113,20 @@ public class PolaroidCamera : MonoBehaviour
         yield return new WaitForSeconds(IntermediateWaitTime);
         PolaroidPicture.SetActive(true);
 
-        while (!Input.GetKeyDown(KeyCode.T) && !Input.GetMouseButtonDown(1))
+        while (true)
         {
+            if(Input.GetKeyDown(KeyCode.D))
+            {
+                PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
+                if (book != null)
+                    book.AddPicture(photo);
+                break;
+            }
+            else if(Input.GetKeyDown(KeyCode.A)) 
+            {
+                break;
+            }
+
             yield return null;
         }
         PolaroidPicture.SetActive(false);
@@ -119,6 +136,7 @@ public class PolaroidCamera : MonoBehaviour
         VisualObject.SetActive(false);
         VisualObject.transform.localPosition = visualObjectStartPos;
 
+        player.MovementEnabled = true;
         TakingPicture = false;
     }
 }
