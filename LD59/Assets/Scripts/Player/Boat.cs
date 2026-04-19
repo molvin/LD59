@@ -72,7 +72,7 @@ public class Boat : MonoBehaviour
 
     void Start()
     {
-        transform.rotation = Quaternion.identity;
+        // transform.rotation = Quaternion.identity;
         Bounds bounds = Utils.GetBounds(gameObject);
         rayCollisionSettings = new RayCollisionSettings
         {
