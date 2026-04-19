@@ -141,4 +141,9 @@ public class PolaroidBook : MonoBehaviour
         PrevPageButton.gameObject.SetActive(currentPage > 0);
         NextPageButton.gameObject.SetActive(currentPage < maxPage);
     }
+
+    public void AddNote(string text)
+    {
+        // TODO:
+    }
 }

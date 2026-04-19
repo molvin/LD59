@@ -3,6 +3,7 @@ Shader "Custom/NightSkybox"
     Properties
     {
         _SkyColor ("Sky Color", Color) = (0.3, 0.6, 1.0, 1)
+        _HorizonOffset ("Horizon Offset", Float) = 0.0
     }
     SubShader
     {
@@ -20,6 +21,7 @@ Shader "Custom/NightSkybox"
             struct v2f { float4 pos : SV_POSITION; float3 dir : TEXCOORD0; };
 
             float4 _SkyColor;
+            float _HorizonOffset;
 
             sampler2D _StarSign0Tex;
             sampler2D _StarSign1Tex;
@@ -64,11 +66,12 @@ Shader "Custom/NightSkybox"
             float4 frag(v2f i) : SV_Target
             {
                 float3 viewDir = normalize(i.dir);
+                float3 adjViewDir = normalize(float3(viewDir.x, viewDir.y + _HorizonOffset, viewDir.z));
                 float3 col = _SkyColor.rgb;
-                col = BlendStarSign(col, viewDir, _StarSign0Dir, _StarSign0Tex, _StarSign0Size);
-                col = BlendStarSign(col, viewDir, _StarSign1Dir, _StarSign1Tex, _StarSign1Size);
-                col = BlendStarSign(col, viewDir, _StarSign2Dir, _StarSign2Tex, _StarSign2Size);
-                col = BlendStarSign(col, viewDir, _MoonDir, _MoonTex, _MoonSize);
+                col = BlendStarSign(col, adjViewDir, _StarSign0Dir, _StarSign0Tex, _StarSign0Size);
+                col = BlendStarSign(col, adjViewDir, _StarSign1Dir, _StarSign1Tex, _StarSign1Size);
+                col = BlendStarSign(col, adjViewDir, _StarSign2Dir, _StarSign2Tex, _StarSign2Size);
+                col = BlendStarSign(col, adjViewDir, _MoonDir, _MoonTex, _MoonSize);
                 return float4(col, 1);
             }
             ENDHLSL
