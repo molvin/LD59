@@ -683,17 +683,21 @@ MonoBehaviour:
   FrequencyDial: {fileID: 5949523199143762707}
   SineWaveRenderer: {fileID: 3842484245707411040}
   SineWaveMat: {fileID: 2100000, guid: 4646713e3d4e8f749ad37284e2897d25, type: 2}
-  MinAmplitude: 0.001
-  MaxAmplitude: 0.5
-  MinFrequency: 0
-  MaxFrequency: 15
-  AmplitudeChangeSpeed: 0.3
-  FrequencyChangeSpeed: 5
+  MinAmplitude: 0.01
+  MaxAmplitude: 0.26
+  MinFrequency: 0.5
+  MaxFrequency: 5.5
+  MinKrangle: 0
+  MaxKrangle: 0.32
+  AmplitudeChangeSpeed: 0.13
+  FrequencyChangeSpeed: 2
+  KrangleSpeedChange: 0.4
   MinDialAngle: -135
   MaxDialAngle: 135
   CameraPoint: {fileID: 197384434029307361}
   Amplitude: 0.2
   Frequency: 3
+  Krangle: 0
   Enabled: 0
   LightRenderer: {fileID: 7118666842825268149}
   LightOnMaterial: {fileID: 2100000, guid: dfabaec86b95e8b47bfde3206f2e84d3, type: 2}
@@ -718,12 +722,16 @@ MonoBehaviour:
   CorrectSettings:
   - Amplitude: 0.45
     Frequency: 7.3
+    Krangle: 0.06
   - Amplitude: 0.22
     Frequency: 14
+    Krangle: 0.14
   - Amplitude: 0.38
     Frequency: 2
+    Krangle: 0.3
   - Amplitude: 0.12
     Frequency: 5
+    Krangle: 0.2
   CorrectSettingsPercentageMargin: 0.1
 --- !u!1001 &4035153509058005029
 PrefabInstance:
