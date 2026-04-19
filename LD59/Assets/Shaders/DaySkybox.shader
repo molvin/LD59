@@ -22,6 +22,7 @@ Shader "Custom/DaySkybox"
         _HazeStrength ("Haze Strength", Float) = 1.0
         _HazeFalloff ("Haze Falloff", Float) = 4.0
         _HazePixels ("Haze Pixel Size", Float) = 64
+        _HorizonOffset ("Horizon Offset", Float) = 0.0
     }
     SubShader
     {
@@ -55,6 +56,7 @@ Shader "Custom/DaySkybox"
             float _HazeStrength;
             float _HazeFalloff;
             float _HazePixels;
+            float _HorizonOffset;
 
             v2f vert(appdata v)
             {
@@ -67,6 +69,7 @@ Shader "Custom/DaySkybox"
             float4 frag(v2f i) : SV_Target
             {
                 float3 dir = normalize(i.dir);
+                float adjY = dir.y + _HorizonOffset;
                 float3 sunDir = normalize(_WorldSpaceLightPos0.xyz);
 
                 // SUN
@@ -76,15 +79,15 @@ Shader "Custom/DaySkybox"
                 float bloom = pow(max(sunDirDot, 0.0), 8.0) * _SunBloom;
 
                 // CLOUDS
-                float2 cloudUV    = dir.xz / max(dir.y, 0.0000001) * _CloudScale + _CloudScrollSpeed.xy * _Time.y * _CloudScrollSpeedFactor;
+                float2 cloudUV    = dir.xz / max(adjY, 0.0000001) * _CloudScale + _CloudScrollSpeed.xy * _Time.y * _CloudScrollSpeedFactor;
                 float2 pixCloudUV = floor(cloudUV * _CloudPixels) / _CloudPixels;
                 float  cloud      = tex2Dlod(_CloudNoise, float4(pixCloudUV, 0, 0)).r;
                 cloud = saturate((cloud - _CloudThreshold) / max(1.0 - _CloudThreshold, 0.001));
                 cloud = pow(cloud, _CloudContrast);
-                cloud *= smoothstep(0.0, 0.2, dir.y);
+                cloud *= smoothstep(0.0, 0.2, adjY);
 
                 // HAZE
-                float pixDirY = floor(dir.y * _HazePixels) / _HazePixels;
+                float pixDirY = floor(adjY * _HazePixels) / _HazePixels;
                 float haze = pow(1.0 - saturate(abs(pixDirY)), _HazeFalloff) * _HazeStrength;
 
                 // COMPOSE
