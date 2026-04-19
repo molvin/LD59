@@ -23,6 +23,8 @@ public class Boat : MonoBehaviour
     public float WheelSpeed = 0.4f;
     public float WheelReset = 0.8f;
     public float GearSpeed = 0.6f;
+    public float driftNoiseScale = 0.01f;
+    public float driftStrength = 0.2f;
 
     [Header("Audio")]
     public StudioEventEmitter engineNoise;
@@ -105,6 +107,11 @@ public class Boat : MonoBehaviour
             Debug.DrawLine(horizPos, horizPos + transform.right * rayCollisionSettings.right, Color.red);
         }
 
+        if (GameManager.Get().Player.StandingOn == Player.GroundType.Boat)
+        {
+            Drift();
+        }
+
         Vector3 currentPosition = transform.position;
         Vector3 currentPlaneForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
@@ -129,36 +136,62 @@ public class Boat : MonoBehaviour
 
         engineNoise.SetParameter("RPM", Mathf.Abs(throttle));
 
+        void NormalForce(Vector2 normal)
+        {
+            float dot = Vector2.Dot(linearVelocity, normal);
+
+            if (dot < 0)
+            {
+                linearVelocity -= dot * normal;
+            }
+        }
+
         // Forward
         RaycastHit rayHit;
         if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 0.1f, 0.01f),
             transform.forward, out rayHit, transform.rotation, rayCollisionSettings.forward, layerMask))
         {
+            NormalForce(new (rayHit.normal.x, rayHit.normal.z));
+
             transform.position -= transform.forward * (rayCollisionSettings.forward - rayHit.distance);
         }
         // Back
         if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 0.1f, 0.01f),
             -transform.forward, out rayHit, transform.rotation, rayCollisionSettings.back, layerMask))
         {
+            NormalForce(new (rayHit.normal.x, rayHit.normal.z));
+
             transform.position += transform.forward * (rayCollisionSettings.back - rayHit.distance);
         }
         // Right
         if (Physics.BoxCast(transform.position, new Vector3(0.01f, 0.1f, rayCollisionSettings.horizontalWidth * 0.5f),
             transform.right, out rayHit, transform.rotation, rayCollisionSettings.right, layerMask))
         {
+            NormalForce(new (rayHit.normal.x, rayHit.normal.z));
+
             transform.position -= transform.right * (rayCollisionSettings.right - rayHit.distance);
         }
         // Left
         if (Physics.BoxCast(transform.position, new Vector3(0.01f, 0.1f, rayCollisionSettings.horizontalWidth * 0.5f),
             -transform.right, out rayHit, transform.rotation, rayCollisionSettings.left, layerMask))
         {
+            NormalForce(new (rayHit.normal.x, rayHit.normal.z));
+
             transform.position += transform.right * (rayCollisionSettings.left - rayHit.distance);
         }
         boatSplashNoise.SetParameter("Speed", Mathf.Clamp01(linearVelocity.magnitude / MaxSpeed));
     }
 
-    void FlowCurrent()
+    private void Drift()
     {
+        float xCoord = (transform.position.x + Time.time) * driftNoiseScale;
+        float zCoord = (transform.position.z + Time.time) * driftNoiseScale;
 
+        float noiseSample = Mathf.PerlinNoise(xCoord, zCoord);
+
+        float angle = noiseSample * Mathf.PI * 2f;
+
+        linearVelocity += new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * driftStrength * Time.deltaTime;
+        angularVelocity += angle * driftStrength * Time.deltaTime;
     }
 }

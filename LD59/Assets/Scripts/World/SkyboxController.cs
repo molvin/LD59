@@ -23,13 +23,24 @@ public class SkyboxController : MonoBehaviour
     [SerializeField] private StarSign[] starSigns;
     [SerializeField] private StarSign moon;
 
+    [Header("Horizon")]
+    [SerializeField] private float PlayerMinHeight = 0.0f;
+    [SerializeField] private float PlayerMaxHeight = 18.0f;
+    [SerializeField] private float MinHorizonOffset = 0.09f;
+    [SerializeField] private float MaxHorizonOffset = 0.27f;
+
     private void Start()
     {
+        dayTimeSkyboxMaterial = new Material(dayTimeSkyboxMaterial);
+        polaroidNightTimeSkyboxMaterial = new Material(polaroidNightTimeSkyboxMaterial);
+        nightTimeSkyboxMaterial = new Material(nightTimeSkyboxMaterial);
+
         for (int i = 0; i < starSigns.Length; i++)
         {
             polaroidNightTimeSkyboxMaterial.SetTexture("_StarSign" + i + "Tex", starSigns[i].Texture);
         }
         polaroidNightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Texture);
+        UpdateSkybox();
     }
 
     [ContextMenu("Update Skybox")]
@@ -49,6 +60,7 @@ public class SkyboxController : MonoBehaviour
         UpdateSkybox();
         UpdatePolaroidSunPosition();
         UpdateStarSigns();
+        UpdateHorizonDropoff();
     }
 
     private Vector3 GetSkyboxDir(Vector3 targetPos, float height)
@@ -103,5 +115,15 @@ public class SkyboxController : MonoBehaviour
         {
             RenderSettings.skybox = dayTimeSkyboxMaterial;
         }
+    }
+
+    private void UpdateHorizonDropoff()
+    {
+        Player player = GameManager.Get().Player;
+        float t = Mathf.InverseLerp(PlayerMinHeight, PlayerMaxHeight, player.transform.position.y);
+        float horizonOffset = Mathf.Lerp(MinHorizonOffset, MaxHorizonOffset, t);
+        dayTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
+        nightTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
+        polaroidNightTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
     }
 }

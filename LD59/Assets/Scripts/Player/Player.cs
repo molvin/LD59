@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public bool MovementEnabled = true;
     [HideInInspector] public bool HoldingPickup = false;
-    private bool isSteering;
+    public bool isSteering { get; private set; }
 
     private new Camera camera;
 
@@ -103,7 +103,14 @@ public class Player : MonoBehaviour
             // Water check
             if (hit.position.y > -0.5f)
             {
-                // TODO: Normal force
+                Vector3 normal = (hit.position - testPos).normalized;
+                
+                float dot = Vector2.Dot(velocity, normal);
+                if (dot < 0)
+                {
+                    velocity -= dot * normal;
+                }
+
                 transform.position = hit.position;
             }
             else
