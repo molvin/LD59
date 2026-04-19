@@ -35,9 +35,7 @@ public class PolaroidCamera : MonoBehaviour
 
     private IEnumerator TakePicture()
     {
-        // TODO: animation when attached to player
-        //       also do something with the output image
-
+        Player player = GameManager.Get().Player;
 
         TakingPicture = true;
         VisualObject.SetActive(true);
@@ -50,6 +48,8 @@ public class PolaroidCamera : MonoBehaviour
         yield return new WaitForSeconds(PreWaitTime);
         VisualObject.transform.localPosition = Vector3.zero;
         yield return new WaitForEndOfFrame();
+
+        player.MovementEnabled = false;
 
         Transform parent = transform.parent;
         transform.SetParent(null);
@@ -90,9 +90,7 @@ public class PolaroidCamera : MonoBehaviour
             Destroy(Output.sprite.texture);
         Output.sprite = sprite;
 
-        PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
-        if (book != null)
-            book.AddPicture(photo);
+
 
         transform.parent = parent;
 
@@ -108,8 +106,20 @@ public class PolaroidCamera : MonoBehaviour
         yield return new WaitForSeconds(IntermediateWaitTime);
         PolaroidPicture.SetActive(true);
 
-        while (!Input.GetKeyDown(KeyCode.T) && !Input.GetMouseButtonDown(1))
+        while (true)
         {
+            if(Input.GetKeyDown(KeyCode.D))
+            {
+                PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
+                if (book != null)
+                    book.AddPicture(photo);
+                break;
+            }
+            else if(Input.GetKeyDown(KeyCode.A)) 
+            {
+                break;
+            }
+
             yield return null;
         }
         PolaroidPicture.SetActive(false);
@@ -119,6 +129,7 @@ public class PolaroidCamera : MonoBehaviour
         VisualObject.SetActive(false);
         VisualObject.transform.localPosition = visualObjectStartPos;
 
+        player.MovementEnabled = true;
         TakingPicture = false;
     }
 }
