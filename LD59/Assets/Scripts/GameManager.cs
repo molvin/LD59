@@ -11,17 +11,21 @@ public class GameManager : Subsystem<GameManager>
     private Player player;
     private PolaroidBook book;
     private PolaroidCamera polaroidCamera;
+    private SignalScope signalScope;
 
     public Boat Boat => boat;
     public Player Player => player;
     public PolaroidBook Book => book;
     public PolaroidCamera PolaroidCamera => polaroidCamera;
+    public SignalScope SignalScope => signalScope;
 
 
     private Vector3 startPosition = new(0, 0.5f, 0);
     private Quaternion startRotation = Quaternion.identity;
     private List<GameObject> happyPillars = new();
     private List<DayNightBound> timeBound = new();
+
+    public int HappyPillarCount => happyPillars.Count;
 
     public void ToggleDayNight()
     {
@@ -75,5 +79,6 @@ public class GameManager : Subsystem<GameManager>
     
         book = FindFirstObjectByType<PolaroidBook>(FindObjectsInactive.Include);
         polaroidCamera = FindFirstObjectByType<PolaroidCamera>(FindObjectsInactive.Include);
+        signalScope = FindFirstObjectByType<SignalScope>(FindObjectsInactive.Include);
     }
 }
