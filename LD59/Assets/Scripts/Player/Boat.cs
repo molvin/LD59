@@ -44,7 +44,7 @@ public class Boat : MonoBehaviour
         throttle = Mathf.Clamp(throttle + throttleJerk, -1.0f, 1.0f);
 
         float t = (throttle + 1.0f) / 2.0f;
-        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-30, 30, t), 0 , 0);
+        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-135, -50, t), 90 , -90);
     }
 
     public void Steer(float input)

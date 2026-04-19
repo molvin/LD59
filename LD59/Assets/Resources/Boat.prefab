@@ -987,7 +987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1887365166047316403
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   boatSplashNoise: {fileID: 4989285505834139847}
   MaxSpeed: 5
   SteeringPoint: {fileID: 3403220886037509978}
-  ThrottlePivot: {fileID: 1887365166047316403}
+  ThrottlePivot: {fileID: 610407100932975005}
 --- !u!114 &8232102860769504419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,6 +1474,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7069244
+      objectReference: {fileID: 0}
+    - target: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70692456
+      objectReference: {fileID: 0}
+    - target: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.016057579
+      objectReference: {fileID: 0}
+    - target: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.016057668
+      objectReference: {fileID: 0}
+    - target: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -87.398
+      objectReference: {fileID: 0}
+    - target: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
       propertyPath: m_Name
       value: Boat
@@ -1517,6 +1545,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3819481277082145582}
   m_SourcePrefab: {fileID: 100100000, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+--- !u!4 &610407100932975005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -273646254709520824, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+  m_PrefabInstance: {fileID: 8379873068697268181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8341215532005804094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
