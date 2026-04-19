@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Subsystem<GameManager>
 {
+    public bool HasGameBeenWon => happyPillars.Count >= 3;
     private bool isDay = true;
     public bool IsDay => isDay;
 
@@ -18,12 +20,20 @@ public class GameManager : Subsystem<GameManager>
 
     private Vector3 startPosition = new(0, 0.5f, 0);
     private Quaternion startRotation = Quaternion.identity;
+    private List<GameObject> happyPillars = new();
 
-    public void SetDayNight(bool isDay)
+    public void ToggleDayNight()
     {
-        this.isDay = isDay;
+        isDay = !isDay;
     }
 
+    public void RegisterHappyPillar(GameObject pillar)
+    {
+        if (!happyPillars.Contains(pillar))
+        {
+            happyPillars.Add(pillar);
+        }
+    }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnGameStart()

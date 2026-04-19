@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 1110547218}
   - component: {fileID: 1110547217}
   - component: {fileID: 1110547216}
+  - component: {fileID: 1110547220}
   m_Layer: 8
   m_Name: Pillar
   m_TagString: Untagged
@@ -634,6 +635,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1664418903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1110547220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110547215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8319ee70dece524587bc2eb82f68a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CircleToNight
+  MaxDistance: 50
+  LapsToActivate: 3
+  Direction: 0
+  CanRetrigger: 1
 --- !u!1 &1135474991
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +677,7 @@ Transform:
   m_GameObject: {fileID: 1135474991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.63713753, z: -0, w: 0.7707502}
-  m_LocalPosition: {x: -1013.7, y: 0, z: -399.3}
+  m_LocalPosition: {x: -47.6, y: 0, z: -83.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
