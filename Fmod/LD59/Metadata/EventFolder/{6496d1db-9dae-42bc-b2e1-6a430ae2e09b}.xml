@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EventFolder" id="{6496d1db-9dae-42bc-b2e1-6a430ae2e09b}">
+		<property name="name">
+			<value>RadioBeeps</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d614d806-23c3-43a2-9330-9487a1326c52}</destination>
+		</relationship>
+	</object>
+</objects>
