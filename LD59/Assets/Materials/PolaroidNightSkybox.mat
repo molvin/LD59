@@ -158,7 +158,7 @@ Material:
     - _HazeFalloff: 9.12
     - _HazePixels: 102.63
     - _HazeStrength: 0.5
-    - _HorizonOffset: 0.16
+    - _HorizonOffset: 0.09493931
     - _Metallic: 0
     - _MoonSize: 5
     - _OcclusionStrength: 1
