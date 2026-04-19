@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8155669453546184522}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1910494047248054518}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 3139880139981412385}
   - component: {fileID: 3455418096533480237}
   - component: {fileID: 8122681198809011809}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 6913400171161459368}
   - component: {fileID: 8041289702077114427}
   - component: {fileID: 3484672045120689342}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780552591210098379}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5327252435292257455}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 7437599070208573519}
   - component: {fileID: 8183386580567882349}
   - component: {fileID: 5320604407952772045}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 422859712105063872}
   - component: {fileID: 77641636263103454}
   - component: {fileID: 1440049767315203900}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 352230444375702767}
   - component: {fileID: 7808308518883160290}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PictureBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,8 +500,6 @@ MonoBehaviour:
   - {fileID: 3002357884042708849}
   - {fileID: 246411668800915190}
   Root: {fileID: 1276570825586102058}
-  PrevPageButton: {fileID: 3924068438199939785}
-  NextPageButton: {fileID: 7059994358026895729}
   FocusImage: {fileID: 381957370750659833}
   Enabled: 1
 --- !u!1 &2433825380704938194
@@ -515,7 +513,7 @@ GameObject:
   - component: {fileID: 6804384816124361285}
   - component: {fileID: 8975441989158019668}
   - component: {fileID: 5160132447450093307}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +650,7 @@ GameObject:
   - component: {fileID: 3632452177772743720}
   - component: {fileID: 2131271402733378253}
   - component: {fileID: 381957370750659833}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: FocusImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +723,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3368447250202428004}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8954975493323818703}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +797,7 @@ GameObject:
   - component: {fileID: 3358531676839707117}
   - component: {fileID: 498274781967793667}
   - component: {fileID: 246411668800915190}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,7 +872,7 @@ GameObject:
   - component: {fileID: 3375336136919210428}
   - component: {fileID: 1718951018709814384}
   - component: {fileID: 750333228747839184}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,7 +1007,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8778807497115746274}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8183312613157954954}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,7 +1079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7446657341567198970}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1119,7 +1117,7 @@ GameObject:
   - component: {fileID: 2671256581016062085}
   - component: {fileID: 303182101310322096}
   - component: {fileID: 4602172692315279476}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1194,7 +1192,7 @@ GameObject:
   - component: {fileID: 5584378801750466433}
   - component: {fileID: 7643149735011555544}
   - component: {fileID: 3002357884042708849}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1267,7 +1265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1035641946866056917}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1304,7 @@ GameObject:
   - component: {fileID: 4172202231898542378}
   - component: {fileID: 1699642742006944454}
   - component: {fileID: 6277876109595703683}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1419,7 +1417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1951862957444745651}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1458,7 +1456,7 @@ GameObject:
   - component: {fileID: 855722581812055964}
   - component: {fileID: 7137559711448490696}
   - component: {fileID: 3924068438199939785}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Prev
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1578,7 +1576,7 @@ GameObject:
   - component: {fileID: 4230671708540085244}
   - component: {fileID: 4890374163403641575}
   - component: {fileID: 7291518948864396615}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1653,7 +1651,7 @@ GameObject:
   - component: {fileID: 8738280204235198842}
   - component: {fileID: 1016742926332902043}
   - component: {fileID: 7763496019487857271}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1726,7 +1724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709853387640401037}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1765,7 +1763,7 @@ GameObject:
   - component: {fileID: 5215336915479464939}
   - component: {fileID: 7506204577496843606}
   - component: {fileID: 7059994358026895729}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1885,7 +1883,7 @@ GameObject:
   - component: {fileID: 1995932398963753457}
   - component: {fileID: 8950278234714887139}
   - component: {fileID: 642020974976283597}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1960,7 +1958,7 @@ GameObject:
   - component: {fileID: 2202442004926271288}
   - component: {fileID: 3286610303699921310}
   - component: {fileID: 2991284942905129485}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2035,7 +2033,7 @@ GameObject:
   - component: {fileID: 4236095891889273383}
   - component: {fileID: 1505985471636700416}
   - component: {fileID: 534524399177625175}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2108,7 +2106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026074197522477192}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Picture (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,9 +2193,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 37704cb88f2eff246bb6c91f46aaa8c3, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 37704cb88f2eff246bb6c91f46aaa8c3, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 37704cb88f2eff246bb6c91f46aaa8c3, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 37704cb88f2eff246bb6c91f46aaa8c3, type: 3}
       propertyPath: m_Name
       value: PictureBook
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 37704cb88f2eff246bb6c91f46aaa8c3, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
