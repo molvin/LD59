@@ -15,6 +15,7 @@ public class SkyboxController : MonoBehaviour
     
     [SerializeField] private Material dayTimeSkyboxMaterial;
     [SerializeField] private Material nightTimeSkyboxMaterial;
+    [SerializeField] private Material polaroidNightTimeSkyboxMaterial;
     [SerializeField] private Light polaroidSun;
     [SerializeField] private Transform polaroidSunTarget;
     [SerializeField] private float polaroidSunHeight = 45.0f;
@@ -22,12 +23,13 @@ public class SkyboxController : MonoBehaviour
     [SerializeField] private StarSign[] starSigns;
     [SerializeField] private StarSign moon;
 
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < starSigns.Length; i++)
         {
-            nightTimeSkyboxMaterial.SetTexture("_StarSign" + i + "Tex", starSigns[i].Texture);
+            polaroidNightTimeSkyboxMaterial.SetTexture("_StarSign" + i + "Tex", starSigns[i].Texture);
         }
+        polaroidNightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Texture);
     }
 
     [ContextMenu("Update Skybox")]
@@ -71,11 +73,35 @@ public class SkyboxController : MonoBehaviour
         {
             StarSign sign = starSigns[i];
             string name = $"_StarSign{i}";
-            nightTimeSkyboxMaterial.SetVector(name + "Dir", GetSkyboxDir(sign.Target.position, sign.Height));
-            nightTimeSkyboxMaterial.SetFloat(name + "Size", sign.Size);
+            polaroidNightTimeSkyboxMaterial.SetVector(name + "Dir", GetSkyboxDir(sign.Target.position, sign.Height));
+            polaroidNightTimeSkyboxMaterial.SetFloat(name + "Size", sign.Size);
         }
 
-        nightTimeSkyboxMaterial.SetVector("_MoonDir", GetSkyboxDir(moon.Target.position, moon.Height));
-        nightTimeSkyboxMaterial.SetFloat("_MoonSize", moon.Size);
+        polaroidNightTimeSkyboxMaterial.SetVector("_MoonDir", GetSkyboxDir(moon.Target.position, moon.Height));
+        polaroidNightTimeSkyboxMaterial.SetFloat("_MoonSize", moon.Size);
+    }
+
+    public void TakePicture()
+    {
+        if(!GameManager.Get().IsDay)
+        {
+            RenderSettings.skybox = polaroidNightTimeSkyboxMaterial;
+        }    
+        else
+        {
+            RenderSettings.skybox = dayTimeSkyboxMaterial;
+        }
+    }
+
+    public void EndPicture()
+    {
+        if(!GameManager.Get().IsDay)
+        {
+            RenderSettings.skybox = nightTimeSkyboxMaterial;
+        }
+        else
+        {
+            RenderSettings.skybox = dayTimeSkyboxMaterial;
+        }
     }
 }
