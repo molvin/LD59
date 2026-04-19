@@ -52,7 +52,7 @@ public class PolaroidBook : MonoBehaviour
         if (Enabled && Input.GetKeyDown(KeyCode.G))
         {
             PolaroidCamera cam = FindFirstObjectByType<PolaroidCamera>();
-            if (cam == null || !cam.TakingPicture)
+            if (cam == null || !cam.TakingPicture && !player.HoldingPickup)
                 Open(!IsOpen);
         }
 
