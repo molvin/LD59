@@ -11,6 +11,7 @@ public class SignalScope : Interactable
     {
         public float Amplitude;
         public float Frequency;
+        public float Krangle;
     }
 
     public TextMeshProUGUI Text;
@@ -22,15 +23,19 @@ public class SignalScope : Interactable
     public float MaxAmplitude;
     public float MinFrequency;
     public float MaxFrequency;
+    public float MinKrangle;
+    public float MaxKrangle;
 
     public float AmplitudeChangeSpeed;
     public float FrequencyChangeSpeed;
+    public float KrangleSpeedChange;
     public float MinDialAngle = -135f;
     public float MaxDialAngle = 135f;
 
     public Transform CameraPoint;
     public float Amplitude;
     public float Frequency;
+    public float Krangle;
     public bool Enabled;
 
     [Header("Beep")]
@@ -91,6 +96,7 @@ public class SignalScope : Interactable
         SineWaveRenderer.materials = mats;
         SineWaveMat.SetFloat("_Amplitude", Amplitude);
         SineWaveMat.SetFloat("_Frequency", Frequency);
+        SineWaveMat.SetFloat("_Krangle", Krangle);
     }
 
     private void Update()
@@ -128,22 +134,35 @@ public class SignalScope : Interactable
                 Frequency = Mathf.Clamp(Frequency - Time.deltaTime * FrequencyChangeSpeed, MinFrequency, MaxFrequency);
             }
 
+            if (Input.GetKey(KeyCode.Q))
+            {
+                Krangle = Mathf.Clamp(Krangle + Time.deltaTime * AmplitudeChangeSpeed, 0, MaxKrangle);
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                Krangle = Mathf.Clamp(Krangle - Time.deltaTime * AmplitudeChangeSpeed, 0, MaxKrangle);
+            }
+
             SineWaveMat.SetFloat("_Amplitude", Amplitude);
             SineWaveMat.SetFloat("_Frequency", Frequency);
+            SineWaveMat.SetFloat("_Krangle", Krangle);
 
             float ampT = Mathf.InverseLerp(MinAmplitude, MaxAmplitude, Amplitude);
             float freqT = Mathf.InverseLerp(MinFrequency, MaxFrequency, Frequency);
+            float krngT = Mathf.InverseLerp(MinKrangle, MaxKrangle, Krangle);
             float ampAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - ampT);
             float freqAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - freqT);
+            float krangAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - krngT);
             AmplitudeDial.localRotation = Quaternion.Euler(0f, 0f, ampAngle);
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
+            //KrangleDial.localRotation = Quaternion.Euler(0f, 0f, krngAngle);
 
-            Text.text = $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}";
+            Text.text = $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}, Krng: {Krangle:F2}";
 
             for (int i = 0; i < CorrectSettings.Length; i++)
             {
-                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency);
-                Debug.Log($"Setting {i}: amp error {result.ampError * 100f:F1}%, freq error {result.freqError * 100f:F1}%, total {result.totalError * 100f:F1}%");
+                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency, CorrectSettings[i].Krangle);
+                Debug.Log($"Setting {i}: amp error {result.ampError * 100f:F1}%, freq error {result.freqError * 100f:F1}%, krng error {result.krngError * 100f:F1}%, total {result.totalError * 100f:F1}%");
             }
         }
 
@@ -153,7 +172,7 @@ public class SignalScope : Interactable
             float error = 1;
             for (int i = 0; i < CorrectSettings.Length; i++)
             {
-                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency);
+                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency, CorrectSettings[i].Krangle);
                 if (bestSetting == -1 || result.totalError < error)
                 {
                     bestSetting = i;
@@ -182,14 +201,16 @@ public class SignalScope : Interactable
         }
     }
 
-    private (float ampError, float freqError, float totalError) GetError(float CorrectAmplitude, float CorrectFrequency)
+    private (float ampError, float freqError, float krngError, float totalError) GetError(float CorrectAmplitude, float CorrectFrequency, float CorrectKrangle)
     {
         float ampRange = MaxAmplitude - MinAmplitude;
         float freqRange = MaxFrequency - MinFrequency;
+        float krngRange = MaxKrangle - MinKrangle;
         float ampError = ampRange > 0f ? Mathf.Abs(Amplitude - CorrectAmplitude) / ampRange : 0f;
         float freqError = freqRange > 0f ? Mathf.Abs(Frequency - CorrectFrequency) / freqRange : 0f;
-        float totalError = (ampError + freqError) * 0.5f;
-        return (ampError, freqError, totalError);
+        float krngError = krngRange > 0f ? Mathf.Abs(Krangle - CorrectKrangle) / krngRange : 0f;
+        float totalError = (ampError + freqError + krngError) / 3.0f;
+        return (ampError, freqError, krngError, totalError);
     }
 
     private void UpdateBeep(float t)
