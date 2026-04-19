@@ -64,7 +64,14 @@ MonoBehaviour:
     Size: 5
     Target: {fileID: 0}
   moon:
-    Texture: {fileID: 2800000, guid: 507cd805ad331e54cb9e9cab5a9270b5, type: 3}
+    Phases:
+    - {fileID: 2800000, guid: 56d963b38452806409df32cddb9bd81f, type: 3}
+    - {fileID: 2800000, guid: 378349059ca97ee499555a885e80da03, type: 3}
+    - {fileID: 2800000, guid: 2f5eb81abb60f0e4b97ccf93f5a7d47d, type: 3}
     Height: 50
     Size: 5
     Target: {fileID: 0}
+  PlayerMinHeight: 0
+  PlayerMaxHeight: 18
+  MinHorizonOffset: 0.09
+  MaxHorizonOffset: 0.27

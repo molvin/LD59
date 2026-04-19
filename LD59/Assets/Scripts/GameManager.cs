@@ -23,6 +23,8 @@ public class GameManager : Subsystem<GameManager>
     private List<GameObject> happyPillars = new();
     private List<DayNightBound> timeBound = new();
 
+    public int HappyPillarCount => happyPillars.Count;
+
     public void ToggleDayNight()
     {
         isDay = !isDay;
