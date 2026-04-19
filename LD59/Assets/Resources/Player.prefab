@@ -53,11 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6acd83488b6454347b6b1ea30101a456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  WalkingControls: {fileID: 0}
-  BoatingControls: {fileID: 0}
-  PolaroidControls: {fileID: 0}
-  PictureBookControls: {fileID: 0}
-  PickupControls: {fileID: 0}
+  WalkingControls: {fileID: 2739754613598418077}
+  BoatingControls: {fileID: 3906953087192805865}
+  PolaroidControls: {fileID: 4132257100011230432}
+  PictureBookControls: {fileID: 7893649597260180237}
+  PickupControls: {fileID: 7674223196692109321}
 --- !u!1 &1583023170998902921
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,14 +123,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Walk: WASD
-
-    Look: Mouse
-
-    Open photoalbum: G
-
-    Interact: Left
-    Click'
+  m_text: 'TODO: pickup controls'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -604,14 +597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Walk: WASD
-
-    Look: Mouse
-
-    Open photoalbum: G
-
-    Interact: Left
-    Click'
+  m_text: TODO boat controls
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -748,14 +734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Walk: WASD
-
-    Look: Mouse
-
-    Open photoalbum: G
-
-    Interact: Left
-    Click'
+  m_text: 'TODO: picture book controls'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -892,14 +871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Walk: WASD
-
-    Look: Mouse
-
-    Open photoalbum: G
-
-    Interact: Left
-    Click'
+  m_text: TODO polaroid camera controls
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

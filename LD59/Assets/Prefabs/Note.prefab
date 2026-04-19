@@ -382,7 +382,7 @@ MonoBehaviour:
   InteractError: 0.4
   HoldDistance: 0.5
   RotateSpeed: 90
-  Text: Hi
+  TextAssetName: TestText
   CanvasText: {fileID: 1634015726649012488}
 --- !u!65 &7954240007286948800
 BoxCollider:
