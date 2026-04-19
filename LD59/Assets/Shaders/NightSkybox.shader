@@ -4,6 +4,11 @@ Shader "Custom/NightSkybox"
     {
         _SkyColor ("Sky Color", Color) = (0.3, 0.6, 1.0, 1)
         _HorizonOffset ("Horizon Offset", Float) = 0.0
+        _StarDensity ("Star Density", Range(0,1)) = 0.3
+        _StarMinSize ("Star Min Size", Range(0,1)) = 0.1
+        _StarMaxSize ("Star Max Size", Range(0,1)) = 0.5
+        _StarColor ("Star Color", Color) = (1,1,1,1)
+        _StarPixelation ("Star Pixelation", Float) = 100
     }
     SubShader
     {
@@ -22,6 +27,11 @@ Shader "Custom/NightSkybox"
 
             float4 _SkyColor;
             float _HorizonOffset;
+            float _StarDensity;
+            float _StarMinSize;
+            float _StarMaxSize;
+            float4 _StarColor;
+            float _StarPixelation;
 
             sampler2D _StarSign0Tex;
             sampler2D _StarSign1Tex;
@@ -36,6 +46,33 @@ Shader "Custom/NightSkybox"
             float _StarSign1Size;
             float _StarSign2Size;
             float _MoonSize;
+
+            float hash(float2 p)
+            {
+                p = frac(p * float2(127.1, 311.7));
+                p += dot(p, p + 45.23);
+                return frac(p.x * p.y);
+            }
+
+            float3 BlendStars(float3 col, float3 viewDir)
+            {
+                float theta = acos(clamp(viewDir.y, -1.0, 1.0));
+                float phi = atan2(viewDir.z, viewDir.x);
+                float2 sphereUV = float2(phi / (2.0 * UNITY_PI) + 0.5, theta / UNITY_PI);
+                float2 cellUV = sphereUV * _StarPixelation;
+                float2 cellID = floor(cellUV);
+                float2 cellFrac = frac(cellUV);
+                float rng1 = hash(cellID);
+                float rng2 = hash(cellID + float2(13.7, 57.3));
+                if (rng1 < _StarDensity)
+                {
+                    float starSize = lerp(_StarMinSize, _StarMaxSize, rng2);
+                    float2 d = abs(cellFrac - 0.5);
+                    if (max(d.x, d.y) < starSize * 0.5)
+                        col = _StarColor.rgb;
+                }
+                return col;
+            }
 
             float3 BlendStarSign(float3 col, float3 viewDir, float3 signDir, sampler2D signTex, float size)
             {
@@ -68,6 +105,7 @@ Shader "Custom/NightSkybox"
                 float3 viewDir = normalize(i.dir);
                 float3 adjViewDir = normalize(float3(viewDir.x, viewDir.y + _HorizonOffset, viewDir.z));
                 float3 col = _SkyColor.rgb;
+                col = BlendStars(col, viewDir);
                 col = BlendStarSign(col, adjViewDir, _StarSign0Dir, _StarSign0Tex, _StarSign0Size);
                 col = BlendStarSign(col, adjViewDir, _StarSign1Dir, _StarSign1Tex, _StarSign1Size);
                 col = BlendStarSign(col, adjViewDir, _StarSign2Dir, _StarSign2Tex, _StarSign2Size);

@@ -7,6 +7,7 @@ public class Controls : MonoBehaviour
     public GameObject PolaroidControls;
     public GameObject PictureBookControls;
     public GameObject PickupControls;
+    public GameObject SignalScopeControls;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class Controls : MonoBehaviour
         PolaroidControls.SetActive(false);
         PictureBookControls.SetActive(false);
         PickupControls.SetActive(false);
+        SignalScopeControls.SetActive(false);
     }
 
     void Update()
@@ -25,7 +27,8 @@ public class Controls : MonoBehaviour
         PolaroidControls.SetActive(gm.PolaroidCamera.TakingPicture);
         PictureBookControls.SetActive(gm.Book.IsOpen);
         PickupControls.SetActive(gm.Player.HoldingPickup);
+        SignalScopeControls.SetActive(gm.SignalScope.Enabled);
 
-        WalkingControls.SetActive(!gm.Player.isSteering && !gm.PolaroidCamera.TakingPicture && !gm.Book.IsOpen && !gm.Player.HoldingPickup);
+        WalkingControls.SetActive(!gm.Player.isSteering && !gm.PolaroidCamera.TakingPicture && !gm.Book.IsOpen && !gm.Player.HoldingPickup && !gm.SignalScope.Enabled);
     }
 }
