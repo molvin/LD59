@@ -27,6 +27,8 @@ public class SkyboxController : MonoBehaviour
     [SerializeField] private Material nightTimeSkyboxMaterial;
     [SerializeField] private Material polaroidNightTimeSkyboxMaterial;
     [SerializeField] private Light polaroidSun;
+    [SerializeField] private Light daySun;
+    [SerializeField] private Light nightSun;
     [SerializeField] private Transform polaroidSunTarget;
     [SerializeField] private float polaroidSunHeight = 45.0f;
 
@@ -58,7 +60,10 @@ public class SkyboxController : MonoBehaviour
     [ContextMenu("Update Skybox")]
     public void UpdateSkybox()
     {
-        RenderSettings.skybox = GameManager.Get().IsDay ? dayTimeSkyboxMaterial : nightTimeSkyboxMaterial;
+        bool isDay = GameManager.Get().IsDay;
+        RenderSettings.skybox = isDay ? dayTimeSkyboxMaterial : nightTimeSkyboxMaterial;
+        nightSun.gameObject.SetActive(!isDay);
+        daySun.gameObject.SetActive(isDay);
     }
 
     private void Update()
