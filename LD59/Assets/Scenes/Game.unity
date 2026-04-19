@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e55a63df6038974f9d2764fa7b49402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
-  Enabled: 0
+  ShowInPhoto: 0
 --- !u!1 &495597673
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +991,7 @@ GameObject:
   - component: {fileID: 1733772868}
   - component: {fileID: 1733772867}
   - component: {fileID: 1733772869}
+  - component: {fileID: 1733772870}
   m_Layer: 0
   m_Name: Managing stuff
   m_TagString: Untagged
@@ -1049,6 +1050,19 @@ MonoBehaviour:
   SetupPlayScene: 1
   DebugSpawnIsland: {fileID: 0}
   DebugSpawnDistance: 40
+--- !u!114 &1733772870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733772866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28690758aae7fbe4c95914095cb9dd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkyboxController
+  skyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
 --- !u!1 &2101159248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e55a63df6038974f9d2764fa7b49402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Enabled: 1
+  ShowInPhoto: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
