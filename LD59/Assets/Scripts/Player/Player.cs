@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,6 @@ public class Player : MonoBehaviour
     private new Camera camera;
 
     private float rotation;
-    private bool boated = true;
     private Vector3 localSpaceOffset = new Vector3(0, 0.5f, 0);
     private Vector3 velocity;
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
@@ -54,12 +54,17 @@ public class Player : MonoBehaviour
             velocity *= Mathf.Pow(MoveDeceleration, Time.deltaTime);
         }
 
+        Boat boat = GameManager.Get().Boat;
+        bool boated = false;
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit rayHit))
+        {
+            boated = rayHit.collider.gameObject.GetComponentInParent<Boat>() != null;
+        }
+
         Vector3 displacement = MovementEnabled ? velocity * Time.deltaTime : Vector3.zero;
 
         if (boated)
         {
-            Boat boat = GameManager.Get().Boat;
-
             Vector3 effectiveWorldPosition = boat.transform.position + boat.transform.rotation * localSpaceOffset;
 
             displacement += effectiveWorldPosition - transform.position;
@@ -79,11 +84,7 @@ public class Player : MonoBehaviour
             velocity = Vector3.zero;
         }
 
-        if (boated)
-        {
-            Boat boat = GameManager.Get().Boat;
-            localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
-        }
+        localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
 
         if (Input.GetMouseButton(0))
         {
