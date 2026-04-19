@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{9bc72b82-3961-40d6-aeab-258630f62df9}">
+	<object class="AudioFile" id="{4e5a3361-9129-4980-a1e7-55cc724ceb29}">
 		<property name="assetPath">
-			<value>RadioBeepFull.wav</value>
+			<value>WoodCreak-06.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>0.29827664399092968</value>
+			<value>1.35425</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{b5fe82f2-2694-469f-a433-715e4a7470c0}</destination>

@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   MouseSensitivity: 80
-  MoveAcceleration: 8
-  MoveDeceleration: 0.03
+  MoveAcceleration: 12
+  MoveDeceleration: 0.01
+  MovementEnabled: 1
 --- !u!1 &4618517213923653630
 GameObject:
   m_ObjectHideFlags: 0
