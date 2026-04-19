@@ -18,9 +18,8 @@ Shader "Custom/Water"
         _WaveNoiseStrength  ("Wave Noise Strength",  Float)      = 0.3
 
         [Header(Dropoff)]
-        _MinDistance        ("Dropoff Min Distance", Float)      = 100
-        _MaxDistance        ("Dropoff Max Distance", Float)      = 200
-        _MaxDropoff         ("Dropoff Max Height",   Float)      = 50
+        _CurveFactor        ("How Much Curve per Meter Distance", Float)      = 100
+        _CurvePower         ("Falloff Power of the Curve", Float)      = 200
 
         [Header(Normal Maps)]
         _NormalMapA         ("Normal Map A",         2D)         = "bump" {}
@@ -99,9 +98,8 @@ Shader "Custom/Water"
                 float  _WaveSpeed;
                 float  _WaveNoiseScale;
                 float  _WaveNoiseStrength;
-                float  _MinDistance;
-                float  _MaxDistance;
-                float  _DropoffHeight;
+                float  _CurveFactor;
+                float  _CurvePower;
                 float4 _FoamMapParams;
                 float3 _FoamColor;
                 float  _FoamNoiseScale;
@@ -143,16 +141,14 @@ Shader "Custom/Water"
             Varyings vert(Attributes IN)
             {
                 Varyings OUT;
-                float3 worldPos  = TransformObjectToWorld(IN.positionOS.xyz);
-                worldPos.y      += WaveHeight(worldPos.xz);
-
-                float distToCamera = distance(_WorldSpaceCameraPos.xz, worldPos.xz);
-                float t = clamp((distToCamera - _MinDistance) / (_MaxDistance - _MinDistance), 0, 1);
-                worldPos.y = lerp(worldPos.y, worldPos.y - _DropoffHeight, t);
-
-                OUT.positionCS   = TransformWorldToHClip(worldPos);
-                OUT.screenPos    = ComputeScreenPos(OUT.positionCS);
-                OUT.worldPos     = worldPos;
+                float3 worldPos = TransformObjectToWorld(IN.positionOS.xyz);
+                worldPos.y += WaveHeight(worldPos.xz);
+                float dist = distance(_WorldSpaceCameraPos.xz, worldPos.xz);
+                float dropoff = pow(dist * _CurveFactor, _CurvePower);
+                worldPos.y -= dropoff;
+                OUT.positionCS = TransformWorldToHClip(worldPos);
+                OUT.screenPos  = ComputeScreenPos(OUT.positionCS);
+                OUT.worldPos   = worldPos;
                 return OUT;
             }
 

@@ -21,10 +21,16 @@ public class GameManager : Subsystem<GameManager>
     private Vector3 startPosition = new(0, 0.5f, 0);
     private Quaternion startRotation = Quaternion.identity;
     private List<GameObject> happyPillars = new();
+    private List<DayNightBound> timeBound = new();
 
     public void ToggleDayNight()
     {
         isDay = !isDay;
+
+        foreach (var thing in timeBound)
+        {
+            thing.gameObject.SetActive((thing.DayBound && isDay) || (!thing.DayBound && !isDay));
+        }
     }
 
     public void RegisterHappyPillar(GameObject pillar)
@@ -33,6 +39,12 @@ public class GameManager : Subsystem<GameManager>
         {
             happyPillars.Add(pillar);
         }
+    }
+
+    public void RegisterDayNightBound(DayNightBound thing)
+    {
+        timeBound.Add(thing);
+        thing.gameObject.SetActive((thing.DayBound && isDay) || (!thing.DayBound && !isDay));
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

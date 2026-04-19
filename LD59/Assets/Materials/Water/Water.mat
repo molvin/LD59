@@ -54,6 +54,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaMin: 0.927
+    - _CurveFactor: 0.04
+    - _CurvePower: 1.8
     - _DepthFactor: 0.5
     - _DepthRange: 5
     - _DropoffHeight: 50
