@@ -841,6 +841,7 @@ Transform:
   - {fileID: 1555008772165103675}
   - {fileID: 1887365166047316403}
   - {fileID: 3814950330688351382}
+  - {fileID: 7416936315426433070}
   - {fileID: 2368516575309796210}
   m_Father: {fileID: 1893441068722668657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1003,6 +1004,71 @@ Transform:
   - {fileID: 2182558023027081513}
   m_Father: {fileID: 5355420929151293198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7312822377218215270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7416936315426433070}
+  - component: {fileID: 4989285505834139847}
+  m_Layer: 0
+  m_Name: BoatSplashNoise
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7416936315426433070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312822377218215270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5355420929151293198}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4989285505834139847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312822377218215270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1461577578
+      Data2: 1096922024
+      Data3: 1099963820
+      Data4: -1930643459
+    Path: event:/BoatSplash
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: Speed
+    Value: 1
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8168733051973625407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,6 +1080,7 @@ GameObject:
   - component: {fileID: 1893441068722668657}
   - component: {fileID: 7098719332587587478}
   - component: {fileID: 8232102860769504419}
+  - component: {fileID: 880218753869541324}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -1059,6 +1126,8 @@ MonoBehaviour:
   WheelReset: 0.8
   GearSpeed: 0.8
   engineNoise: {fileID: 1853082167153262688}
+  boatSplashNoise: {fileID: 4989285505834139847}
+  MaxSpeed: 5
   SteeringPoint: {fileID: 3403220886037509978}
   ThrottlePivot: {fileID: 1887365166047316403}
 --- !u!114 &8232102860769504419
@@ -1093,6 +1162,28 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 99d0c7fa1fc102c4cbb38efb807765c5, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &880218753869541324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168733051973625407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e70deac409a08743993114e19d57682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomAudioEventPlayer
+  m_Event:
+    Guid:
+      Data1: 110846387
+      Data2: 1270387445
+      Data3: -1806698315
+      Data4: -1411896005
+    Path: event:/WoodCreak
+  m_Range: 1
+  m_MinInterval: 3
+  m_MaxInterval: 6
 --- !u!1 &8832944073520666446
 GameObject:
   m_ObjectHideFlags: 0

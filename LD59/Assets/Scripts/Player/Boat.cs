@@ -16,6 +16,8 @@ public class Boat : MonoBehaviour
 
     [Header("Audio")]
     public StudioEventEmitter engineNoise;
+    public StudioEventEmitter boatSplashNoise;
+    public float MaxSpeed = 20f;
 
     public Transform SteeringPoint;
     public Transform ThrottlePivot;
@@ -78,5 +80,6 @@ public class Boat : MonoBehaviour
         deltaRotation = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, currentPlaneForward, Vector3.up);
 
         engineNoise.SetParameter("RPM", Mathf.Abs(throttle));
+        boatSplashNoise.SetParameter("Speed", Mathf.Clamp01(linearVelocity.magnitude / MaxSpeed));
     }
 }
