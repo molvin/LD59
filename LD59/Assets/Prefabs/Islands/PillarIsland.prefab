@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8923805644806853366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PillarIsland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,9 +80,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: e20c00372b2b7354386e32cf2ab2961d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: e20c00372b2b7354386e32cf2ab2961d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: e20c00372b2b7354386e32cf2ab2961d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: e20c00372b2b7354386e32cf2ab2961d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e20c00372b2b7354386e32cf2ab2961d, type: 3}
       propertyPath: m_Name
       value: PillarIsland
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e20c00372b2b7354386e32cf2ab2961d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: e20c00372b2b7354386e32cf2ab2961d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

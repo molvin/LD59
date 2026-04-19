@@ -1,8 +1,19 @@
 using FMODUnity;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Boat : MonoBehaviour
 {
+    struct RayCollisionSettings
+    {
+        public float verticalWidth;
+        public float horizontalWidth;
+        public float forward;
+        public float back;
+        public float right;
+        public float left;
+    }
+
     [Header("References")]
     public Interactable Wheel;
     public float DeckLevel = 0.5f;
@@ -19,6 +30,9 @@ public class Boat : MonoBehaviour
     public StudioEventEmitter boatSplashNoise;
     public float MaxSpeed = 20f;
 
+    [Header("Collision")]
+    public LayerMask layerMask;
+
     public Transform SteeringPoint;
     public Transform ThrottlePivot;
 
@@ -30,6 +44,7 @@ public class Boat : MonoBehaviour
     private Vector3 deltaVelocity;
     private float deltaRotation;
     private bool isSteering = false;
+    private RayCollisionSettings rayCollisionSettings;
 
     public Vector3 DeltaVelocity => deltaVelocity;
     public float DeltaRotation => deltaRotation;
@@ -55,8 +70,34 @@ public class Boat : MonoBehaviour
         isSteering = true;
     }
 
+    void Start()
+    {
+        transform.rotation = Quaternion.identity;
+        Bounds bounds = Utils.GetBounds(gameObject);
+        rayCollisionSettings = new RayCollisionSettings
+        {
+            verticalWidth = Mathf.Abs(bounds.max.x - bounds.min.x) * 0.5f,
+            horizontalWidth = Mathf.Abs(bounds.max.z - bounds.min.z) * 0.5f,
+            forward = Mathf.Abs(bounds.max.z - transform.position.z),
+            back = Mathf.Abs(transform.position.z - bounds.min.z),
+            right = Mathf.Abs(bounds.max.x - transform.position.x),
+            left = Mathf.Abs(transform.position.x - bounds.min.x),
+        };
+    }
+
     void Update()
     {
+        for (int i = 0; i < 10; i++)
+        {
+            float alpha = (float)i / 10.0f;
+
+            Vector3 vertPos = transform.position + transform.right * ((-rayCollisionSettings.verticalWidth * 0.5f) + (alpha * rayCollisionSettings.verticalWidth));
+            Debug.DrawLine(vertPos, vertPos + transform.forward * rayCollisionSettings.forward, Color.blue);
+
+            Vector3 horizPos = transform.position + transform.forward * ((-rayCollisionSettings.horizontalWidth * 0.5f) + (alpha * rayCollisionSettings.horizontalWidth));
+            Debug.DrawLine(horizPos, horizPos + transform.right * rayCollisionSettings.right, Color.red);
+        }
+
         Vector3 currentPosition = transform.position;
         Vector3 currentPlaneForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
@@ -80,6 +121,32 @@ public class Boat : MonoBehaviour
         deltaRotation = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, currentPlaneForward, Vector3.up);
 
         engineNoise.SetParameter("RPM", Mathf.Abs(throttle));
+
+        // Forward
+        RaycastHit rayHit;
+        if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 10.0f, 1.0f),
+            transform.forward, out rayHit, transform.rotation, rayCollisionSettings.forward, layerMask))
+        {
+            transform.position -= transform.forward * (rayCollisionSettings.forward - rayHit.distance);
+        }
+        // Back
+        if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 10.0f, 1.0f),
+            -transform.forward, out rayHit, transform.rotation, rayCollisionSettings.back, layerMask))
+        {
+            transform.position += transform.forward * (rayCollisionSettings.back - rayHit.distance);
+        }
+        // Right
+        if (Physics.BoxCast(transform.position, new Vector3(1.0f, 10.0f, rayCollisionSettings.horizontalWidth * 0.5f),
+            transform.right, out rayHit, transform.rotation, rayCollisionSettings.right, layerMask))
+        {
+            transform.position -= transform.right * (rayCollisionSettings.right - rayHit.distance);
+        }
+        // Left
+        if (Physics.BoxCast(transform.position, new Vector3(1.0f, 10.0f, rayCollisionSettings.horizontalWidth * 0.5f),
+            -transform.right, out rayHit, transform.rotation, rayCollisionSettings.left, layerMask))
+        {
+            transform.position += transform.right * (rayCollisionSettings.left - rayHit.distance);
+        }
         boatSplashNoise.SetParameter("Speed", Mathf.Clamp01(linearVelocity.magnitude / MaxSpeed));
     }
 }

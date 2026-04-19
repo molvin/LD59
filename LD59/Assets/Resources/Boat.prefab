@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1525122806407522045}
   - component: {fileID: 1465523074788246549}
   - component: {fileID: 941635940083511351}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1487266656386723384}
   - component: {fileID: 353863654451608925}
   - component: {fileID: 7206479982084012682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 2368516575309796210}
   - component: {fileID: 7639520471261940272}
   - component: {fileID: 7552487803009159071}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WaveformNote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 5434498817390824499}
   - component: {fileID: 449810615466870036}
   - component: {fileID: 962834816143054181}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3403220886037509978}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SteeringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 7198385592107823643}
   - component: {fileID: 6981388749967995533}
   - component: {fileID: 211281674726347761}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 2890794538120694238}
   - component: {fileID: 4725498893067459907}
   - component: {fileID: 206146064723301756}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 4140713692728715044}
   - component: {fileID: 1542829548364029454}
   - component: {fileID: 3084536942070835019}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3814950330688351382}
   - component: {fileID: 1853082167153262688}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EngineNoise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5355420929151293198}
   - component: {fileID: 5310677554791032881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +872,7 @@ GameObject:
   - component: {fileID: 7095507750680687098}
   - component: {fileID: 3279242881328730438}
   - component: {fileID: 7025098811825214034}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1887365166047316403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StickPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7416936315426433070}
   - component: {fileID: 4989285505834139847}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BoatSplashNoise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,7 +1081,7 @@ GameObject:
   - component: {fileID: 7098719332587587478}
   - component: {fileID: 8232102860769504419}
   - component: {fileID: 880218753869541324}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,6 +1128,9 @@ MonoBehaviour:
   engineNoise: {fileID: 1853082167153262688}
   boatSplashNoise: {fileID: 4989285505834139847}
   MaxSpeed: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
   SteeringPoint: {fileID: 3403220886037509978}
   ThrottlePivot: {fileID: 610407100932975005}
 --- !u!114 &8232102860769504419
@@ -1160,7 +1163,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.11666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 99d0c7fa1fc102c4cbb38efb807765c5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fe4973a25ed58154db38ad9afad4fca2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &880218753869541324
 MonoBehaviour:
@@ -1196,7 +1199,7 @@ GameObject:
   - component: {fileID: 1170052219330122789}
   - component: {fileID: 5802077435249479755}
   - component: {fileID: 3563071263980166424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1356,6 +1359,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.842
       objectReference: {fileID: 0}
+    - target: {fileID: 2024394527103104697, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382224011313330687, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: BeepSound.Path
       value: event:/RadioBeeps/RadioBeep
@@ -1400,9 +1411,49 @@ PrefabInstance:
       propertyPath: FullBeepSound.Guid.Data4
       value: -166360025
       objectReference: {fileID: 0}
+    - target: {fileID: 4094220231537989472, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269086360576456052, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800676340367831162, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915194694470985233, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5232066295050201999, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826484626918431737, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353053436813884875, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403166453888134116, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531283932681052143, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_Name
       value: SignalScope
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
