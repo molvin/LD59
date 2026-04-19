@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class InteractionSubsystem : Subsystem<InteractionSubsystem>
@@ -7,19 +8,21 @@ public class InteractionSubsystem : Subsystem<InteractionSubsystem>
 
     public void Interact(Transform interactorTransform)
     {
-        foreach (Interactable interactable in interactables)
+        for (int i = interactables.Count - 1; i >= 0; --i)
         {
-            interactable.TryInteract(interactorTransform);
+            if (interactables[i] == null)
+            {
+                interactables.RemoveAtSwapBack(i);
+            }
+            else
+            {
+                interactables[i].TryInteract(interactorTransform);
+            }
         }
     }
 
     public void Register(Interactable interactable)
     {
         interactables.Add(interactable);
-    }
-
-    public void Unregister(Interactable interactable)
-    {
-        interactables.Remove(interactable);
     }
 }

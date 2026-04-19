@@ -582,6 +582,10 @@ MonoBehaviour:
   Amplitude: 0.2
   Frequency: 3
   Enabled: 0
+  CorrectSettings:
+  - Amplitude: 0.32
+    Frequency: 7.3
+  CorrectSettingsPercentageMargin: 0.05
 --- !u!1001 &4035153509058005029
 PrefabInstance:
   m_ObjectHideFlags: 0
