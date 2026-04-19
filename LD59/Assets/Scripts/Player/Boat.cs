@@ -1,5 +1,4 @@
 using FMODUnity;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Boat : MonoBehaviour
@@ -156,5 +155,10 @@ public class Boat : MonoBehaviour
             transform.position += transform.right * (rayCollisionSettings.left - rayHit.distance);
         }
         boatSplashNoise.SetParameter("Speed", Mathf.Clamp01(linearVelocity.magnitude / MaxSpeed));
+    }
+
+    void FlowCurrent()
+    {
+
     }
 }
