@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e55a63df6038974f9d2764fa7b49402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
-  Enabled: 0
+  ShowInPhoto: 0
 --- !u!1 &495597673
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +634,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1664418903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1135474991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135474992}
+  - component: {fileID: 1135474993}
+  m_Layer: 0
+  m_Name: StartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1135474992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135474991}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.63713753, z: -0, w: 0.7707502}
+  m_LocalPosition: {x: -1013.7, y: 0, z: -399.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 79.157, z: 0}
+--- !u!114 &1135474993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135474991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2268829d5f9e2a7428f3bf5eeb1db687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &1206599298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -947,6 +991,7 @@ GameObject:
   - component: {fileID: 1733772868}
   - component: {fileID: 1733772867}
   - component: {fileID: 1733772869}
+  - component: {fileID: 1733772870}
   m_Layer: 0
   m_Name: Managing stuff
   m_TagString: Untagged
@@ -966,8 +1011,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bee592db217424f9c11e12f4b047ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dropoff
-  MinDistance: 60
-  MaxDistance: 2000
+  MinDistance: 120
+  MaxDistance: 2200
   MaxDropoff: 800
   DropoffList:
   - {fileID: 1110547215}
@@ -1003,8 +1048,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneConfig
   SetupPlayScene: 1
-  DebugSpawnIsland: {fileID: 7952600594985736324, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+  DebugSpawnIsland: {fileID: 0}
   DebugSpawnDistance: 40
+--- !u!114 &1733772870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733772866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28690758aae7fbe4c95914095cb9dd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkyboxController
+  skyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
 --- !u!1 &2101159248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e55a63df6038974f9d2764fa7b49402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Enabled: 1
+  ShowInPhoto: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1156,3 +1214,4 @@ SceneRoots:
   - {fileID: 495597676}
   - {fileID: 1733772868}
   - {fileID: 1664418903}
+  - {fileID: 1135474992}

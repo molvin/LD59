@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class GameManager : Subsystem<GameManager>
 {
+    private bool isDay = true;
+    public bool IsDay => isDay;
+
     private Boat boat;
     private Player player;
     private PolaroidBook book;
@@ -14,6 +17,12 @@ public class GameManager : Subsystem<GameManager>
 
 
     private Vector3 startPosition = new(0, 0.5f, 0);
+    private Quaternion startRotation = Quaternion.identity;
+
+    public void SetDayNight(bool isDay)
+    {
+        this.isDay = isDay;
+    }
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -30,8 +39,17 @@ public class GameManager : Subsystem<GameManager>
 
     private void LoadAssets()
     {
-        boat = Instantiate(Resources.Load("Boat") as GameObject, Vector3.zero, Quaternion.identity).GetComponent<Boat>();
-        player = Instantiate(Resources.Load("Player") as GameObject, startPosition, Quaternion.identity).GetComponent<Player>();
+        StartPoint startPoint = FindFirstObjectByType<StartPoint>();
+
+        if(startPoint != null)
+        {
+            Debug.Log($"SPAWNING AT: {startPoint.transform.position}");
+            startPosition = startPoint.transform.position;
+            startRotation = startPoint.transform.rotation;
+        }
+
+        boat = Instantiate(Resources.Load("Boat") as GameObject, startPosition, startRotation).GetComponent<Boat>();
+        player = Instantiate(Resources.Load("Player") as GameObject, startPosition, startRotation).GetComponent<Player>();
     
         book = FindFirstObjectByType<PolaroidBook>(FindObjectsInactive.Include);
         polaroidCamera = FindFirstObjectByType<PolaroidCamera>(FindObjectsInactive.Include);
