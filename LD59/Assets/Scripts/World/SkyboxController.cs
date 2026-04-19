@@ -41,7 +41,7 @@ public class SkyboxController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             GameManager gm = GameManager.Get();
-            gm.SetDayNight(!gm.IsDay);
+            gm.ToggleDayNight();
         }
 
         UpdateSkybox();
