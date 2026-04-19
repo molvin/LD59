@@ -154,7 +154,7 @@ Shader "Custom/Water"
 
             float CalculateSpecular(float3 normal, float3 viewDir, float3 lightDir, float smoothness)
             {
-                float angle    = acos(clamp(dot(normalize(lightDir - viewDir), normal), -1.0, 1.0));
+                float angle    = acos(clamp(dot(normalize(lightDir + viewDir), normal), -1.0, 1.0));
                 float exponent = angle / smoothness;
                 return exp(-exponent * exponent);
             }
