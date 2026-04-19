@@ -54,7 +54,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaMin: 0.905
-    - _DepthFactor: 0.5
+    - _DepthFactor: 0.15
     - _DepthRange: 5
     - _DropoffHeight: 50
     - _FoamBand1: 0.84
@@ -66,7 +66,7 @@ Material:
     - _FoamNoiseStrength: 1.55
     - _FoamScrollSpeed: 0.05
     - _FoamThreshold: 0.151
-    - _FresnelPower: 1.45
+    - _FresnelPower: 5
     - _IntersectionThreshold: 0.3
     - _MaxDistance: 800
     - _MaxDropoff: 100000
@@ -76,7 +76,7 @@ Material:
     - _ScrollSpeedA: 0.004
     - _ScrollSpeedB: 0.007
     - _Shininess: 0.71
-    - _ShoreFadeStrength: 1.71
+    - _ShoreFadeStrength: 3
     - _SpecularDistFade: 0.07
     - _SpecularPixelSize: 0.05
     - _SpecularSmoothness: 1.87
