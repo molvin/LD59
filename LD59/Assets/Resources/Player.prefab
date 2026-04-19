@@ -50,6 +50,7 @@ MonoBehaviour:
   MoveAcceleration: 12
   MoveDeceleration: 0.01
   MovementEnabled: 1
+  HoldingPickup: 0
 --- !u!1 &4618517213923653630
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
       propertyPath: HasCamera
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

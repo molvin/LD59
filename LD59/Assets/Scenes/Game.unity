@@ -660,7 +660,7 @@ Transform:
   m_GameObject: {fileID: 1135474991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.63713753, z: -0, w: 0.7707502}
-  m_LocalPosition: {x: -1147.9, y: 0, z: -198.8}
+  m_LocalPosition: {x: -1319, y: 0, z: -479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1010,8 +1010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bee592db217424f9c11e12f4b047ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dropoff
-  MinDistance: 60
-  MaxDistance: 2000
+  MinDistance: 120
+  MaxDistance: 2200
   MaxDropoff: 800
   DropoffList:
   - {fileID: 1110547215}
@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneConfig
   SetupPlayScene: 1
-  DebugSpawnIsland: {fileID: 7952600594985736324, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+  DebugSpawnIsland: {fileID: 0}
   DebugSpawnDistance: 40
 --- !u!1 &2101159248
 GameObject:
