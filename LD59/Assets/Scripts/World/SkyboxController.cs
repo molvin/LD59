@@ -31,11 +31,16 @@ public class SkyboxController : MonoBehaviour
 
     private void Start()
     {
+        dayTimeSkyboxMaterial = new Material(dayTimeSkyboxMaterial);
+        polaroidNightTimeSkyboxMaterial = new Material(polaroidNightTimeSkyboxMaterial);
+        nightTimeSkyboxMaterial = new Material(nightTimeSkyboxMaterial);
+
         for (int i = 0; i < starSigns.Length; i++)
         {
             polaroidNightTimeSkyboxMaterial.SetTexture("_StarSign" + i + "Tex", starSigns[i].Texture);
         }
         polaroidNightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Texture);
+        UpdateSkybox();
     }
 
     [ContextMenu("Update Skybox")]
