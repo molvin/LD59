@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class PolaroidControlled : MonoBehaviour
 {
-    public bool Enabled = true;
+    public bool ShowInPhoto = true;
 }
