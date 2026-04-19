@@ -124,25 +124,25 @@ public class Boat : MonoBehaviour
 
         // Forward
         RaycastHit rayHit;
-        if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 10.0f, 1.0f),
+        if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 0.1f, 0.01f),
             transform.forward, out rayHit, transform.rotation, rayCollisionSettings.forward, layerMask))
         {
             transform.position -= transform.forward * (rayCollisionSettings.forward - rayHit.distance);
         }
         // Back
-        if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 10.0f, 1.0f),
+        if (Physics.BoxCast(transform.position, new Vector3(rayCollisionSettings.verticalWidth * 0.5f, 0.1f, 0.01f),
             -transform.forward, out rayHit, transform.rotation, rayCollisionSettings.back, layerMask))
         {
             transform.position += transform.forward * (rayCollisionSettings.back - rayHit.distance);
         }
         // Right
-        if (Physics.BoxCast(transform.position, new Vector3(1.0f, 10.0f, rayCollisionSettings.horizontalWidth * 0.5f),
+        if (Physics.BoxCast(transform.position, new Vector3(0.01f, 0.1f, rayCollisionSettings.horizontalWidth * 0.5f),
             transform.right, out rayHit, transform.rotation, rayCollisionSettings.right, layerMask))
         {
             transform.position -= transform.right * (rayCollisionSettings.right - rayHit.distance);
         }
         // Left
-        if (Physics.BoxCast(transform.position, new Vector3(1.0f, 10.0f, rayCollisionSettings.horizontalWidth * 0.5f),
+        if (Physics.BoxCast(transform.position, new Vector3(0.01f, 0.1f, rayCollisionSettings.horizontalWidth * 0.5f),
             -transform.right, out rayHit, transform.rotation, rayCollisionSettings.left, layerMask))
         {
             transform.position += transform.right * (rayCollisionSettings.left - rayHit.distance);
