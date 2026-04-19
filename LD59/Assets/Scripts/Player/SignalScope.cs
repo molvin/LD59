@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class SignalScope : Interactable
 {
+    [System.Serializable]
+    public struct Setting
+    {
+        public float Amplitude;
+        public float Frequency;
+    }
+
     public TextMeshProUGUI Text;
     public Transform AmplitudeDial;
     public Transform FrequencyDial;
@@ -22,6 +29,9 @@ public class SignalScope : Interactable
     public float Amplitude;
     public float Frequency;
     public bool Enabled;
+
+    public Setting[] CorrectSettings;
+    public float CorrectSettingsPercentageMargin = 0.05f;
 
     private Player player;
     private Camera cam;
@@ -111,6 +121,16 @@ public class SignalScope : Interactable
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
 
             Text.text = $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}";
+
+            for (int i = 0; i < CorrectSettings.Length; i++)
+            {
+                float ampRange = MaxAmplitude - MinAmplitude;
+                float freqRange = MaxFrequency - MinFrequency;
+                float ampError = ampRange > 0f ? Mathf.Abs(Amplitude - CorrectSettings[i].Amplitude) / ampRange : 0f;
+                float freqError = freqRange > 0f ? Mathf.Abs(Frequency - CorrectSettings[i].Frequency) / freqRange : 0f;
+                float totalError = (ampError + freqError) * 0.5f;
+                Debug.Log($"Setting {i}: amp error {ampError * 100f:F1}%, freq error {freqError * 100f:F1}%, total {totalError * 100f:F1}%");
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Boat : MonoBehaviour
@@ -12,6 +13,9 @@ public class Boat : MonoBehaviour
     public float WheelSpeed = 0.4f;
     public float WheelReset = 0.8f;
     public float GearSpeed = 0.6f;
+
+    [Header("Audio")]
+    public StudioEventEmitter engineNoise;
 
     private float throttle = 0.0f;
     private float steering = 0.0f;
@@ -66,5 +70,7 @@ public class Boat : MonoBehaviour
 
         deltaVelocity = transform.position - currentPosition;
         deltaRotation = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, currentPlaneForward, Vector3.up);
+
+        engineNoise.SetParameter("RPM", Mathf.Abs(throttle));
     }
 }
