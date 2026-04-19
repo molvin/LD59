@@ -157,8 +157,7 @@ public class Boat : MonoBehaviour
         boatSplashNoise.SetParameter("Speed", Mathf.Clamp01(linearVelocity.magnitude / MaxSpeed));
     }
 
-    void FlowCurrent()
+    private void Drift()
     {
-
     }
 }
