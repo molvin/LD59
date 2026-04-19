@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using FMODUnity;
 
 public class SignalScope : Interactable
 {
@@ -29,6 +30,17 @@ public class SignalScope : Interactable
     public float Amplitude;
     public float Frequency;
     public bool Enabled;
+
+    [Header("Beep")]
+    public Renderer LightRenderer;
+    public Material LightOnMaterial;
+    public Material LightOffMaterial;
+    public float BeepMaxInterval = 2f;
+    public float BeepMinInterval = 0.1f;
+    public EventReference BeepSound;
+
+    private float beepTimer;
+    private bool lightOn;
 
     public Setting[] CorrectSettings;
     public float CorrectSettingsPercentageMargin = 0.05f;
@@ -132,5 +144,28 @@ public class SignalScope : Interactable
                 Debug.Log($"Setting {i}: amp error {ampError * 100f:F1}%, freq error {freqError * 100f:F1}%, total {totalError * 100f:F1}%");
             }
         }
+    
+        UpdateBeep(BeepInterval);
     }
+
+    public float BeepInterval;
+
+    private void UpdateBeep(float t)
+    {
+        if (t > 0)
+        {
+            float interval = Mathf.Lerp(BeepMaxInterval, BeepMinInterval, t);
+            beepTimer -= Time.deltaTime;
+            if (beepTimer <= 0f)
+            {
+                beepTimer = interval;
+                lightOn = !lightOn;
+                if (LightRenderer != null)
+                    LightRenderer.material = lightOn ? LightOnMaterial : LightOffMaterial;
+                if (lightOn && !BeepSound.IsNull)
+                    RuntimeManager.PlayOneShot(BeepSound, transform.position);
+            }
+        }
+    }
+
 }
