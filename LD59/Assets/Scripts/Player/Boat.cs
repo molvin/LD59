@@ -49,6 +49,14 @@ public class Boat : MonoBehaviour
     public Vector3 DeltaVelocity => deltaVelocity;
     public float DeltaRotation => deltaRotation;
 
+    public void Stop()
+    {
+        linearVelocity = Vector2.zero;
+        angularVelocity = 0;
+        throttle = 0;
+        steering = 0;
+    }
+
     public void Throttle(float input)
     {
         float throttleJerk = input * GearSpeed * Time.deltaTime;
