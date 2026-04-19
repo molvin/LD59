@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float MoveDeceleration = 0.03f;
 
     [HideInInspector] public bool MovementEnabled = true;
+    [HideInInspector] public bool HoldingPickup = false;
     private bool isSteering;
 
     private new Camera camera;
@@ -110,7 +111,7 @@ public class Player : MonoBehaviour
 
             transform.position = boat.SteeringPoint.position;
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0) && !GameManager.Get().Book.IsOpen && !GameManager.Get().PolaroidCamera.TakingPicture)
         {
             InteractionSubsystem.Get().Interact(camera.transform);
         }
