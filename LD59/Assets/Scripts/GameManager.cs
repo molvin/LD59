@@ -1,8 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Subsystem<GameManager>
 {
+    private bool isDay = true;
+    public bool IsDay => isDay;
+
     private Boat boat;
     private Player player;
     private PolaroidBook book;
@@ -16,6 +18,11 @@ public class GameManager : Subsystem<GameManager>
 
     private Vector3 startPosition = new(0, 0.5f, 0);
     private Quaternion startRotation = Quaternion.identity;
+
+    public void SetDayNight(bool isDay)
+    {
+        this.isDay = isDay;
+    }
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
