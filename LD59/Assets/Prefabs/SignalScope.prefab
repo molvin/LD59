@@ -716,13 +716,13 @@ MonoBehaviour:
     Path: 
   FullBeepThreshold: 0
   CorrectSettings:
-  - Amplitude: 0.32
-    Frequency: 7.3
-  - Amplitude: 0.12
-    Frequency: 14
-  - Amplitude: 0.22
-    Frequency: 2
   - Amplitude: 0.45
+    Frequency: 7.3
+  - Amplitude: 0.22
+    Frequency: 14
+  - Amplitude: 0.38
+    Frequency: 2
+  - Amplitude: 0.12
     Frequency: 5
   CorrectSettingsPercentageMargin: 0.1
 --- !u!1001 &4035153509058005029

@@ -12,6 +12,7 @@ public abstract class CircleAround : MonoBehaviour
     public float MaxDistance = 10.0f;
     public int LapsToActivate = 3;
     public CircleDirection Direction = CircleDirection.Omnidirectional;
+    public bool CanRetrigger = false;
 
     private float? currentProgress;
     private Vector3 lastTrackedDirection;
@@ -65,7 +66,14 @@ public abstract class CircleAround : MonoBehaviour
         if (shouldTrigger)
         {
             Trigger();
-            hasTriggered = true;
+            if (CanRetrigger)
+            {
+                currentProgress = null;
+            }
+            else
+            {
+                hasTriggered = true;
+            }
         }
     }
 }
