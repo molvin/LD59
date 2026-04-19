@@ -4,9 +4,19 @@ Shader "Custom/Skybox"
     {
         _SkyColor ("Sky Color", Color) = (0.3, 0.6, 1.0, 1)
         _SunColor ("Sun Color", Color) = (1.0, 0.95, 0.8, 1)
-        _SunSize ("Sun Size", Range(0.001, 0.2)) = 0.05
-        _SunBloom ("Sun Bloom", Range(0.0, 1.0)) = 0.3
-        _SunPixels ("Sun Pixel Size", Range(2, 64)) = 16
+        _SunSize ("Sun Size", Float) = 0.05
+        _SunBloom ("Sun Bloom", Float) = 0.3
+        _SunPixels ("Sun Pixel Size", Float) = 16
+
+        [NoScaleOffset]
+        _CloudNoise ("Cloud Noise", 2D) = "white" {}
+        _CloudScale ("Cloud Scale", Float) = 1.0
+        _CloudColor ("Cloud Color", Color) = (1.0, 1.0, 1.0, 1)
+        _CloudPixels ("Cloud Pixel Size", Float) = 32
+        _CloudThreshold ("Cloud Threshold", Float) = 0.5
+        _CloudContrast ("Cloud Contrast", Float) = 2.0
+        _CloudScrollSpeed ("Cloud Scroll Speed", Vector) = (0.005, 0.002, 0, 0)
+        _CloudScrollSpeedFactor ("Cloud Scroll Speed Factor", Float) = 1.0
     }
     SubShader
     {
@@ -28,6 +38,14 @@ Shader "Custom/Skybox"
             float _SunSize;
             float _SunBloom;
             float _SunPixels;
+            sampler2D _CloudNoise;
+            float _CloudScale;
+            float4 _CloudColor;
+            float _CloudPixels;
+            float _CloudThreshold;
+            float _CloudContrast;
+            float4 _CloudScrollSpeed;
+            float _CloudScrollSpeedFactor;
 
             v2f vert(appdata v)
             {
@@ -42,15 +60,22 @@ Shader "Custom/Skybox"
                 float3 dir = normalize(i.dir);
                 float3 sunDir = normalize(_WorldSpaceLightPos0.xyz);
 
-                // Quantize direction to give the sun a pixelated blocky appearance
-                float3 pixDir = floor(dir * _SunPixels) / _SunPixels;
-                pixDir = normalize(pixDir);
-
+                // SUN
+                float3 pixDir = normalize(floor(dir * _SunPixels) / _SunPixels);
                 float sunDirDot = dot(pixDir, sunDir);
                 float sunDisk = smoothstep(1.0 - _SunSize, 1.0 - _SunSize * 0.1, sunDirDot);
                 float bloom = pow(max(sunDirDot, 0.0), 8.0) * _SunBloom;
 
-                float3 col = _SkyColor.rgb;
+                // CLOUDS
+                float2 cloudUV    = dir.xz / max(dir.y, 0.0000001) * _CloudScale + _CloudScrollSpeed.xy * _Time.y * _CloudScrollSpeedFactor;
+                float2 pixCloudUV = floor(cloudUV * _CloudPixels) / _CloudPixels;
+                float  cloud      = tex2Dlod(_CloudNoise, float4(pixCloudUV, 0, 0)).r;
+                cloud = saturate((cloud - _CloudThreshold) / max(1.0 - _CloudThreshold, 0.001));
+                cloud = pow(cloud, _CloudContrast);
+                cloud *= smoothstep(0.0, 0.2, dir.y);
+
+                // COMPOSE
+                float3 col = lerp(_SkyColor.rgb, _CloudColor.rgb, cloud);
                 col = lerp(col, _SunColor.rgb, saturate(bloom));
                 col = lerp(col, _SunColor.rgb, sunDisk);
 
