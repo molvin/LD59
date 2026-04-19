@@ -27,7 +27,7 @@ public class PolaroidCamera : MonoBehaviour
     private void Update()
     {
         PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
-        if(HasCamera && Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen))
+        if(HasCamera && Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen) && !GameManager.Get().Player.HoldingPickup)
         {
             StartCoroutine(TakePicture());
         }
@@ -59,7 +59,7 @@ public class PolaroidCamera : MonoBehaviour
         var polaroidControlled = FindObjectsByType<PolaroidControlled>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(obj.Enabled);
+            obj.gameObject.SetActive(obj.ShowInPhoto);
         }
 
         yield return new WaitForEndOfFrame();
@@ -95,7 +95,7 @@ public class PolaroidCamera : MonoBehaviour
 
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(!obj.Enabled);
+            obj.gameObject.SetActive(!obj.ShowInPhoto);
         }
 
         yield return new WaitForSeconds(TakingPictureWaitTime);

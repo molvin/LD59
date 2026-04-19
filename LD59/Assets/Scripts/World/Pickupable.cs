@@ -12,21 +12,28 @@ public class Pickupable : Interactable
     private Quaternion originalRotation;
     private Transform originalParent;
 
+    private void Start()
+    {
+        originalPosition = transform.position;
+        originalRotation = transform.rotation;
+        originalParent = transform.parent;
+    }
+
     protected override void Interact(Transform interactorTransform)
     {
         cam = Camera.main;
         player = FindFirstObjectByType<Player>();
         player.MovementEnabled = false;
-
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
-        originalParent = transform.parent;
+        player.HoldingPickup = true;
 
         transform.SetParent(null);
         holding = true;
+
+        transform.position = cam.transform.position + cam.transform.forward * HoldDistance;
+        transform.forward = -cam.transform.forward;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!holding)
             return;
@@ -45,9 +52,16 @@ public class Pickupable : Interactable
         if (Input.GetMouseButtonDown(1))
         {
             holding = false;
-            transform.SetParent(originalParent);
-            transform.SetPositionAndRotation(originalPosition, originalRotation);
             player.MovementEnabled = true;
+            player.HoldingPickup = false;
+            Drop();
         }
+    }
+
+    protected virtual void Drop()
+    {
+        transform.SetParent(originalParent);
+        transform.position = originalPosition;
+        transform.rotation = originalRotation;
     }
 }
