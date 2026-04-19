@@ -8,8 +8,6 @@ public class PolaroidBook : MonoBehaviour
 {
     public List<Image> Pictures = new List<Image>();
     public GameObject Root;
-    public Button PrevPageButton;
-    public Button NextPageButton;
     public Image FocusImage;
 
     public bool Enabled = true;
@@ -24,8 +22,6 @@ public class PolaroidBook : MonoBehaviour
     private void Start()
     {
         player = FindFirstObjectByType<Player>();
-        PrevPageButton.onClick.AddListener(() => FlipPage(-1));
-        NextPageButton.onClick.AddListener(() => FlipPage(1));
 
         FocusImage.gameObject.SetActive(false);
 
@@ -83,8 +79,6 @@ public class PolaroidBook : MonoBehaviour
 
     private void SetBookInteractable(bool interactable)
     {
-        PrevPageButton.interactable = interactable;
-        NextPageButton.interactable = interactable;
         foreach (Image img in Pictures)
         {
             img.raycastTarget = interactable;
@@ -138,8 +132,6 @@ public class PolaroidBook : MonoBehaviour
             }
         }
 
-        PrevPageButton.gameObject.SetActive(currentPage > 0);
-        NextPageButton.gameObject.SetActive(currentPage < maxPage);
     }
 
     public void AddNote(string text)
