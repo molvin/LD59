@@ -144,7 +144,7 @@ Shader "Custom/Water"
                 float3 worldPos = TransformObjectToWorld(IN.positionOS.xyz);
                 worldPos.y += WaveHeight(worldPos.xz);
                 float dist = distance(_WorldSpaceCameraPos.xz, worldPos.xz);
-                float dropoff = pow(dist * _CurveFactor, _CurvePower);
+                float dropoff = pow(abs(dist * _CurveFactor), _CurvePower);
                 worldPos.y -= dropoff;
                 OUT.positionCS = TransformWorldToHClip(worldPos);
                 OUT.screenPos  = ComputeScreenPos(OUT.positionCS);
