@@ -427,7 +427,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.11666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 7b85fab017be0d94182153200af4555c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 038157c568f1cb4488613381a0c94dd2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &242481221765140805
 PrefabInstance:
