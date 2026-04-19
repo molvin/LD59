@@ -156,7 +156,6 @@ Shader "Custom/Water"
                 return OUT;
             }
 
-            // Gaussian distribution specular with hard cartoony step cutoff.
             float CalculateSpecular(float3 normal, float3 viewDir, float3 lightDir, float smoothness)
             {
                 float angle    = acos(dot(normalize(lightDir - viewDir), normal));
@@ -181,7 +180,7 @@ Shader "Custom/Water"
                 float3 nA  = UnpackNormal(SAMPLE_TEXTURE2D(_NormalMapA, sampler_NormalMapA, uvA));
                 float3 nB  = UnpackNormal(SAMPLE_TEXTURE2D(_NormalMapB, sampler_NormalMapB, uvB));
 
-                // Blend normals and convert to world space (flat XZ plane: tangent=X, bitangent=Z)
+                // Blend normals and convert to world space
                 float3 blended     = normalize(nA + nB);
                 float3 worldNormal = normalize(float3(
                     blended.x * _NormalStrength,
@@ -207,13 +206,13 @@ Shader "Custom/Water"
                 spec = step(_SpecularThreshold, spec);
                 waterColor += _SpecularColor * mainLight.color * spec * _SpecularStrength * distFade;
 
-                // Shore foam (baked per-tile by WaterFoamBaker)
-                float2 foamUV   = (IN.worldPos.xz - _FoamMapParams.xy) / _FoamMapParams.z;
-                float  foamVal  = SAMPLE_TEXTURE2D(_FoamMap, sampler_FoamMap, foamUV).r;
-                float2 foamNoiseUV = IN.worldPos.xz / _FoamNoiseScale + _Time.y * _FoamNoiseSpeed.xy;
-                float  foamNoise   = SAMPLE_TEXTURE2D(_FoamNoise, sampler_FoamNoise, foamNoiseUV).r;
-                float  foam        = step(_FoamThreshold, foamVal * foamNoise);
-                waterColor         = lerp(waterColor, _FoamColor, foam);
+                // Shore foam 
+                // float2 foamUV   = (IN.worldPos.xz - _FoamMapParams.xy) / _FoamMapParams.z;
+                // float  foamVal  = SAMPLE_TEXTURE2D(_FoamMap, sampler_FoamMap, foamUV).r;
+                // float2 foamNoiseUV = IN.worldPos.xz / _FoamNoiseScale + _Time.y * _FoamNoiseSpeed.xy;
+                // float  foamNoise   = SAMPLE_TEXTURE2D(_FoamNoise, sampler_FoamNoise, foamNoiseUV).r;
+                // float  foam        = step(_FoamThreshold, foamVal * foamNoise);
+                // waterColor         = lerp(waterColor, _FoamColor, foam);
 
                 // Alpha: fresnel (view angle) × shore fade (depth)
                 float fresnelFactor = pow(saturate(dot(viewDir, float3(0, 1, 0))), _FresnelPower);

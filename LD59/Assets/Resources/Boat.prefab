@@ -391,7 +391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4214026922294767761
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0cd3909bdcbe549acdcc92a9be5110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boat
-  Wheel: {fileID: 211281674726347761}
+  Wheel: {fileID: 3819481277082145582}
   DeckLevel: 0.5
   Acceleration: 5
   Deceleration: 0.35
@@ -1111,7 +1111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3239552839628573816
 Transform:
   m_ObjectHideFlags: 0
@@ -1387,13 +1387,87 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
+    - target: {fileID: 2512243300098982147, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97282755
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512243300098982147, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.2315308
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512243300098982147, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00000008940696
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512243300098982147, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512243300098982147, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 26.774
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512243300098982147, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512243300098982147, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 901897122485332503, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 589342989743049990}
+    - targetCorrespondingSourceObject: {fileID: 901897122485332503, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3819481277082145582}
   m_SourcePrefab: {fileID: 100100000, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
 --- !u!4 &8341215532005804094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
   m_PrefabInstance: {fileID: 8379873068697268181}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8705287173751915970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 901897122485332503, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+  m_PrefabInstance: {fileID: 8379873068697268181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &589342989743049990
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705287173751915970}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.353144, y: 1.3474147, z: 1.335825}
+  m_Center: {x: 0.046674754, y: -0.0148867015, z: 0.007875322}
+--- !u!114 &3819481277082145582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705287173751915970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a543e005e65c8f4fa65b2e9747ae27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WheelInteractable
+  InteractDistance: 2
+  InteractError: 0.4
