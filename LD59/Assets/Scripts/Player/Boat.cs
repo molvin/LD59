@@ -54,7 +54,7 @@ public class Boat : MonoBehaviour
     private bool isSteering = false;
     private bool isThrottling = false;
     private RayCollisionSettings rayCollisionSettings;
-
+    public Transform StartPosition;
     public Vector3 DeltaVelocity => deltaVelocity;
     public float DeltaRotation => deltaRotation;
 
@@ -144,7 +144,8 @@ public class Boat : MonoBehaviour
         angularVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
         transform.Rotate(Vector3.up, angularVelocity * Time.deltaTime);
 
-        linearVelocity += new Vector2(transform.forward.x, transform.forward.z) * (throttle * Acceleration * Time.deltaTime);
+        float throttleJuice = throttle > 0 ? 1.0f : 0.5f;
+        linearVelocity += new Vector2(transform.forward.x, transform.forward.z) * (throttle * throttleJuice * Acceleration * Time.deltaTime);
         linearVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
 
         transform.position += new Vector3(linearVelocity.x, 0, linearVelocity.y) * Time.deltaTime;

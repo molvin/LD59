@@ -11,17 +11,9 @@ public class Dropoff : MonoBehaviour
     private List<Vector3> startPositions = new();
     private Camera mainCamera;
 
-    private void OnDisable()
-    {
-    }
-
     private void Start()
     {
         mainCamera = Camera.main;
-        Shader.SetGlobalFloat("_MinDistance", MinDistance);
-        Shader.SetGlobalFloat("_MaxDistance", MaxDistance);
-        Shader.SetGlobalFloat("_DropoffHeight", MaxDropoff);
-
         foreach (GameObject dropOff in DropoffList)
         {
             startPositions.Add(dropOff.transform.position);
@@ -47,7 +39,6 @@ public class Dropoff : MonoBehaviour
 
             float distanceToCamera = Vector3.Distance(camXZ, objXZ);
             float t = Mathf.Clamp01((distanceToCamera - MinDistance) / (MaxDistance - MinDistance));
-            
             dropoff.transform.position = startPositions[i] + Vector3.down * Mathf.Lerp(0, MaxDropoff, t);
         }
     }
