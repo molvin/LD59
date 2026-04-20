@@ -6,136 +6,141 @@ using System.Collections.Generic;
 
 public class PolaroidBook : MonoBehaviour
 {
-    public List<Image> Pictures = new List<Image>();
+
     public GameObject Root;
-    public Image FocusImage;
 
     public bool Enabled = true;
     public bool IsOpen { get; private set; }
 
-    private List<Texture2D> polaroids = new();
-    private Player player;
-    private bool isFocused;
 
+    private PolaroidPicture[] pictures;
+    private Note[] notes;
+    private List<(string, Texture2D)> polaroids = new();
+    private List<(string, string)> noteData = new();
+    private Player player;
     private int currentPage;
+    private bool isInteracting;
 
     private void Start()
     {
-        player = FindFirstObjectByType<Player>();
+        pictures = GetComponentsInChildren<PolaroidPicture>();
+        notes = GetComponentsInChildren<Note>();
 
-        FocusImage.gameObject.SetActive(false);
+        foreach(var p in pictures)
+            p.gameObject.SetActive(false);
 
-        for (int i = 0; i < Pictures.Count; i++)
-        {
-            int slot = i;
-            EventTrigger trigger = Pictures[i].gameObject.AddComponent<EventTrigger>();
-            var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
-            entry.callback.AddListener(_ => OnPictureClicked(slot));
-            trigger.triggers.Add(entry);
-        }
+        foreach(var n in notes)
+            n.gameObject.SetActive(false);
 
+        player = GameManager.Get().Player;
         Open(false);
     }
 
     private void Update()
     {
-        if (isFocused && Input.GetMouseButtonDown(1))
+        if (Enabled && !IsOpen && Input.GetKeyDown(KeyCode.G))
         {
-            Unfocus();
-            return;
-        }
-
-        if (Enabled && Input.GetKeyDown(KeyCode.G))
-        {
-            PolaroidCamera cam = FindFirstObjectByType<PolaroidCamera>();
+            PolaroidCamera cam = GameManager.Get().PolaroidCamera;
             if (cam == null || !cam.TakingPicture && !player.HoldingPickup)
                 Open(!IsOpen);
         }
 
-        if(Enabled && IsOpen && Input.GetMouseButtonDown(1))
-            Open(false);
-    }
-
-    private void OnPictureClicked(int slot)
-    {
-        if (isFocused) return;
-        int idx = currentPage * Pictures.Count + slot;
-        if (idx >= polaroids.Count || polaroids[idx] == null) return;
-
-        isFocused = true;
-        var tex = polaroids[idx];
-        FocusImage.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-        FocusImage.gameObject.SetActive(true);
-
-        SetBookInteractable(false);
-    }
-
-    private void Unfocus()
-    {
-        isFocused = false;
-        FocusImage.gameObject.SetActive(false);
-        SetBookInteractable(true);
-    }
-
-    private void SetBookInteractable(bool interactable)
-    {
-        foreach (Image img in Pictures)
+        if(Enabled && IsOpen)
         {
-            img.raycastTarget = interactable;
-        }
-    }
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(0))
+            {
+                foreach(var p in pictures)
+                {
+                    if (hit.collider.gameObject == p.gameObject)
+                    {
+                        p.Interact(transform);
+                        isInteracting = true;
+                        break;
+                    }
+                }
+            }
 
-    public void AddPicture(Texture2D texture)
-    {
-        polaroids.Add(texture);
-        UpdatePictures();
+            if(!isInteracting && Input.GetMouseButtonDown(1))
+                Open(false);
+
+            if(isInteracting && Input.GetMouseButtonDown(1))
+                isInteracting = false;
+
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                FlipPage(-1);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                FlipPage(1);
+            }
+        }
     }
 
     public void Open(bool open)
     {
         IsOpen = open;
         Root.SetActive(open);
-        if (!open && isFocused) Unfocus();
-        if (player != null) player.MovementEnabled = !open;
+        player.MovementEnabled = !open;
         Cursor.lockState = open ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = open;
-        UpdatePictures();
+
+        foreach(var p in pictures)
+        {
+            p.Interactable = open;
+        }
+
+        UpdatePicturesAndNotes();
     }
 
     public void FlipPage(int direction)
     {
-        int perPage = Pictures.Count;
+        int perPage = pictures.Length;
         int maxPage = perPage > 0 ? Mathf.Max(0, Mathf.CeilToInt((float)polaroids.Count / perPage) - 1) : 0;
         currentPage += direction;
         currentPage = Mathf.Clamp(currentPage, 0, maxPage);
-        UpdatePictures();
+        UpdatePicturesAndNotes();
     }
 
-    private void UpdatePictures()
+    private void UpdatePicturesAndNotes()
     {
-        int perPage = Pictures.Count;
+        int perPage = pictures.Length;
         int maxPage = perPage > 0 ? Mathf.Max(0, Mathf.CeilToInt((float)polaroids.Count / perPage) - 1) : 0;
         int startIndex = currentPage * perPage;
-        for (int i = 0; i < Pictures.Count; i++)
+
+        for (int i = 0; i < pictures.Length; i++)
         {
+            PolaroidPicture picture = pictures[i];
+
             int idx = startIndex + i;
-            if (idx < polaroids.Count && polaroids[idx] != null)
+            if (idx < polaroids.Count)
             {
-                var tex = polaroids[idx];
-                Pictures[i].sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-                Pictures[i].enabled = true;
+                (string text, Texture2D texture) = polaroids[idx]; 
+                picture.gameObject.SetActive(true);
+                picture.Interactable = true;
+                picture.Text = text;
+                picture.Picture = texture;
+                picture.UpdatePicture();
             }
             else
             {
-                Pictures[i].sprite = null;
-                Pictures[i].enabled = false;
+                picture.Interactable = false;
+                picture.gameObject.SetActive(false);
             }
         }
+        
+        // Any notes will appear on the page after the last polaroids, in the same way they can go on forever, but you have to flip through all the polaroid pages to get to the notes
 
     }
 
-    public void AddNote(string text)
+    public void AddPicture(string text, Texture2D texture)
     {
-        // TODO:
+        polaroids.Add((text, texture));
+    }
+
+    public void AddNote(string title, string text)
+    {
+        noteData.Add((title, text));
     }
 }

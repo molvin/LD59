@@ -4,6 +4,8 @@ public class Pickupable : Interactable
 {
     public float HoldDistance = 1.5f;
     public float RotateSpeed = 90f;
+    public bool Interactable = true;
+    public bool ControlPlayerMovement = true;
 
     private bool holding;
     private Player player;
@@ -12,19 +14,25 @@ public class Pickupable : Interactable
     private Quaternion originalRotation;
     private Transform originalParent;
 
-    private void Start()
+    protected void Awake()
     {
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
+        originalPosition = transform.localPosition;
+        originalRotation = transform.localRotation;
         originalParent = transform.parent;
     }
 
-    protected override void Interact(Transform interactorTransform)
+    public override void Interact(Transform interactorTransform)
     {
+        if (!Interactable)
+            return;
+
         cam = Camera.main;
-        player = FindFirstObjectByType<Player>();
-        player.MovementEnabled = false;
-        player.HoldingPickup = true;
+        if(ControlPlayerMovement)
+        {
+            player = FindFirstObjectByType<Player>();
+            player.MovementEnabled = false;
+            player.HoldingPickup = true;
+        }
 
         transform.SetParent(null);
         holding = true;
@@ -52,8 +60,11 @@ public class Pickupable : Interactable
         if (Input.GetMouseButtonDown(1))
         {
             holding = false;
-            player.MovementEnabled = true;
-            player.HoldingPickup = false;
+            if(ControlPlayerMovement)
+            {
+                player.MovementEnabled = true;
+                player.HoldingPickup = false;
+            }
             Drop();
         }
     }
@@ -61,7 +72,7 @@ public class Pickupable : Interactable
     protected virtual void Drop()
     {
         transform.SetParent(originalParent);
-        transform.position = originalPosition;
-        transform.rotation = originalRotation;
+        transform.localPosition = originalPosition;
+        transform.localRotation = originalRotation;
     }
 }

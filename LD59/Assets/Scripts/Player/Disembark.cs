@@ -5,7 +5,7 @@ public class Disembark : Interactable
 {
     public float SampleDistance = 1.0f;
 
-    protected override void Interact(Transform interactorTransform)
+    public override void Interact(Transform interactorTransform)
     {
         Player player = GameManager.Get().Player;
         Boat boat = GameManager.Get().Boat;
