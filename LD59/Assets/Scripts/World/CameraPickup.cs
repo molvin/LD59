@@ -9,6 +9,20 @@ public class CameraPickup : Pickupable
         TutorialCanvas.gameObject.SetActive(holding);
         Transform camT = Camera.main.transform;
         TutorialCanvas.transform.forward = -camT.forward;
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            holding = false;
+            if (ControlPlayerMovement)
+            {
+                Player player = GameManager.Get().Player;
+                player.MovementEnabled = true;
+                player.HoldingPickup = false;
+            }
+            Drop();
+            var c = GameManager.Get().PolaroidCamera;
+            c.StartCoroutine(c.TakePicture());
+        }
     }
 
     protected override void Drop()

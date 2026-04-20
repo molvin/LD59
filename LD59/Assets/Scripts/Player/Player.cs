@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using FMOD.Studio;
 using FMODUnity;
-using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -222,7 +221,7 @@ public class Player : MonoBehaviour
                 terrainSound = FootstepSounds.Find(foot => foot.name.Equals(textureName)).sound;
             }
 
-            if (!Footstep.IsNull)
+            if (!Footstep.IsNull && !inStartAnimation)
             {
                 EventInstance step = RuntimeManager.CreateInstance(Footstep);
                 step.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
