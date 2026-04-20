@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FMOD.Studio;
@@ -46,6 +47,10 @@ public class Player : MonoBehaviour
     public bool Boated => standingOn == GroundType.Boat;
     private float lastTimeStandingOnBoat;
     private string textureName = "";
+    private bool isDay = true;
+
+    public EventReference NightSwitchSound;
+    public Animator CameraAnimator;
 
     public void Reset()
     {
@@ -65,6 +70,7 @@ public class Player : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
+        CameraAnimator.enabled = false;
     }
 
     public void Unstuck()
@@ -100,6 +106,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        CheckForDayNightShift();
+        
         if (Input.GetKeyDown(KeyCode.K) && Time.time - lastTimeStandingOnBoat > 120.0f)
         {
             Unstuck();
@@ -252,5 +260,44 @@ public class Player : MonoBehaviour
     private void ExitSteering()
     {
         isSteering = false;
+    }
+    
+    private void CheckForDayNightShift()
+    {
+        IEnumerator DayShiftAnimation(bool goingToNight)
+        {
+            CameraAnimator.enabled = true;
+            MovementEnabled = false;
+            RuntimeManager.PlayOneShot(NightSwitchSound, transform.position);
+
+            CameraAnimator.SetTrigger("FallDown");
+
+            yield return new WaitForSeconds(1.0f);
+
+            float duration = 4.0f;
+            float t = 0.0f;
+            SkyboxController skybox = FindFirstObjectByType<SkyboxController>();
+            skybox.UpdateSkybox();
+            while (t < duration)
+            {
+                skybox.SetDayNightTransition(t / duration);
+                t += Time.deltaTime;
+                yield return null;
+            }
+            skybox.SetDayNightTransition(1);
+
+            yield return new WaitForSeconds(1.0f);
+
+            MovementEnabled = true;
+            CameraAnimator.enabled = false;
+            rotation = 0.0f;
+        }
+
+        if (GameManager.Get().IsDay != isDay)
+        {
+            bool goingToNight = isDay;
+            isDay = GameManager.Get().IsDay;
+            StartCoroutine(DayShiftAnimation(goingToNight));
+        }
     }
 }
