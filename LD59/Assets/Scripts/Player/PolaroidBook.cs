@@ -6,15 +6,13 @@ using System.Collections.Generic;
 
 public class PolaroidBook : MonoBehaviour
 {
-
     public GameObject Root;
 
     public bool Enabled = true;
     public bool IsOpen { get; private set; }
 
-
-    private PolaroidPicture[] pictures;
-    private Note[] notes;
+    public PolaroidPicture[] pictures;
+    public Note[] notes;
     private List<(string, Texture2D)> polaroids = new();
     private List<(string, string)> noteData = new();
     private Player player;
@@ -23,9 +21,6 @@ public class PolaroidBook : MonoBehaviour
 
     private void Start()
     {
-        pictures = GetComponentsInChildren<PolaroidPicture>();
-        notes = GetComponentsInChildren<Note>();
-
         foreach(var p in pictures)
             p.gameObject.SetActive(false);
 
@@ -59,6 +54,16 @@ public class PolaroidBook : MonoBehaviour
                         break;
                     }
                 }
+
+                foreach(var n in notes)
+                {
+                    if (hit.collider.gameObject == n.gameObject)
+                    {
+                        n.Interact(transform);
+                        isInteracting = true;
+                        break;
+                    }
+                }
             }
 
             if(!isInteracting && Input.GetMouseButtonDown(1))
@@ -67,11 +72,11 @@ public class PolaroidBook : MonoBehaviour
             if(isInteracting && Input.GetMouseButtonDown(1))
                 isInteracting = false;
 
-            if(Input.GetKeyDown(KeyCode.A))
+            if(!isInteracting && Input.GetKeyDown(KeyCode.A))
             {
                 FlipPage(-1);
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (!isInteracting && Input.GetKeyDown(KeyCode.D))
             {
                 FlipPage(1);
             }
@@ -91,16 +96,30 @@ public class PolaroidBook : MonoBehaviour
             p.Interactable = open;
         }
 
+        foreach(var n in notes)
+        {
+            n.Interactable = open;
+        }
+
         UpdatePicturesAndNotes();
+    }
+
+    private int PolaroidPageCount()
+    {
+        int perPage = pictures.Length;
+        return (perPage > 0 && polaroids.Count > 0) ? Mathf.CeilToInt((float)polaroids.Count / perPage) : 0;
+    }
+
+    private int NotePageCount()
+    {
+        int notesPerPage = notes.Length;
+        return (notesPerPage > 0 && noteData.Count > 0) ? Mathf.CeilToInt((float)noteData.Count / notesPerPage) : 0;
     }
 
     public void FlipPage(int direction)
     {
-        int perPage = pictures.Length;
-        int polaroidPageCount = perPage > 0 ? Mathf.CeilToInt((float)polaroids.Count / perPage) : 0;
-        int notesPerPage = notes.Length;
-        int notePageCount = notesPerPage > 0 ? Mathf.CeilToInt((float)noteData.Count / notesPerPage) : 0;
-        int maxPage = Mathf.Max(0, polaroidPageCount + notePageCount - 1);
+        int totalPages = PolaroidPageCount() + NotePageCount();
+        int maxPage = Mathf.Max(0, totalPages - 1);
         currentPage += direction;
         currentPage = Mathf.Clamp(currentPage, 0, maxPage);
         UpdatePicturesAndNotes();
@@ -109,7 +128,7 @@ public class PolaroidBook : MonoBehaviour
     private void UpdatePicturesAndNotes()
     {
         int perPage = pictures.Length;
-        int polaroidPageCount = perPage > 0 ? Mathf.CeilToInt((float)polaroids.Count / perPage) : 0;
+        int polaroidPageCount = PolaroidPageCount();
         bool onPolaroidPage = currentPage < polaroidPageCount;
 
         for (int i = 0; i < pictures.Length; i++)
@@ -138,7 +157,7 @@ public class PolaroidBook : MonoBehaviour
         {
             Note note = notes[i];
             int idx = notePage * notesPerPage + i;
-            if (!onPolaroidPage && idx < noteData.Count)
+            if (!onPolaroidPage && notePage >= 0 && idx < noteData.Count)
             {
                 (string title, string text) = noteData[idx];
                 note.gameObject.SetActive(true);
