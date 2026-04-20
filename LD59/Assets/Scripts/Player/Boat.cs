@@ -62,10 +62,6 @@ public class Boat : MonoBehaviour
     public void Throttle(float input)
     {
         float throttleJerk = input * GearSpeed * Time.deltaTime;
-        if (throttleJerk < 0.0f)
-        {
-            throttleJerk *= 0.5f;
-        }
         throttle = Mathf.Clamp(throttle + throttleJerk, -1.0f, 1.0f);
 
         isThrottling = true;
@@ -130,13 +126,19 @@ public class Boat : MonoBehaviour
         float t = (throttle + 1.0f) / 2.0f;
         ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-135, -50, t), 90 , -90);
 
-        angularVelocity += steering * Mathf.Rad2Deg * TurnSpeed * Time.deltaTime;
+        float speed = Vector3.Dot(new Vector3(linearVelocity.x, 0, linearVelocity.y), transform.forward);
+        // NOTE: Science
+        float turningAlpha = Mathf.Clamp01((2.0f + Mathf.Abs(speed)) / 6.8f);
+        turningAlpha *= Mathf.Sign(speed);
+
+        angularVelocity += turningAlpha * steering * Mathf.Rad2Deg * TurnSpeed * Time.deltaTime;
         angularVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
         transform.Rotate(Vector3.up, angularVelocity * Time.deltaTime);
 
         linearVelocity += new Vector2(transform.forward.x, transform.forward.z) * (throttle * Acceleration * Time.deltaTime);
         linearVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
         transform.position += new Vector3(linearVelocity.x, 0, linearVelocity.y) * Time.deltaTime;
+
 
         deltaVelocity = transform.position - currentPosition;
         deltaRotation = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, currentPlaneForward, Vector3.up);
