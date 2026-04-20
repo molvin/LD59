@@ -45,7 +45,7 @@ public class SignalScope : Interactable
     public float BeepMaxInterval = 2f;
     public float BeepMinInterval = 0.1f;
     public EventReference BeepSound;
-    public EventReference FullBeepSound;
+    public StudioEventEmitter FullBeepSound;
 
     public float FullBeepThreshold;
     public float VolumeChangeSpeed = 1.0f;
@@ -260,22 +260,18 @@ public class SignalScope : Interactable
             }
             if (t >= FullBeepThreshold)
             {
-                if (!fullBeepInstance.isValid())
+                if (!FullBeepSound.IsPlaying())
                 {
-                    fullBeepInstance = RuntimeManager.CreateInstance(FullBeepSound);
-                    fullBeepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
                     fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
-                    fullBeepInstance.start();
+                    FullBeepSound.Play();
                 }
                 LightRenderer.material = LightOnMaterial;
             }
             else
             {
-                if (fullBeepInstance.isValid())
+                if (FullBeepSound.IsPlaying())
                 {
-                    fullBeepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    fullBeepInstance.release();
-                    fullBeepInstance = default;
+                    FullBeepSound.Stop();
                 }
             }
         }
