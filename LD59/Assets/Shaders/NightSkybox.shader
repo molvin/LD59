@@ -9,6 +9,12 @@ Shader "Custom/NightSkybox"
         _StarMaxSize ("Star Max Size", Range(0,1)) = 0.5
         _StarColor ("Star Color", Color) = (1,1,1,1)
         _StarPixelation ("Star Pixelation", Float) = 100
+        _RandomSign0Tex ("Random Star Sign Texture 0", 2D) = "black"{}
+        _RandomSign1Tex ("Random Star Sign Texture 1", 2D) = "black"{}
+        _RandomSign2Tex ("Random Star Sign Texture 2", 2D) = "black"{}
+        _RandomSignSize ("Random Star Sign Size", Float) = 1.0
+        _RandomSignDensity ("Random Star Sign Density", Range(0, 1)) = 0.1
+        _RandomSignMinHeight ("Random Star Sign Min Height", Range(0, 1)) = 0.1
     }
     SubShader
     {
@@ -37,6 +43,9 @@ Shader "Custom/NightSkybox"
             sampler2D _StarSign1Tex;
             sampler2D _StarSign2Tex;
             sampler2D _MoonTex;
+            sampler2D _RandomSign0Tex;
+            sampler2D _RandomSign1Tex;
+            sampler2D _RandomSign2Tex;
 
             float3 _StarSign0Dir;
             float3 _StarSign1Dir;
@@ -46,6 +55,9 @@ Shader "Custom/NightSkybox"
             float _StarSign1Size;
             float _StarSign2Size;
             float _MoonSize;
+            float _RandomSignSize;
+            float _RandomSignDensity;
+            float _RandomSignMinHeight;
 
             float hash(float2 p)
             {
@@ -110,6 +122,32 @@ Shader "Custom/NightSkybox"
                 col = BlendStarSign(col, adjViewDir, _StarSign1Dir, _StarSign1Tex, _StarSign1Size);
                 col = BlendStarSign(col, adjViewDir, _StarSign2Dir, _StarSign2Tex, _StarSign2Size);
                 col = BlendStarSign(col, adjViewDir, _MoonDir, _MoonTex, _MoonSize);
+
+                static const int GRID_W = 24;
+                static const int GRID_H = 12;
+                for (int gy = 0; gy < GRID_H; gy++)
+                {
+                    for (int gx = 0; gx < GRID_W; gx++)
+                    {
+                        float2 cellID = float2(gx, gy);
+                        if (hash(cellID) >= _RandomSignDensity)
+                            continue;
+
+                        float phi = (float(gx) + hash(cellID + float2(7.3, 2.1))) / float(GRID_W) * 2.0 * UNITY_PI;
+                        float y = lerp(_RandomSignMinHeight, 1.0, (float(gy) + hash(cellID + float2(3.7, 9.1))) / float(GRID_H));
+                        float r = sqrt(max(0.0, 1.0 - y * y));
+                        float3 rdir = float3(r * cos(phi), y, r * sin(phi));
+
+                        float texSel = hash(cellID + float2(17.3, 5.7));
+                        if (texSel < 0.333)
+                            col = BlendStarSign(col, adjViewDir, rdir, _RandomSign0Tex, _RandomSignSize);
+                        else if (texSel < 0.667)
+                            col = BlendStarSign(col, adjViewDir, rdir, _RandomSign1Tex, _RandomSignSize);
+                        else
+                            col = BlendStarSign(col, adjViewDir, rdir, _RandomSign2Tex, _RandomSignSize);
+                    }
+                }
+
                 return float4(col, 1);
             }
             ENDHLSL

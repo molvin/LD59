@@ -47,7 +47,7 @@ public class SkyboxController : MonoBehaviour
     {
         dayTimeSkyboxMaterial = new Material(dayTimeSkyboxMaterial);
         polaroidNightTimeSkyboxMaterial = new Material(polaroidNightTimeSkyboxMaterial);
-        nightTimeSkyboxMaterial = new Material(nightTimeSkyboxMaterial);
+        // nightTimeSkyboxMaterial = new Material(nightTimeSkyboxMaterial);
 
         for (int i = 0; i < starSigns.Length; i++)
         {
