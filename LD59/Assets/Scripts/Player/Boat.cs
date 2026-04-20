@@ -45,6 +45,7 @@ public class Boat : MonoBehaviour
     private Vector3 deltaVelocity;
     private float deltaRotation;
     private bool isSteering = false;
+    private bool isThrottling = false;
     private RayCollisionSettings rayCollisionSettings;
 
     public Vector3 DeltaVelocity => deltaVelocity;
@@ -67,8 +68,7 @@ public class Boat : MonoBehaviour
         }
         throttle = Mathf.Clamp(throttle + throttleJerk, -1.0f, 1.0f);
 
-        float t = (throttle + 1.0f) / 2.0f;
-        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-135, -50, t), 90 , -90);
+        isThrottling = true;
     }
 
     public void Steer(float input)
@@ -121,7 +121,14 @@ public class Boat : MonoBehaviour
         }
         isSteering = false;
         Wheel.transform.localRotation = Quaternion.Euler(-300 * steering, 0, 0);
-        //Wheel.transform.rotation = Quaternion.AngleAxis(300 * steering, Vector3.forward);
+
+        if (!isThrottling && throttle < 0.16f && throttle > -0.32f)
+        {
+            throttle *= Mathf.Pow(WheelReset, Time.deltaTime);
+        }
+        isThrottling = false;
+        float t = (throttle + 1.0f) / 2.0f;
+        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-135, -50, t), 90 , -90);
 
         angularVelocity += steering * Mathf.Rad2Deg * TurnSpeed * Time.deltaTime;
         angularVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
