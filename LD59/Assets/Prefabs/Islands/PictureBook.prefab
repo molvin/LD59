@@ -92,6 +92,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   Root: {fileID: 1276570825586102058}
+  OpenBookSound:
+    Guid:
+      Data1: -1441072274
+      Data2: 1192721239
+      Data3: -1157946739
+      Data4: -1580512386
+    Path: event:/Notebook/OpenBook
+  CloseBookSound:
+    Guid:
+      Data1: -1647879060
+      Data2: 1281011063
+      Data3: -276354383
+      Data4: -497861566
+    Path: event:/Notebook/CloseBook
+  FlipPageSound:
+    Guid:
+      Data1: 613261745
+      Data2: 1182317981
+      Data3: -2086791502
+      Data4: -1603165482
+    Path: event:/Notebook/FlipPage
+  InspectSound:
+    Guid:
+      Data1: -1000550628
+      Data2: 1266113590
+      Data3: 949737661
+      Data4: -1921756450
+    Path: event:/Notebook/LookAt
   Enabled: 1
   pictures:
   - {fileID: 1226363274837507315}
@@ -109,6 +137,7 @@ MonoBehaviour:
   - {fileID: 5897032088592426529}
   - {fileID: 6803569567627893965}
   - {fileID: 770659119720715095}
+  startPictures: []
 --- !u!1001 &892228710258725288
 PrefabInstance:
   m_ObjectHideFlags: 0

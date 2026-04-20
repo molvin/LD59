@@ -2,11 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using FMODUnity;
 
 
 public class PolaroidBook : MonoBehaviour
 {
     public GameObject Root;
+
+    public EventReference OpenBookSound;
+    public EventReference CloseBookSound;
+    public EventReference FlipPageSound;
+    public EventReference InspectSound;
 
     public bool Enabled = true;
     public bool IsOpen { get; private set; }
@@ -66,6 +72,7 @@ public class PolaroidBook : MonoBehaviour
                         {
                             p.Interact(transform);
                             IsInteracting = true;
+                            RuntimeManager.PlayOneShot(InspectSound, transform.position);
                         }
                         break;
                     }
@@ -79,6 +86,7 @@ public class PolaroidBook : MonoBehaviour
                         {
                             n.Interact(transform);
                             IsInteracting = true;
+                            RuntimeManager.PlayOneShot(InspectSound, transform.position);
                             break;
                         }
                     }
@@ -92,6 +100,7 @@ public class PolaroidBook : MonoBehaviour
             if(IsInteracting && Input.GetMouseButtonDown(1))
             {
                 IsInteracting = false;
+                RuntimeManager.PlayOneShot(InspectSound, transform.position);
             }
 
             if (!IsInteracting && Input.GetKeyDown(KeyCode.A))
@@ -107,6 +116,11 @@ public class PolaroidBook : MonoBehaviour
 
     public void Open(bool open)
     {
+        if (open)
+            RuntimeManager.PlayOneShot(OpenBookSound, transform.position);
+        else if (IsOpen)
+            RuntimeManager.PlayOneShot(CloseBookSound, transform.position);
+
         IsOpen = open;
         Root.SetActive(open);
         player.MovementEnabled = !open && !GameManager.Get().SignalScope.Enabled;
@@ -143,8 +157,11 @@ public class PolaroidBook : MonoBehaviour
     {
         int totalPages = PolaroidPageCount() + NotePageCount();
         int maxPage = Mathf.Max(0, totalPages - 1);
+        int prevPage = currentPage;
         currentPage += direction;
         currentPage = Mathf.Clamp(currentPage, 0, maxPage);
+        if (currentPage != prevPage)
+            RuntimeManager.PlayOneShot(FlipPageSound, transform.position);
         UpdatePicturesAndNotes();
     }
 
