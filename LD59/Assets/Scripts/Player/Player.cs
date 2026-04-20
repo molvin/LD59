@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FMOD.Studio;
 using FMODUnity;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -52,6 +53,8 @@ public class Player : MonoBehaviour
     public EventReference NightSwitchSound;
     public Animator CameraAnimator;
 
+    private bool inStartAnimation;
+
     public void Reset()
     {
         localSpaceOffset = transform.position - GameManager.Get().Boat.transform.position;
@@ -67,9 +70,10 @@ public class Player : MonoBehaviour
         }
         camera.transform.SetParent(transform);
         camera.transform.SetLocalPositionAndRotation(new (0, PLAYER_HEIGHT, 0), Quaternion.LookRotation(transform.forward, Vector3.up));
+        StartAnimation();
 
         Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.visible = false;
         CameraAnimator.enabled = false;
     }
 
@@ -144,14 +148,20 @@ public class Player : MonoBehaviour
             float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
-            rotation -= mouseY;
-            rotation = Mathf.Clamp(rotation, -90f, 90f);
+            if(!inStartAnimation)
+            {
+                rotation -= mouseY;
+                rotation = Mathf.Clamp(rotation, -90f, 90f);
 
-            camera.transform.localRotation = Quaternion.Euler(rotation, 0f, 0f);
-            transform.Rotate(Vector3.up * mouseX);
+                camera.transform.localRotation = Quaternion.Euler(rotation, 0f, 0f);
+                transform.Rotate(Vector3.up * mouseX);
+            }
+
 
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             input = Vector3.ClampMagnitude(input, 1.0f);
+            if (inStartAnimation)
+                input = Vector3.zero;
 
             float sprint = Input.GetKey(KeyCode.LeftShift) ? (Boated ? 1.25f : 1.5f) : 1.0f;
             velocity += transform.rotation * input * MoveAcceleration * sprint * Time.deltaTime;
@@ -286,7 +296,7 @@ public class Player : MonoBehaviour
             }
             skybox.SetDayNightTransition(1);
 
-            yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(1.0f);
 
             MovementEnabled = true;
             CameraAnimator.enabled = false;
@@ -299,5 +309,32 @@ public class Player : MonoBehaviour
             isDay = GameManager.Get().IsDay;
             StartCoroutine(DayShiftAnimation(goingToNight));
         }
+    }
+
+    private void StartAnimation()
+    {
+        IEnumerator Animation()
+        {
+            inStartAnimation = true;
+            Transform sp = GameManager.Get().Boat.StartPosition;
+
+            float duration = 0.5f;
+            float t = 0.0f;
+            Vector3 forward = sp.transform.forward;
+            forward.y = 0;
+            transform.forward = forward;
+            camera.transform.SetLocalPositionAndRotation(new(0, PLAYER_HEIGHT, 0), Quaternion.identity);
+
+            while (t < duration)
+            {
+                transform.position = sp.transform.position;
+                localSpaceOffset = transform.position - GameManager.Get().Boat.transform.position;
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            inStartAnimation = false;
+        }
+        StartCoroutine(Animation());
     }
 }
