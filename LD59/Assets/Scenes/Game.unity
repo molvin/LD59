@@ -933,6 +933,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1664418903}
     m_Modifications:
+    - target: {fileID: 681252078298882507, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1054241874159106976, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -945,9 +949,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2873376942465128127, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 955fa1703e3e9284e856bc6b54b18c50, type: 2}
     - target: {fileID: 3061637030791262782, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147380499520253668, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 5702278805787930656, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1296,6 +1308,10 @@ PrefabInstance:
     - target: {fileID: 2546783273470623303, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: m_Name
       value: SkyboxController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: moon.Size
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: moon.Height
