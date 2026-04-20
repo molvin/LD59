@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63932da7bdfd7f24183969e1c1bc93ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  HasCamera: 0
   Enabled: 1
   Width: 512
   Height: 512
@@ -195,6 +196,20 @@ MonoBehaviour:
   IgnoredRenderers:
   - {fileID: 1240759473348217491}
   - {fileID: 9021142577950298107}
+  SnapSound:
+    Guid:
+      Data1: 632485542
+      Data2: 1263875723
+      Data3: -1758217794
+      Data4: -385543161
+    Path: event:/CameraTakePhoto
+  WhirrSound:
+    Guid:
+      Data1: -1775275223
+      Data2: 1144847851
+      Data3: 52016291
+      Data4: 930329095
+    Path: event:/CameraWhir
 --- !u!95 &50255217102856190
 Animator:
   serializedVersion: 7
