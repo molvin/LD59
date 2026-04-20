@@ -11,10 +11,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5003216858645964198}
-    m_Position: {x: 300, y: 100, z: 0}
+    m_Position: {x: 380, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5356814001877551468}
-    m_Position: {x: 295, y: 165, z: 0}
+    m_Position: {x: 370, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -725045390092599429}
     m_Position: {x: 330, y: 230, z: 0}
@@ -39,7 +39,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -5003216858645964198}
+  m_DefaultState: {fileID: 6559064231949417560}
 --- !u!1102 &-5188090303033971893
 AnimatorState:
   serializedVersion: 6
@@ -150,7 +150,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CelebratingGoodTimesParticle
+  m_Name: CelebratingGoodTimesParticle 2
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
