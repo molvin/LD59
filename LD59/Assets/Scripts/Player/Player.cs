@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
     public EventReference NightSwitchSound;
     public Animator CameraAnimator;
 
+    private bool inStartAnimation;
+
     public void Reset()
     {
         localSpaceOffset = transform.position - GameManager.Get().Boat.transform.position;
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        StartAnimation();
         camera = Camera.main;
         if (camera == null)
         {
@@ -106,6 +109,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if(inStartAnimation)
+        {
+            return;
+        }
+
         CheckForDayNightShift();
         
         if (Input.GetKeyDown(KeyCode.K) && Time.time - lastTimeStandingOnBoat > 120.0f)
@@ -286,7 +294,7 @@ public class Player : MonoBehaviour
             }
             skybox.SetDayNightTransition(1);
 
-            yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(1.0f);
 
             MovementEnabled = true;
             CameraAnimator.enabled = false;
@@ -299,5 +307,18 @@ public class Player : MonoBehaviour
             isDay = GameManager.Get().IsDay;
             StartCoroutine(DayShiftAnimation(goingToNight));
         }
+    }
+
+    private void StartAnimation()
+    {
+        IEnumerator Animation()
+        {
+            inStartAnimation = true;
+
+            yield return new WaitForSeconds(1.0f);
+ 
+            inStartAnimation = false;
+        }
+        //StartCoroutine(Animation());
     }
 }
