@@ -12,9 +12,12 @@ public class Pickupable : Interactable
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Transform originalParent;
+    public Transform RotatingObject;
 
     protected void Awake()
     {
+        if (RotatingObject == null)
+            RotatingObject = transform;
         originalPosition = transform.localPosition;
         originalRotation = transform.localRotation;
         originalParent = transform.parent;
@@ -53,8 +56,8 @@ public class Pickupable : Interactable
         if (Input.GetKey(KeyCode.A)) rotY += 1f;
         if (Input.GetKey(KeyCode.D)) rotY -= 1f;
 
-        transform.Rotate(cam.transform.up, rotY * RotateSpeed * Time.deltaTime, Space.World);
-        transform.Rotate(cam.transform.right, rotX * RotateSpeed * Time.deltaTime, Space.World);
+        RotatingObject.Rotate(cam.transform.up, rotY * RotateSpeed * Time.deltaTime, Space.World);
+        RotatingObject.Rotate(cam.transform.right, rotX * RotateSpeed * Time.deltaTime, Space.World);
 
         if (Input.GetMouseButtonDown(1))
         {

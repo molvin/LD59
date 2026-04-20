@@ -1702,8 +1702,18 @@ MonoBehaviour:
       Data3: -931430763
       Data4: 1868899165
     Path: event:/Footstep
-  FootstepSounds: []
-  FootstepsMetersPerSecond: 1.8
+  FootstepSounds:
+  - name: DEBUG_Brown
+    sound: 1
+  - name: Dirt
+    sound: 0
+  - name: Grass
+    sound: 3
+  - name: Pebles
+    sound: 2
+  - name: Tiles
+    sound: 0
+  FootstepStride: 0.7
   MovementEnabled: 1
   HoldingPickup: 0
 --- !u!1 &1884726478380355942
