@@ -19,8 +19,13 @@ public class PolaroidBook : MonoBehaviour
     private int currentPage;
     public bool IsInteracting { get; private set; }
 
+    public List<Texture2D> startPictures;
+
     private void Start()
     {
+        foreach(Texture2D pic in startPictures)
+            AddPicture("", pic);
+
         foreach(var p in pictures)
             p.gameObject.SetActive(false);
 
@@ -37,7 +42,10 @@ public class PolaroidBook : MonoBehaviour
         {
             PolaroidCamera cam = GameManager.Get().PolaroidCamera;
             if (cam == null || !cam.TakingPicture && !player.HoldingPickup)
+            {
                 Open(!IsOpen);
+                return;
+            }
         }
 
         if(Enabled && IsOpen)
@@ -78,7 +86,7 @@ public class PolaroidBook : MonoBehaviour
                 
             }
 
-            if(!IsInteracting && Input.GetMouseButtonDown(1))
+            if(!IsInteracting && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G)))
                 Open(false);
 
             if(IsInteracting && Input.GetMouseButtonDown(1))
