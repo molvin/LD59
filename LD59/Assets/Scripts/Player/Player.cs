@@ -346,10 +346,12 @@ public class Player : MonoBehaviour
 
     private void HeadBob(float speed)
     {
-        float bobAmount = speed;
-        float bobX = Mathf.Sin(Time.time * HeadbobFrequency) * bobAmount * HeadbobSideRatio;
-        float bobY = Mathf.Abs(Mathf.Cos(Time.time * HeadbobFrequency)) * bobAmount * HeadbobVerticalRatio;
-
-        camera.transform.localPosition = Vector3.up * (PLAYER_HEIGHT + bobY) + Vector3.right * bobX;
+        if(camera.transform.parent != null)
+        {
+            float bobAmount = speed;
+            float bobX = Mathf.Sin(Time.time * HeadbobFrequency) * bobAmount * HeadbobSideRatio;
+            float bobY = Mathf.Abs(Mathf.Cos(Time.time * HeadbobFrequency)) * bobAmount * HeadbobVerticalRatio;
+            camera.transform.localPosition = Vector3.up * (PLAYER_HEIGHT + bobY) + Vector3.right * bobX;
+        }
     }
 }
