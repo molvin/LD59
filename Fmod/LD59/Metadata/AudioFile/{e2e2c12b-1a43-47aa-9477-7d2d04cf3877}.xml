@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{aeb4ddbd-1271-46bc-97bd-0d6a2747a856}">
+	<object class="AudioFile" id="{e2e2c12b-1a43-47aa-9477-7d2d04cf3877}">
 		<property name="assetPath">
-			<value>SecretComplete.wav</value>
+			<value>NightSwitch.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
 		</property>
 		<property name="channelCount">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<property name="length">
-			<value>4.9500000000000002</value>
+			<value>12</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{b5fe82f2-2694-469f-a433-715e4a7470c0}</destination>

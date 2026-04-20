@@ -5,7 +5,7 @@
 			<value>SecretComplete</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{d614d806-23c3-43a2-9330-9487a1326c52}</destination>
