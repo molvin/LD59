@@ -192,11 +192,18 @@ public class SignalScope : Interactable
 
                 Vector3 toDestination2D = (destination.position - origin.position);
                 toDestination2D.y = 0;
+
+                float dist = toDestination2D.magnitude;
+
                 toDestination2D.Normalize();
 
                 float innerProduct = Vector3.Dot(toDestination2D, new Vector3(origin.forward.x, 0, origin.forward.z).normalized);
 
                 float t = (innerProduct + 1.0f) / 2.0f + 0.01f;
+                if(dist < 65)
+                {
+                    t = 0;
+                }
                 UpdateBeep(GameManager.Get().IsDay ? t : 0);
             }
             else
