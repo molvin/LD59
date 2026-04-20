@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="ParameterPreset" id="{05a2bb06-eb67-44cf-8bd0-3364e40be444}">
 		<property name="name">
-			<value>Terain</value>
+			<value>Terrain</value>
 		</property>
 		<relationship name="folder">
 			<destination>{20df318c-23b7-43cb-90a1-c89ebd2f68a9}</destination>
@@ -19,6 +19,9 @@
 			<value>4</value>
 		</property>
 		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="isHeld">
 			<value>true</value>
 		</property>
 		<property name="initialValue">
