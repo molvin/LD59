@@ -48,6 +48,7 @@ public class SignalScope : Interactable
     public EventReference FullBeepSound;
 
     public float FullBeepThreshold;
+    public float VolumeChangeSpeed = 1.0f;
 
     private float beepTimer;
     private bool lightOn;
@@ -64,6 +65,7 @@ public class SignalScope : Interactable
     private PolaroidCamera polaroidCamera;
     private PolaroidBook polaroidBook;
 
+    private float signalScopeVolume = 1.0f;
     public override void Interact(Transform interactorTransform)
     {
         cam = Camera.main;
@@ -141,6 +143,20 @@ public class SignalScope : Interactable
             else if (Input.GetKey(KeyCode.E))
             {
                 Krangle = Mathf.Clamp(Krangle - Time.deltaTime * AmplitudeChangeSpeed, 0, MaxKrangle);
+            }
+
+            if(Input.GetKey(KeyCode.Z))
+            {
+                signalScopeVolume = Mathf.Clamp01(signalScopeVolume + VolumeChangeSpeed * Time.deltaTime);
+                if (fullBeepInstance.isValid())
+                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
+            }
+            else if(Input.GetKey(KeyCode.X))
+            {
+                signalScopeVolume = Mathf.Clamp01(signalScopeVolume - VolumeChangeSpeed * Time.deltaTime);
+
+                if (fullBeepInstance.isValid())
+                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
             }
 
             SineWaveMat.SetFloat("_Amplitude", Amplitude);
@@ -230,7 +246,11 @@ public class SignalScope : Interactable
                     LightRenderer.material = lightOn ? LightOnMaterial : LightOffMaterial;
                 if (lightOn && !BeepSound.IsNull && t < FullBeepThreshold)
                 {
-                    RuntimeManager.PlayOneShot(BeepSound, transform.position);
+                    EventInstance beep = RuntimeManager.CreateInstance(BeepSound);
+                    beep.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+                    beep.setParameterByName("ScopeVolume", signalScopeVolume);
+                    beep.start();
+                    beep.release();
                 }
             }
             if (t >= FullBeepThreshold)
@@ -239,6 +259,7 @@ public class SignalScope : Interactable
                 {
                     fullBeepInstance = RuntimeManager.CreateInstance(FullBeepSound);
                     fullBeepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
                     fullBeepInstance.start();
                 }
                 LightRenderer.material = LightOnMaterial;
