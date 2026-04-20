@@ -212,6 +212,7 @@ MonoBehaviour:
     Target: {fileID: 0}
   moon:
     Phases:
+    - {fileID: 0}
     - {fileID: 2800000, guid: 56d963b38452806409df32cddb9bd81f, type: 3}
     - {fileID: 2800000, guid: 378349059ca97ee499555a885e80da03, type: 3}
     - {fileID: 2800000, guid: 2f5eb81abb60f0e4b97ccf93f5a7d47d, type: 3}
