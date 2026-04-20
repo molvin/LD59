@@ -127,7 +127,7 @@ public class PolaroidCamera : MonoBehaviour
             {
                 PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
                 if (book != null)
-                    book.AddPicture("Temp", photo);
+                    book.AddPicture("", photo);
                 break;
             }
             else if(Input.GetKeyDown(KeyCode.A)) 
