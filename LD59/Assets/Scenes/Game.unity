@@ -270,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6566800170517760672, guid: 3c822225174e14b49b787cae4aae5c88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 199
+      value: 317
       objectReference: {fileID: 0}
     - target: {fileID: 6566800170517760672, guid: 3c822225174e14b49b787cae4aae5c88, type: 3}
       propertyPath: m_LocalRotation.w
@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044880996539317603, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -307
+      value: -335
       objectReference: {fileID: 0}
     - target: {fileID: 4044880996539317603, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
       propertyPath: m_LocalPosition.y
@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044880996539317603, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 98
+      value: 124
       objectReference: {fileID: 0}
     - target: {fileID: 4044880996539317603, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1130,7 +1130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7469676225600843032, guid: 9649532d8b7152e4295eace03a153267, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 7469676225600843032, guid: 9649532d8b7152e4295eace03a153267, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1138,7 +1138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7469676225600843032, guid: 9649532d8b7152e4295eace03a153267, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.3
+      value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 7469676225600843032, guid: 9649532d8b7152e4295eace03a153267, type: 3}
       propertyPath: m_LocalRotation.w
