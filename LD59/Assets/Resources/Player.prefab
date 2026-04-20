@@ -1695,6 +1695,15 @@ MonoBehaviour:
   MouseSensitivity: 80
   MoveAcceleration: 12
   MoveDeceleration: 0.01
+  Footstep:
+    Guid:
+      Data1: 362656416
+      Data2: 1327003292
+      Data3: -931430763
+      Data4: 1868899165
+    Path: event:/Footstep
+  FootstepSounds: []
+  FootstepsMetersPerSecond: 1.8
   MovementEnabled: 1
   HoldingPickup: 0
 --- !u!1 &1884726478380355942
