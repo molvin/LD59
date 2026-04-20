@@ -133,7 +133,7 @@ public class Boat : MonoBehaviour
         }
         isThrottling = false;
         float t = (throttle + 1.0f) / 2.0f;
-        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-135, -50, t), 90 , -90);
+        ThrottlePivot.localRotation = Quaternion.Euler(Mathf.Lerp(-113, -65, t), 90 , -90);
 
         float speed = Vector3.Dot(new Vector3(linearVelocity.x, 0, linearVelocity.y), transform.forward);
         // NOTE: Science
