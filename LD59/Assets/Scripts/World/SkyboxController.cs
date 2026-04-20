@@ -45,8 +45,22 @@ public class SkyboxController : MonoBehaviour
     private int circledPillars = 0;
     private Vector3 moonDir = Vector3.up;
 
+    private float dayIntensity;
+    private float nightIntensity;
+    private float dayTemp;
+    private float nightTemp;
+    private Color dayColor;
+    private Color nightColor;
+
     private void Start()
     {
+        dayIntensity = daySun.intensity;
+        dayTemp = daySun.colorTemperature;
+        nightIntensity = nightSun.intensity;
+        nightTemp = nightSun.colorTemperature;
+        dayColor = daySun.color;
+        nightColor = nightSun.color;
+
         dayTimeSkyboxMaterial = new Material(dayTimeSkyboxMaterial);
         nightTimeSkyboxMaterial = new Material(nightTimeSkyboxMaterial);
 
@@ -59,7 +73,6 @@ public class SkyboxController : MonoBehaviour
         UpdateStarSigns(true);
     }
 
-    [ContextMenu("Update Skybox")]
     public void UpdateSkybox()
     {
         bool isDay = GameManager.Get().IsDay;
@@ -80,7 +93,7 @@ public class SkyboxController : MonoBehaviour
             GameManager.Get().happyPillars.Add(GameManager.Get().HappyPillarCount);
         }
 
-        UpdateSkybox();
+        // UpdateSkybox();
         UpdatePolaroidSunPosition();
         UpdateNightSunPosition();
         UpdateStarSigns(false);
@@ -194,6 +207,22 @@ public class SkyboxController : MonoBehaviour
             t += Time.deltaTime;
             moonDir = Vector3.Lerp(currentDir, targetDir, t / MoonMoveDuration);
             yield return null;
+        }
+    }
+
+    public void SetDayNightTransition(float t)
+    {
+        if(GameManager.Get().IsDay)
+        {
+            daySun.colorTemperature = Mathf.Lerp(nightTemp, dayTemp, t);
+            daySun.intensity = Mathf.Lerp(nightIntensity, dayIntensity, t);
+            daySun.color = Color.Lerp(nightColor, dayColor, t);
+        }
+        else
+        {
+            nightSun.colorTemperature = Mathf.Lerp(dayTemp, nightTemp, t);
+            nightSun.intensity = Mathf.Lerp(dayIntensity, nightIntensity, t);
+            nightSun.color = Color.Lerp(dayColor, nightColor, t);
         }
     }
 }

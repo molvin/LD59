@@ -1716,6 +1716,14 @@ MonoBehaviour:
   FootstepStride: 0.9
   MovementEnabled: 1
   HoldingPickup: 0
+  NightSwitchSound:
+    Guid:
+      Data1: 1429752349
+      Data2: 1293146704
+      Data3: -1212383049
+      Data4: -994994016
+    Path: event:/NightSwitch
+  CameraAnimator: {fileID: 4977473334734761819}
 --- !u!1 &1884726478380355942
 GameObject:
   m_ObjectHideFlags: 0
@@ -3725,6 +3733,7 @@ GameObject:
   - component: {fileID: 1495132868816788719}
   - component: {fileID: 8659860395804055036}
   - component: {fileID: 7855345370594713096}
+  - component: {fileID: 4977473334734761819}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3892,6 +3901,28 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!95 &4977473334734761819
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618517213923653630}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c7bc366949056b74a85c7972319602f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4899004234124692651
 GameObject:
   m_ObjectHideFlags: 0

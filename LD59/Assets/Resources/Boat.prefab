@@ -936,6 +936,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+  ParkingDistanceCheck: 5
+  ParkingRotation: 30
+  ParkingLinear: 1
   SteeringPoint: {fileID: 3403220886037509978}
   ThrottlePivot: {fileID: 610407100932975005}
 --- !u!114 &8232102860769504419
