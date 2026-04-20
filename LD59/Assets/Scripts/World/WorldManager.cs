@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -17,6 +18,9 @@ public class WorldManager : Subsystem<WorldManager>
 
     private List<GameObject> seaguls = new();
     private List<Vector2> seagulVelocities = new();
+    private GameObject koiPrefab;
+    private GameObject koiHolder;
+    private List<GameObject> kois = new();
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnGameStart()
@@ -46,6 +50,9 @@ public class WorldManager : Subsystem<WorldManager>
             seaguls.Add(seagul);
             seagulVelocities.Add(Random.onUnitCircle * 5);
         }
+
+        koiPrefab = Resources.Load("koi") as GameObject;
+        koiHolder = new GameObject();
     }
 
     private void SetupTiles()
@@ -124,6 +131,7 @@ public class WorldManager : Subsystem<WorldManager>
         }
 
         SeagulSim();
+        MakeFishesFish();
     }
 
     private void SeagulSim()
@@ -204,5 +212,47 @@ public class WorldManager : Subsystem<WorldManager>
             seaguls[i].transform.position += velocity * Time.deltaTime;
             //seaguls[i].transform.rotation = Quaternion.LookRotation();
         }
+    }
+    
+    private void MakeFishesFish()
+    {
+        Player player = GameManager.Get().Player;
+        if (kois.Count < 200)
+        {
+            GameObject newKoi = Instantiate(koiPrefab, koiHolder.transform);
+            Vector2 rng = Random.onUnitCircle * (1.0f + Random.value) * 40.0f;
+            newKoi.transform.position = player.transform.position + new Vector3(rng.x, -Random.value * 2.0f - 1.0f, rng.y);
+            newKoi.transform.localScale = new (Random.value > 0.5 ? 1 : -1, 1, 1);
+            kois.Add(newKoi);
+        }
+
+        Boat boat = GameManager.Get().Boat;
+        foreach (GameObject koi in kois)
+        {
+            if (Vector3.Distance(boat.transform.position, koi.transform.position) > 100)
+            {
+                if (Vector3.Dot(boat.transform.forward, (boat.transform.position - koi.transform.position)) > 0)
+                {
+                    koi.transform.position += boat.transform.forward * 200;
+                    Vector2 dir = Random.onUnitCircle;
+                    koi.transform.forward = new(dir.x, 0, dir.y);
+                }
+            }
+
+            koi.transform.position += koi.transform.forward * (1.0f + Random.value) * Time.deltaTime;
+        }
+
+        //foreach (GameObject koi in kois)
+        //{
+            //Vector2 targetPos2D = new Vector2(player.transform.position.x, player.transform.position.z);// + Random.onUnitCircle * 20.0f;
+            //Vector3 targetPos = new(targetPos2D.x, koi.transform.position.y, targetPos2D.y);
+            //Vector3 toTarget = (targetPos - koi.transform.position).normalized;
+            //Vector3 dir = koi.transform.localScale.x * Vector3.Cross(toTarget, Vector3.up);
+            //targetPos += dir * Random.value * 100.0f;
+            //dir = (targetPos - koi.transform.position).normalized;
+            //dir = Vector3.RotateTowards(koi.transform.forward, dir, Time.deltaTime, Time.deltaTime);
+            //koi.transform.forward = dir;
+            //koi.transform.position += dir * 20.0f * Random.value * Time.deltaTime;
+        //}
     }
 }
