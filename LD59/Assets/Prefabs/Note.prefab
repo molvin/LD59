@@ -383,8 +383,11 @@ MonoBehaviour:
   InteractError: 0.4
   HoldDistance: 0.5
   RotateSpeed: 90
+  Interactable: 1
+  ControlPlayerMovement: 1
   TextFile: {fileID: 0}
   CanvasText: {fileID: 1634015726649012488}
+  InBook: 0
 --- !u!65 &7954240007286948800
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -419,3 +422,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
   ShowInPhoto: 0
+  IgnoreIfNightTime: 0

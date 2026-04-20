@@ -720,18 +720,18 @@ MonoBehaviour:
     Path: 
   FullBeepThreshold: 0
   CorrectSettings:
-  - Amplitude: 0.45
-    Frequency: 7.3
-    Krangle: 0.06
-  - Amplitude: 0.22
-    Frequency: 14
-    Krangle: 0.14
-  - Amplitude: 0.38
-    Frequency: 2
-    Krangle: 0.3
-  - Amplitude: 0.12
-    Frequency: 5
-    Krangle: 0.2
+  - Amplitude: 0.2
+    Frequency: 4.92
+    Krangle: 0
+  - Amplitude: 0.18
+    Frequency: 1.75
+    Krangle: 0.31
+  - Amplitude: 0.14
+    Frequency: 3.14
+    Krangle: 0.11
+  - Amplitude: 0.08
+    Frequency: 4.29
+    Krangle: 0.24
   CorrectSettingsPercentageMargin: 0.1
 --- !u!1001 &4035153509058005029
 PrefabInstance:
