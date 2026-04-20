@@ -120,7 +120,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 8fb6e249398c91c4089693373c0d0fdc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
+      objectReference: {fileID: 2100000, guid: 51533e14535824c4f97d2fa09850bbcb, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 8fb6e249398c91c4089693373c0d0fdc, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d34167edc37b69546b2f2c7c7d5328fc, type: 2}
     - target: {fileID: 919132149155446097, guid: 8fb6e249398c91c4089693373c0d0fdc, type: 3}
       propertyPath: m_Name
       value: StorageBox
