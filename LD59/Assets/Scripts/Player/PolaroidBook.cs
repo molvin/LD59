@@ -97,7 +97,10 @@ public class PolaroidBook : MonoBehaviour
     public void FlipPage(int direction)
     {
         int perPage = pictures.Length;
-        int maxPage = perPage > 0 ? Mathf.Max(0, Mathf.CeilToInt((float)polaroids.Count / perPage) - 1) : 0;
+        int polaroidPageCount = perPage > 0 ? Mathf.CeilToInt((float)polaroids.Count / perPage) : 0;
+        int notesPerPage = notes.Length;
+        int notePageCount = notesPerPage > 0 ? Mathf.CeilToInt((float)noteData.Count / notesPerPage) : 0;
+        int maxPage = Mathf.Max(0, polaroidPageCount + notePageCount - 1);
         currentPage += direction;
         currentPage = Mathf.Clamp(currentPage, 0, maxPage);
         UpdatePicturesAndNotes();
@@ -106,17 +109,16 @@ public class PolaroidBook : MonoBehaviour
     private void UpdatePicturesAndNotes()
     {
         int perPage = pictures.Length;
-        int maxPage = perPage > 0 ? Mathf.Max(0, Mathf.CeilToInt((float)polaroids.Count / perPage) - 1) : 0;
-        int startIndex = currentPage * perPage;
+        int polaroidPageCount = perPage > 0 ? Mathf.CeilToInt((float)polaroids.Count / perPage) : 0;
+        bool onPolaroidPage = currentPage < polaroidPageCount;
 
         for (int i = 0; i < pictures.Length; i++)
         {
             PolaroidPicture picture = pictures[i];
-
-            int idx = startIndex + i;
-            if (idx < polaroids.Count)
+            int idx = currentPage * perPage + i;
+            if (onPolaroidPage && idx < polaroids.Count)
             {
-                (string text, Texture2D texture) = polaroids[idx]; 
+                (string text, Texture2D texture) = polaroids[idx];
                 picture.gameObject.SetActive(true);
                 picture.Interactable = true;
                 picture.Text = text;
@@ -129,9 +131,24 @@ public class PolaroidBook : MonoBehaviour
                 picture.gameObject.SetActive(false);
             }
         }
-        
-        // Any notes will appear on the page after the last polaroids, in the same way they can go on forever, but you have to flip through all the polaroid pages to get to the notes
 
+        int notesPerPage = notes.Length;
+        int notePage = currentPage - polaroidPageCount;
+        for (int i = 0; i < notes.Length; i++)
+        {
+            Note note = notes[i];
+            int idx = notePage * notesPerPage + i;
+            if (!onPolaroidPage && idx < noteData.Count)
+            {
+                (string title, string text) = noteData[idx];
+                note.gameObject.SetActive(true);
+                note.UpdateText(title, text);
+            }
+            else
+            {
+                note.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void AddPicture(string text, Texture2D texture)

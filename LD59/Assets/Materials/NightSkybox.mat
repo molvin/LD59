@@ -170,7 +170,7 @@ Material:
     - _HazeFalloff: 9.12
     - _HazePixels: 102.63
     - _HazeStrength: 0.5
-    - _HorizonOffset: 0.09296827
+    - _HorizonOffset: 0.09319018
     - _Metallic: 0
     - _MoonSize: 5
     - _OcclusionStrength: 1
