@@ -1201,7 +1201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -15, y: 15}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &6165127002167233209
@@ -1469,7 +1469,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1608,7 +1608,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1703,7 +1703,7 @@ MonoBehaviour:
       Data4: 1868899165
     Path: event:/Footstep
   FootstepSounds:
-  - name: DEBUG_Brown
+  - name: DEBUG_Brown (Instance)
     sound: 1
   - name: Dirt
     sound: 0
@@ -1713,7 +1713,7 @@ MonoBehaviour:
     sound: 2
   - name: Tiles
     sound: 0
-  FootstepStride: 0.7
+  FootstepStride: 0.9
   MovementEnabled: 1
   HoldingPickup: 0
 --- !u!1 &1884726478380355942
@@ -4338,7 +4338,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5344,7 +5344,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5881,7 +5881,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6437,7 +6437,7 @@ MonoBehaviour:
 
     Look: Mouse
 
-    Open photoalbum: G
+    Open Picture Book: G
 
     Interact: Left
     Click'
@@ -6474,7 +6474,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -7293,6 +7293,14 @@ PrefabInstance:
       propertyPath: Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7808308518883160290, guid: 0f3eb0df87dec304eac94363b7c1aa42, type: 3}
+      propertyPath: startPictures.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808308518883160290, guid: 0f3eb0df87dec304eac94363b7c1aa42, type: 3}
+      propertyPath: 'startPictures.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2800000, guid: f12b088e373c2c24b948acc3493341f2, type: 3}
     - target: {fileID: 8173361942626806977, guid: 0f3eb0df87dec304eac94363b7c1aa42, type: 3}
       propertyPath: m_IsActive
       value: 0
