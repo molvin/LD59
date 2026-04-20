@@ -1714,6 +1714,9 @@ MonoBehaviour:
   - name: Tiles
     sound: 0
   FootstepStride: 0.9
+  HeadbobFrequency: 3.8
+  HeadbobSideRatio: 0.008
+  HeadbobVerticalRatio: 0.016
   MovementEnabled: 1
   HoldingPickup: 0
   NightSwitchSound:

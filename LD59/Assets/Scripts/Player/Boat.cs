@@ -110,11 +110,13 @@ public class Boat : MonoBehaviour
             Debug.DrawLine(horizPos, horizPos + transform.right * rayCollisionSettings.right, Color.red);
         }
 
-        if (GameManager.Get().Player.StandingOn == Player.GroundType.Boat)
+        if (GameManager.Get().Player.StandingOn != Player.GroundType.Boat)
         {
-            Drift();
+            Stop();
+            return;
         }
 
+        Drift();
         ParkingAssistant();
 
         Vector3 currentPosition = transform.position;
