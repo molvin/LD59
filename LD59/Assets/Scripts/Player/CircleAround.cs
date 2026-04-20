@@ -15,6 +15,7 @@ public abstract class CircleAround : MonoBehaviour
     public CircleDirection Direction = CircleDirection.Omnidirectional;
     public bool CanRetrigger = false;
     public EventReference TriggerSound;
+    public GameObject TriggerAnimation;
 
     private float? currentProgress;
     private Vector3 lastTrackedDirection;
@@ -71,6 +72,9 @@ public abstract class CircleAround : MonoBehaviour
             {
                 RuntimeManager.PlayOneShot(TriggerSound, transform.position);
             }
+            
+            TriggerAnimation.SetActive(true);
+
 
             Trigger();
             if (CanRetrigger)
