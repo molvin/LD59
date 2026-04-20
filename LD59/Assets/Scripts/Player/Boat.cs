@@ -1,5 +1,6 @@
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Boat : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class Boat : MonoBehaviour
 
     [Header("Collision")]
     public LayerMask layerMask;
+
+    [Header("Parking Assistant")]
+    public float ParkingDistanceCheck;
+    public float ParkingRotation;
+    public float ParkingLinear;
 
     public Transform SteeringPoint;
     public Transform ThrottlePivot;
@@ -108,6 +114,8 @@ public class Boat : MonoBehaviour
             Drift();
         }
 
+        ParkingAssistant();
+
         Vector3 currentPosition = transform.position;
         Vector3 currentPlaneForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
@@ -137,8 +145,8 @@ public class Boat : MonoBehaviour
 
         linearVelocity += new Vector2(transform.forward.x, transform.forward.z) * (throttle * Acceleration * Time.deltaTime);
         linearVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
-        transform.position += new Vector3(linearVelocity.x, 0, linearVelocity.y) * Time.deltaTime;
 
+        transform.position += new Vector3(linearVelocity.x, 0, linearVelocity.y) * Time.deltaTime;
 
         deltaVelocity = transform.position - currentPosition;
         deltaRotation = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, currentPlaneForward, Vector3.up);
@@ -202,5 +210,24 @@ public class Boat : MonoBehaviour
 
         linearVelocity += new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * driftStrength * Time.deltaTime;
         angularVelocity += angle * driftStrength * Time.deltaTime;
+    }
+
+    private void ParkingAssistant()
+    {
+        Vector3 rightSideTest = transform.position + transform.right * ParkingDistanceCheck;
+        Vector3 leftSideTest = transform.position - transform.right * ParkingDistanceCheck;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(rightSideTest, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            if (hit.position.y < 0)
+            {
+                return;
+            }
+            Vector3 toHit = hit.position - transform.position;
+            float rotation = Vector3.Dot(transform.forward, toHit.normalized);
+
+            angularVelocity += rotation * ParkingRotation * Time.deltaTime;
+        }
     }
 }
