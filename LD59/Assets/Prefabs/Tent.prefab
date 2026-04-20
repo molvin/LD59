@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5746776688235012634}
   - component: {fileID: 1593521844427371468}
   - component: {fileID: 3838230478144545985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,3 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
   ShowInPhoto: 0
+  IgnoreIfNightTime: 0

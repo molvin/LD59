@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4318587031927011812}
   - component: {fileID: 5503407576785742822}
   - component: {fileID: 483199492017408402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4742089930015217810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockSpire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

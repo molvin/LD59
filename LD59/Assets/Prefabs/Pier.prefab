@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 489408768564925826}
   - component: {fileID: 3850761982358519466}
   - component: {fileID: 7145240242116173964}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
