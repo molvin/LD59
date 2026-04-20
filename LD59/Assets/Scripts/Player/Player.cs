@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         StartAnimation();
 
         Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.visible = false;
         CameraAnimator.enabled = false;
     }
 
