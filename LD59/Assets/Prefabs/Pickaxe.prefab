@@ -132,7 +132,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ada5ef2db0e87d04cb08c3cb8c6fcdf7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
+      objectReference: {fileID: 2100000, guid: e5846efdd546c4e48982329e29aa21a9, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ada5ef2db0e87d04cb08c3cb8c6fcdf7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 68db3eda67e7b5444a330a4396386074, type: 2}
     - target: {fileID: 919132149155446097, guid: ada5ef2db0e87d04cb08c3cb8c6fcdf7, type: 3}
       propertyPath: m_Name
       value: Pickax
