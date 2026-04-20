@@ -95,12 +95,12 @@ public class PolaroidBook : MonoBehaviour
 
         foreach(var p in pictures)
         {
-            p.Interactable = open;
+            p.CanBeInteractedWith = open;
         }
 
         foreach(var n in notes)
         {
-            n.Interactable = open;
+            n.CanBeInteractedWith = open;
         }
 
         if(open)
@@ -142,14 +142,14 @@ public class PolaroidBook : MonoBehaviour
             {
                 (string text, Texture2D texture) = polaroids[idx];
                 picture.gameObject.SetActive(true);
-                picture.Interactable = true;
+                picture.CanBeInteractedWith = true;
                 picture.Text = text;
                 picture.Picture = texture;
                 picture.UpdatePicture();
             }
             else
             {
-                picture.Interactable = false;
+                picture.CanBeInteractedWith = false;
                 picture.gameObject.SetActive(false);
             }
         }

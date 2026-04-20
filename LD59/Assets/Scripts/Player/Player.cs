@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
                 float dot = Vector2.Dot(velocity, normal);
                 if (dot < 0)
                 {
-                    velocity -= dot * normal;
+                    //velocity -= dot * normal;
                 }
 
                 transform.position = hit.position;
