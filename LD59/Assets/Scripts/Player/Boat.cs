@@ -1,5 +1,7 @@
 using FMODUnity;
+using UnityEditor.Analytics;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Boat : MonoBehaviour
 {
@@ -33,6 +35,11 @@ public class Boat : MonoBehaviour
 
     [Header("Collision")]
     public LayerMask layerMask;
+
+    [Header("Parking Assistant")]
+    public float ParkingDistanceCheck;
+    public float ParkingRotation;
+    public float ParkingLinear;
 
     public Transform SteeringPoint;
     public Transform ThrottlePivot;
@@ -108,6 +115,8 @@ public class Boat : MonoBehaviour
             Drift();
         }
 
+        ParkingAssistant();
+
         Vector3 currentPosition = transform.position;
         Vector3 currentPlaneForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
@@ -137,8 +146,8 @@ public class Boat : MonoBehaviour
 
         linearVelocity += new Vector2(transform.forward.x, transform.forward.z) * (throttle * Acceleration * Time.deltaTime);
         linearVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
-        transform.position += new Vector3(linearVelocity.x, 0, linearVelocity.y) * Time.deltaTime;
 
+        transform.position += new Vector3(linearVelocity.x, 0, linearVelocity.y) * Time.deltaTime;
 
         deltaVelocity = transform.position - currentPosition;
         deltaRotation = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, currentPlaneForward, Vector3.up);
@@ -202,5 +211,44 @@ public class Boat : MonoBehaviour
 
         linearVelocity += new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * driftStrength * Time.deltaTime;
         angularVelocity += angle * driftStrength * Time.deltaTime;
+    }
+
+    private void ParkingAssistant()
+    {
+        float rotationAssistance = 0;
+        Vector2 velocityAssistance = Vector2.zero;
+
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, 0.2f, transform.right, out hit, ParkingDistanceCheck, layerMask))
+        {
+            NavMeshHit navHit;
+            if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas))
+            {
+                Vector3 toHit = hit.point - transform.position;
+                float rotation = Vector3.Dot(transform.forward, hit.normal);
+
+                Debug.DrawLine(transform.position, hit.point, Color.rebeccaPurple, 0.2f);
+
+                rotationAssistance += rotation * ParkingRotation;
+                velocityAssistance += new Vector2(toHit.x, toHit.z).normalized * ParkingLinear;
+            }
+        }
+        if (Physics.SphereCast(transform.position, 0.2f, -transform.right, out hit, ParkingDistanceCheck, layerMask))
+        {
+            NavMeshHit navHit;
+            if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas))
+            {
+                Vector3 toHit = hit.point - transform.position;
+                float rotation = -Vector3.Dot(transform.forward, hit.normal);
+
+                Debug.DrawLine(transform.position, hit.point, Color.rebeccaPurple, 0.2f);
+
+                rotationAssistance += rotation * ParkingRotation;
+                velocityAssistance += new Vector2(toHit.x, toHit.z).normalized * ParkingLinear;
+            }
+        }
+
+        angularVelocity += rotationAssistance * Time.deltaTime;
+        linearVelocity += velocityAssistance * Time.deltaTime;
     }
 }
