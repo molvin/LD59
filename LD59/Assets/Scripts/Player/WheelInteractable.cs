@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WheelInteractable : Interactable
 {
-    protected override void Interact(Transform interactorTransform)
+    public override void Interact(Transform interactorTransform)
     {
         GameManager.Get().Player.EnterSteering();
     }
