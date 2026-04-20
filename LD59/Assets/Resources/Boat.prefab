@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WheelInteractable
   InteractDistance: 2
   InteractError: 0.4
+  CanBeInteractedWith: 1
 --- !u!1 &3049610441372518756
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BoatStickInteractable
   InteractDistance: 1.6
   InteractError: 0.2
+  CanBeInteractedWith: 1
 --- !u!1 &4356976732765547699
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Disembark
   InteractDistance: 3
   InteractError: 0.5
+  CanBeInteractedWith: 1
   SampleDistance: 1
 --- !u!1 &6876507824023754695
 GameObject:
@@ -865,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Disembark
   InteractDistance: 3
   InteractError: 0.5
+  CanBeInteractedWith: 1
   SampleDistance: 1
 --- !u!1 &8168733051973625407
 GameObject:
@@ -1163,12 +1167,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.955
       objectReference: {fileID: 0}
+    - target: {fileID: 2024394527103104697, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5568506363361189212, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5568506363361189212, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: CanBeInteractedWith
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568506363361189212, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: ControlPlayerMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826484626918431737, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
@@ -1464,3 +1480,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WheelInteractable
   InteractDistance: 2
   InteractError: 0.4
+  CanBeInteractedWith: 1

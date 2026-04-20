@@ -1,8 +1,18 @@
+using System.Collections.Generic;
+using System.Linq;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
+    [System.Serializable]
+    public struct FootSound
+    {
+        public string name;
+        public int sound;
+    }
     public enum GroundType
     {
         None,
@@ -16,6 +26,10 @@ public class Player : MonoBehaviour
     public float MouseSensitivity = 80;
     public float MoveAcceleration = 8;
     public float MoveDeceleration = 0.03f;
+    public EventReference Footstep;
+    public List<FootSound> FootstepSounds;
+    public float FootstepsMetersPerSecond = 1.8f;
+    private float lastFootstep;
 
     [HideInInspector] public bool MovementEnabled = true;
     [HideInInspector] public bool HoldingPickup = false;
@@ -31,6 +45,7 @@ public class Player : MonoBehaviour
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
     public bool Boated => standingOn == GroundType.Boat;
     private float lastTimeStandingOnBoat;
+    private string textureName = "";
 
     public void Reset()
     {
@@ -58,6 +73,31 @@ public class Player : MonoBehaviour
         Reset();
     }
 
+    public string GetTerrainTextureName(Vector3 hitPoint, Terrain terrain)
+    {
+        TerrainData terrainData = terrain.terrainData;
+        Vector3 terrainPos = terrain.transform.position;
+
+        int mapX = (int)(((hitPoint.x - terrainPos.x) / terrainData.size.x) * terrainData.alphamapWidth);
+        int mapZ = (int)(((hitPoint.z - terrainPos.z) / terrainData.size.z) * terrainData.alphamapHeight);
+
+        float[,,] splatmapData = terrainData.GetAlphamaps(mapX, mapZ, 1, 1);
+
+        float maxWeight = 0;
+        int dominantIndex = 0;
+
+        for (int i = 0; i < splatmapData.GetLength(2); i++)
+        {
+            if (splatmapData[0, 0, i] > maxWeight)
+            {
+                maxWeight = splatmapData[0, 0, i];
+                dominantIndex = i;
+            }
+        }
+
+        return terrainData.terrainLayers[dominantIndex].name;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K) && Time.time - lastTimeStandingOnBoat > 120.0f)
@@ -76,6 +116,18 @@ public class Player : MonoBehaviour
             else
             {
                 standingOn = GroundType.Land;
+            }
+
+            Terrain terrain = rayHit.collider.GetComponent<Terrain>();
+            Renderer renderer = rayHit.collider.GetComponent<Renderer>();
+
+            if (terrain != null)
+            {
+                textureName = GetTerrainTextureName(rayHit.point, terrain);
+            }
+            else if (renderer != null)
+            {
+                textureName = renderer.material.name;
             }
         }
 
@@ -123,10 +175,30 @@ public class Player : MonoBehaviour
                 float dot = Vector2.Dot(velocity, normal);
                 if (dot < 0)
                 {
-                    velocity -= dot * normal;
+                    //velocity -= dot * normal;
                 }
 
                 transform.position = hit.position;
+
+                if (Time.time - lastFootstep > FootstepsMetersPerSecond / velocity.magnitude)
+                {
+                    lastFootstep = Time.time;
+
+                    int terrainSound = 0;
+                    if (FootstepSounds.Any(foot => foot.name.Equals(textureName)))
+                    {
+                        terrainSound = FootstepSounds.Find(foot => foot.name.Equals(textureName)).sound;
+                    }
+
+                    if (!Footstep.IsNull)
+                    {
+                        EventInstance step = RuntimeManager.CreateInstance(Footstep);
+                        step.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+                        step.setParameterByName("Terrain", terrainSound);
+                        step.start();
+                        step.release();
+                    }
+                }
             }
             else
             {

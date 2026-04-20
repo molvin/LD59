@@ -4,6 +4,7 @@ using UnityEngine;
 public class CircleTogether : CircleAround
 {
     public GameObject ThingToActivate;
+
     protected override void Trigger()
     {
         CanRetrigger = false;

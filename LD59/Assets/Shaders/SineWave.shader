@@ -6,7 +6,7 @@ Shader "Custom/SineWave"
         _Frequency ("Frequency", Float) = 5.0
         _Krangle ("Krangle", Float) = 0.1
         _LineColor ("Line Color", Color) = (1, 1, 1, 1)
-        _BgTex ("Background Texture", 2D) = "black" {}
+        _BgColor ("Background Color", Color) = (0, 0, 0, 1)
         _Thickness ("Line Thickness", Float) = 0.01
         _ScrollSpeed ("Scroll Speed", Float) = 1.0
     }
@@ -34,15 +34,13 @@ Shader "Custom/SineWave"
                 float2 uv : TEXCOORD0;
             };
 
-            TEXTURE2D(_BgTex);
-            SAMPLER(sampler_BgTex);
 
             CBUFFER_START(UnityPerMaterial)
                 float _Amplitude;
                 float _Frequency;
                 float _Krangle;
                 float4 _LineColor;
-                float4 _BgTex_ST;
+                float4 _BgColor;
                 float _Thickness;
                 float _ScrollSpeed;
             CBUFFER_END
@@ -68,8 +66,7 @@ Shader "Custom/SineWave"
 
                 float dist = abs(y - (waveY + krangle));
                 float mask = step(dist, _Thickness);
-                float4 bg = SAMPLE_TEXTURE2D(_BgTex, sampler_BgTex, TRANSFORM_TEX(uv, _BgTex));
-                return lerp(bg, _LineColor, mask);
+                return lerp(_BgColor, _LineColor, mask);
             }
 
             ENDHLSL

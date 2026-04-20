@@ -4,7 +4,6 @@ public class Pickupable : Interactable
 {
     public float HoldDistance = 1.5f;
     public float RotateSpeed = 90f;
-    public bool Interactable = true;
     public bool ControlPlayerMovement = true;
 
     protected bool holding;
@@ -23,7 +22,7 @@ public class Pickupable : Interactable
 
     public override void Interact(Transform interactorTransform)
     {
-        if (!Interactable)
+        if (!CanBeInteractedWith)
             return;
 
         cam = Camera.main;

@@ -16,6 +16,11 @@ public class Note : Pickupable
         if (TextFile != null)
             UpdateText(TextFile.name, TextFile.text);
     }
+    
+    private void Update()
+    {
+        CanvasText.text = holding || InBook ? text : "";
+    }
 
     public void UpdateText(string title, string text)
     {
