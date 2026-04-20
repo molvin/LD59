@@ -129,17 +129,20 @@ public class WorldManager : Subsystem<WorldManager>
     private void SeagulSim()
     {
         float vision = 50;
-        float minDist = 20;
+        float minDist = 15;
         float maxSpeed = 5;
         float cohesion = 0.05f;
-        float align = 0.5f;
-        float separation = 0.5f;
+        float align = 0.35f;
+        float separation = 0.6f;
+        float rngSpeed = 0.6f;
         float maxDistanceFromPlayer = 200;
         float turnStrength = 2.0f;
 
         for (int i = 0; i < seaguls.Count; ++i)
         {
             GameObject seagul = seaguls[i];
+            Vector2 rng = Random.onUnitCircle;
+            seagulVelocities[i] += rng * rngSpeed * Time.deltaTime;
 
             Vector2 seagulPos = new Vector2(seagul.transform.position.x, seagul.transform.position.z);
 
