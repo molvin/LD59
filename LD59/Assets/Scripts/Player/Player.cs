@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public GroundType StandingOn => standingOn;
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
     public bool Boated => standingOn == GroundType.Boat;
+    private float lastTimeStandingOnBoat;
 
     public void Reset()
     {
@@ -53,12 +54,19 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K) && Time.time - lastTimeStandingOnBoat > 120.0f)
+        {
+            transform.position = GameManager.Get().Boat.transform.position + Vector3.up * 0.5f;
+            Reset();
+        }
+
         standingOn = GroundType.None;
         if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit rayHit))
         {
             if (rayHit.collider.gameObject.GetComponentInParent<Boat>() != null)
             {
                 standingOn = GroundType.Boat;
+                lastTimeStandingOnBoat = Time.time;
             }
             else
             {
