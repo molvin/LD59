@@ -24,6 +24,7 @@ public class PolaroidCamera : MonoBehaviour
     public Animator Anim;
     public List<Renderer> IgnoredRenderers = new();
     public EventReference SnapSound;
+    public EventReference WhirrSound;
 
     public bool TakingPicture { get; private set; }
     private Vector3 visualObjectStartPos;
@@ -115,6 +116,7 @@ public class PolaroidCamera : MonoBehaviour
         yield return new WaitForSeconds(TakingPictureWaitTime);
 
         Anim.SetTrigger("LookAt");
+        RuntimeManager.PlayOneShot(WhirrSound, transform.position);
 
         yield return new WaitForSeconds(IntermediateWaitTime);
         PolaroidPicture.SetActive(true);
@@ -125,7 +127,7 @@ public class PolaroidCamera : MonoBehaviour
             {
                 PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
                 if (book != null)
-                    book.AddPicture("Temp", photo);
+                    book.AddPicture("", photo);
                 break;
             }
             else if(Input.GetKeyDown(KeyCode.A)) 
