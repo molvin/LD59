@@ -1086,9 +1086,9 @@ MonoBehaviour:
   ResolutionDropdown: {fileID: 6933294663812680726}
   UnstuckButton: {fileID: 4674434472348414641}
   QuitButton: {fileID: 7926297466756215102}
-  MasterBusPath: 
-  SFXBusPath: 
-  MusicBusPath: 
+  MasterBusPath: bus:/
+  SFXBusPath: bus:/SFX
+  MusicBusPath: bus:/Music
 --- !u!1 &1138778632608894734
 GameObject:
   m_ObjectHideFlags: 0

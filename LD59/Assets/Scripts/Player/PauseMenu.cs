@@ -60,10 +60,9 @@ public class PauseMenu : MonoBehaviour
         UnstuckButton.onClick.AddListener(Unstuck);
         QuitButton.onClick.AddListener(Quit);
 
-        masterBus = FMODUnity.RuntimeManager.GetBus(MasterBusPath);
         sfxBus = FMODUnity.RuntimeManager.GetBus(SFXBusPath);
         musicBus = FMODUnity.RuntimeManager.GetBus(MusicBusPath);
-
+        masterBus = FMODUnity.RuntimeManager.GetBus(MasterBusPath);
         // TODO: set the sliders to the values of the busses
     }
 
