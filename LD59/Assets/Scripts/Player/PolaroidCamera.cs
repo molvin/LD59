@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PolaroidCamera : MonoBehaviour
@@ -60,7 +61,10 @@ public class PolaroidCamera : MonoBehaviour
         var polaroidControlled = FindObjectsByType<PolaroidControlled>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(obj.ShowInPhoto);
+            bool isDay = GameManager.Get().IsDay;
+            bool ignore = !isDay && obj.IgnoreIfNightTime;
+            if(!ignore) 
+                obj.gameObject.SetActive(obj.ShowInPhoto);
         }
 
         SkyboxController skybox = FindFirstObjectByType<SkyboxController>(); 
@@ -96,8 +100,11 @@ public class PolaroidCamera : MonoBehaviour
 
         foreach(var obj in polaroidControlled)
         {
-            obj.gameObject.SetActive(!obj.ShowInPhoto);
-        }
+            bool isDay = GameManager.Get().IsDay;
+            bool ignore = !isDay && obj.IgnoreIfNightTime;
+            if(!ignore) 
+                obj.gameObject.SetActive(!obj.ShowInPhoto);     
+       }
 
         yield return new WaitForSeconds(TakingPictureWaitTime);
 
