@@ -7,7 +7,7 @@ public class Pickupable : Interactable
     public bool Interactable = true;
     public bool ControlPlayerMovement = true;
 
-    private bool holding;
+    protected bool holding;
     private Player player;
     private Camera cam;
     private Vector3 originalPosition;

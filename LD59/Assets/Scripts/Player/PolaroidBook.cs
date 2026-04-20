@@ -17,7 +17,7 @@ public class PolaroidBook : MonoBehaviour
     private List<(string, string)> noteData = new();
     private Player player;
     private int currentPage;
-    private bool isInteracting;
+    public bool IsInteracting { get; private set; }
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class PolaroidBook : MonoBehaviour
                     if (hit.collider.gameObject == p.gameObject)
                     {
                         p.Interact(transform);
-                        isInteracting = true;
+                        IsInteracting = true;
                         break;
                     }
                 }
@@ -60,23 +60,25 @@ public class PolaroidBook : MonoBehaviour
                     if (hit.collider.gameObject == n.gameObject)
                     {
                         n.Interact(transform);
-                        isInteracting = true;
+                        IsInteracting = true;
                         break;
                     }
                 }
             }
 
-            if(!isInteracting && Input.GetMouseButtonDown(1))
+            if(!IsInteracting && Input.GetMouseButtonDown(1))
                 Open(false);
 
-            if(isInteracting && Input.GetMouseButtonDown(1))
-                isInteracting = false;
+            if(IsInteracting && Input.GetMouseButtonDown(1))
+            {
+                IsInteracting = false;
+            }
 
-            if(!isInteracting && Input.GetKeyDown(KeyCode.A))
+            if (!IsInteracting && Input.GetKeyDown(KeyCode.A))
             {
                 FlipPage(-1);
             }
-            if (!isInteracting && Input.GetKeyDown(KeyCode.D))
+            if (!IsInteracting && Input.GetKeyDown(KeyCode.D))
             {
                 FlipPage(1);
             }

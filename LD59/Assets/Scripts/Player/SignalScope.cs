@@ -65,6 +65,11 @@ public class SignalScope : Interactable
     private PolaroidCamera polaroidCamera;
     private PolaroidBook polaroidBook;
 
+    public PolaroidPicture PinnedPolaroid;
+
+    private Texture2D pinnedPicture = null;
+
+
     private float signalScopeVolume = 1.0f;
     public override void Interact(Transform interactorTransform)
     {
@@ -288,6 +293,15 @@ public class SignalScope : Interactable
                 LightRenderer.material = lightOn ? LightOnMaterial : LightOffMaterial;
 
         }
+    }
+
+    public void PinPolaroid(Texture2D pic)
+    {
+        pinnedPicture = pic;
+        PinnedPolaroid.gameObject.SetActive(true);
+        PinnedPolaroid.Picture = pic;
+        PinnedPolaroid.Text = "";
+        PinnedPolaroid.UpdatePicture();
     }
 
 }
