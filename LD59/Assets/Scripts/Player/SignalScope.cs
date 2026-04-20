@@ -64,7 +64,7 @@ public class SignalScope : Interactable
     private PolaroidCamera polaroidCamera;
     private PolaroidBook polaroidBook;
 
-    protected override void Interact(Transform interactorTransform)
+    public override void Interact(Transform interactorTransform)
     {
         cam = Camera.main;
         camOriginalParent = cam.transform.parent;

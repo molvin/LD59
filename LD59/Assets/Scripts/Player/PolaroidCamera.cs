@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class PolaroidCamera : MonoBehaviour
 
     public Animator Anim;
     public List<Renderer> IgnoredRenderers = new();
+    public EventReference SnapSound;
+
     public bool TakingPicture { get; private set; }
     private Vector3 visualObjectStartPos;
 
@@ -71,6 +74,9 @@ public class PolaroidCamera : MonoBehaviour
 
         // cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
         foreach (var r in IgnoredRenderers) r.enabled = false;
+
+        RuntimeManager.PlayOneShot(SnapSound, transform.position);
+
         skybox.TakePicture();
         RenderTexture rt = new(Width, Height, 24);
         cam.targetTexture = rt;
@@ -119,7 +125,7 @@ public class PolaroidCamera : MonoBehaviour
             {
                 PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
                 if (book != null)
-                    book.AddPicture(photo);
+                    book.AddPicture("Temp", photo);
                 break;
             }
             else if(Input.GetKeyDown(KeyCode.A)) 
