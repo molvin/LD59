@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2988574933179074837}
   - component: {fileID: 1665457607249147310}
+  - component: {fileID: 3878505017111733664}
   m_Layer: 8
   m_Name: PolaroidPickup
   m_TagString: Untagged
@@ -47,10 +48,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraPickup
   InteractDistance: 1.6
   InteractError: 0.4
-  HoldDistance: 1.5
+  HoldDistance: 0.6
   RotateSpeed: 90
   Interactable: 1
   ControlPlayerMovement: 1
+--- !u!65 &3878505017111733664
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236508935609163949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.35, z: 0.35}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &696492668703640736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,23 +107,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -109,7 +131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -122,37 +144,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5725248192686110398}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
---- !u!1 &390434061076902385 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}
-  m_PrefabInstance: {fileID: 696492668703640736}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &5725248192686110398
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390434061076902385}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2979423, y: 1.3361474, z: 0.96716964}
-  m_Center: {x: 0.20783444, y: -0.0000038146973, z: 1.4767525e-15}
 --- !u!4 &1018034625601334091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e63dd37fa01d9948a3041144579b1ae, type: 3}

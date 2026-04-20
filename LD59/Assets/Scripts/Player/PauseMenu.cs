@@ -48,7 +48,7 @@ public class PauseMenu : MonoBehaviour
         int currentIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
-            resOptions.Add($"{resolutions[i].width}x{resolutions[i].height} {resolutions[i].refreshRateRatio.numerator}Hz");
+            resOptions.Add($"{resolutions[i].width}x{resolutions[i].height} {Mathf.RoundToInt((float)resolutions[i].refreshRateRatio.value)}Hz");
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                 currentIndex = i;
         }
@@ -60,11 +60,15 @@ public class PauseMenu : MonoBehaviour
         UnstuckButton.onClick.AddListener(Unstuck);
         QuitButton.onClick.AddListener(Quit);
 
-        masterBus = FMODUnity.RuntimeManager.GetBus(MasterBusPath);
         sfxBus = FMODUnity.RuntimeManager.GetBus(SFXBusPath);
         musicBus = FMODUnity.RuntimeManager.GetBus(MusicBusPath);
-
-        // TODO: set the sliders to the values of the busses
+        masterBus = FMODUnity.RuntimeManager.GetBus(MasterBusPath);
+        masterBus.getVolume(out float masterVol);
+        sfxBus.getVolume(out float sfxVol);
+        musicBus.getVolume(out float musicVol);
+        MasterSlider.SetValueWithoutNotify(masterVol);
+        SFXSlider.SetValueWithoutNotify(sfxVol);
+        MusicSlider.SetValueWithoutNotify(musicVol);
     }
 
     private void Update()

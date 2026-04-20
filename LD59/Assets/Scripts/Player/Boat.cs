@@ -129,7 +129,7 @@ public class Boat : MonoBehaviour
         float speed = Vector3.Dot(new Vector3(linearVelocity.x, 0, linearVelocity.y), transform.forward);
         // NOTE: Science
         float turningAlpha = Mathf.Clamp01((2.0f + Mathf.Abs(speed)) / 6.8f);
-        turningAlpha *= Mathf.Sign(speed);
+        turningAlpha *= Mathf.Sign(speed + 1);
 
         angularVelocity += turningAlpha * steering * Mathf.Rad2Deg * TurnSpeed * Time.deltaTime;
         angularVelocity *= Mathf.Pow(Deceleration, Time.deltaTime);
