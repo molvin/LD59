@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     private GroundType standingOn = GroundType.None;
     public GroundType StandingOn => standingOn;
     public Bounds BoatBounds => Utils.GetBounds(GameManager.Get().Boat.gameObject);
+    public bool Boated => standingOn == GroundType.Boat;
 
     public void Reset()
     {
@@ -79,7 +80,8 @@ public class Player : MonoBehaviour
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             input = Vector3.ClampMagnitude(input, 1.0f);
 
-            velocity += transform.rotation * input * MoveAcceleration * Time.deltaTime;
+            float sprint = Input.GetKey(KeyCode.LeftShift) ? (Boated ? 1.25f : 1.5f) : 1.0f;
+            velocity += transform.rotation * input * MoveAcceleration * sprint * Time.deltaTime;
             velocity *= Mathf.Pow(MoveDeceleration, Time.deltaTime);
         }
 
@@ -87,7 +89,7 @@ public class Player : MonoBehaviour
 
         Vector3 displacement = MovementEnabled && !isSteering ? velocity * Time.deltaTime : Vector3.zero;
 
-        if (standingOn == GroundType.Boat)
+        if (Boated)
         {
             Vector3 effectiveWorldPosition = boat.transform.position + boat.transform.rotation * localSpaceOffset;
 
