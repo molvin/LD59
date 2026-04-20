@@ -52,12 +52,17 @@ public class Player : MonoBehaviour
         //Cursor.visible = false;
     }
 
+    public void Unstuck()
+    {
+        transform.position = GameManager.Get().Boat.transform.position + Vector3.up * 0.5f;
+        Reset();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K) && Time.time - lastTimeStandingOnBoat > 120.0f)
         {
-            transform.position = GameManager.Get().Boat.transform.position + Vector3.up * 0.5f;
-            Reset();
+            Unstuck();
         }
 
         standingOn = GroundType.None;
