@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
         return terrainData.terrainLayers[dominantIndex].name;
     }
 
-    void Update()
+    void LateUpdate()
     {
         CheckForDayNightShift();
         
