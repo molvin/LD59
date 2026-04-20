@@ -1,4 +1,5 @@
 using FMODUnity;
+using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -214,20 +215,40 @@ public class Boat : MonoBehaviour
 
     private void ParkingAssistant()
     {
-        Vector3 rightSideTest = transform.position + transform.right * ParkingDistanceCheck;
-        Vector3 leftSideTest = transform.position - transform.right * ParkingDistanceCheck;
+        float rotationAssistance = 0;
+        Vector2 velocityAssistance = Vector2.zero;
 
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(rightSideTest, out hit, 1.0f, NavMesh.AllAreas))
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, 0.2f, transform.right, out hit, ParkingDistanceCheck, layerMask))
         {
-            if (hit.position.y < 0)
+            NavMeshHit navHit;
+            if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas))
             {
-                return;
-            }
-            Vector3 toHit = hit.position - transform.position;
-            float rotation = Vector3.Dot(transform.forward, toHit.normalized);
+                Vector3 toHit = hit.point - transform.position;
+                float rotation = Vector3.Dot(transform.forward, hit.normal);
 
-            angularVelocity += rotation * ParkingRotation * Time.deltaTime;
+                Debug.DrawLine(transform.position, hit.point, Color.rebeccaPurple, 0.2f);
+
+                rotationAssistance += rotation * ParkingRotation;
+                velocityAssistance += new Vector2(toHit.x, toHit.z).normalized * ParkingLinear;
+            }
         }
+        if (Physics.SphereCast(transform.position, 0.2f, -transform.right, out hit, ParkingDistanceCheck, layerMask))
+        {
+            NavMeshHit navHit;
+            if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas))
+            {
+                Vector3 toHit = hit.point - transform.position;
+                float rotation = -Vector3.Dot(transform.forward, hit.normal);
+
+                Debug.DrawLine(transform.position, hit.point, Color.rebeccaPurple, 0.2f);
+
+                rotationAssistance += rotation * ParkingRotation;
+                velocityAssistance += new Vector2(toHit.x, toHit.z).normalized * ParkingLinear;
+            }
+        }
+
+        angularVelocity += rotationAssistance * Time.deltaTime;
+        linearVelocity += velocityAssistance * Time.deltaTime;
     }
 }
