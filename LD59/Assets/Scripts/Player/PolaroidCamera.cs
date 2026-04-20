@@ -13,7 +13,7 @@ public class PolaroidCamera : MonoBehaviour
     public int Height = 512;
     public GameObject VisualObject;
     public Transform CameraPoint;
-    public Image Output;
+    public PolaroidPicture Output;
     public GameObject PolaroidPicture;
 
     public float PreWaitTime;
@@ -44,7 +44,8 @@ public class PolaroidCamera : MonoBehaviour
 
         TakingPicture = true;
         VisualObject.SetActive(true);
-        Output.sprite = null;
+        Output.Picture = null;
+        Output.UpdatePicture();
         PolaroidPicture.SetActive(false);
 
         visualObjectStartPos = VisualObject.transform.localPosition;
@@ -96,12 +97,8 @@ public class PolaroidCamera : MonoBehaviour
         RenderTexture.active = null;
         Destroy(rt);
 
-        Sprite sprite = Sprite.Create(photo, new Rect(0, 0, Width, Height), new Vector2(0.5f, 0.5f));
-        if (Output.sprite != null)
-            Destroy(Output.sprite.texture);
-        Output.sprite = sprite;
-
-
+        Output.Picture = photo;
+        Output.UpdatePicture();
 
         transform.parent = parent;
 

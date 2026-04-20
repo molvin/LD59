@@ -5,7 +5,7 @@
 			<value>FullRadioBeep</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{6496d1db-9dae-42bc-b2e1-6a430ae2e09b}</destination>
@@ -59,7 +59,11 @@
 			<destination>{bd38f50c-74ba-447f-94fa-3bf1e885a8a0}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{15184630-e852-4976-b0b6-861ebe7cee3b}" />
+	<object class="EventAutomatableProperties" id="{15184630-e852-4976-b0b6-861ebe7cee3b}">
+		<property name="maximumDistance">
+			<value>8</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{779b387d-8c20-462d-89fb-34890d5259d6}" />
 	<object class="Timeline" id="{f78b37c4-dff5-4fcb-a652-1ce7d0372989}">
 		<relationship name="modules">
@@ -93,7 +97,7 @@
 	</object>
 	<object class="SingleSound" id="{789e2ae9-9d4f-40a1-9387-715a05ff521a}">
 		<property name="length">
-			<value>0.29827664399092968</value>
+			<value>0.93371882086167801</value>
 		</property>
 		<property name="looping">
 			<value>true</value>
@@ -113,7 +117,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>0.29827664399092968</value>
+			<value>0.93371882086167801</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{f78b37c4-dff5-4fcb-a652-1ce7d0372989}</destination>
@@ -133,6 +137,7 @@
 	<object class="MixerBusEffectChain" id="{4fa75555-f752-4446-9ccc-6865b5b84e90}">
 		<relationship name="effects">
 			<destination>{d0bb1db9-c9bb-49e5-9731-6312872e407f}</destination>
+			<destination>{eeda5a88-fce3-4049-986c-606f617fd495}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b05623a4-8781-4a54-99db-3a7d1bbf8339}" />
@@ -147,6 +152,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{d0bb1db9-c9bb-49e5-9731-6312872e407f}" />
+	<object class="ObjectSpatialiserEffect" id="{eeda5a88-fce3-4049-986c-606f617fd495}">
+		<property name="soundSize">
+			<value>1.60000002</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{4c255e6b-1743-432f-92ea-c0ea8e88ffb8}">
 		<property name="position">
 			<value>0</value>

@@ -6183,6 +6183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5094092536005980971}
+  - component: {fileID: 7686802152084950000}
   m_Layer: 5
   m_Name: PickupControls
   m_TagString: Untagged
@@ -6210,6 +6211,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7686802152084950000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674223196692109321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c29431a6d2a7c4a8400f846872ea13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  ExtraText: 'Pin to Signal Scope: F'
+  Text: {fileID: 7669502927022771300}
+  HoldingPolaroid: 0
 --- !u!1 &7807039872148726307
 GameObject:
   m_ObjectHideFlags: 0
@@ -7338,7 +7354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
       propertyPath: HasCamera
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
       propertyPath: SnapSound.Path
