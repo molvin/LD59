@@ -17,6 +17,7 @@ public class SignalScope : Interactable
     public TextMeshProUGUI Text;
     public Transform AmplitudeDial;
     public Transform FrequencyDial;
+    public Transform ModuloDial;
     public Renderer SineWaveRenderer;
     public Material SineWaveMat;
     public float MinAmplitude;  
@@ -31,6 +32,9 @@ public class SignalScope : Interactable
     public float KrangleSpeedChange;
     public float MinDialAngle = -135f;
     public float MaxDialAngle = 135f;
+
+    public float MinModulDialAngle = -30f;
+    public float MaxModulDialAngle = 30f;
 
     public Transform CameraPoint;
     public float Amplitude;
@@ -70,7 +74,7 @@ public class SignalScope : Interactable
     private Texture2D pinnedPicture = null;
 
 
-    private float signalScopeVolume = 1.0f;
+    private bool signalScopeMute = false;
     public override void Interact(Transform interactorTransform)
     {
         cam = Camera.main;
@@ -142,19 +146,13 @@ public class SignalScope : Interactable
             {
                 Krangle = Mathf.Clamp(Krangle - Time.deltaTime * AmplitudeChangeSpeed, 0, MaxKrangle);
             }
-
-            if(Input.GetKey(KeyCode.Z))
+            if(Input.GetKey(KeyCode.M))
             {
-                signalScopeVolume = Mathf.Clamp01(signalScopeVolume + VolumeChangeSpeed * Time.deltaTime);
-                if (fullBeepInstance.isValid())
-                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
-            }
-            else if(Input.GetKey(KeyCode.X))
-            {
-                signalScopeVolume = Mathf.Clamp01(signalScopeVolume - VolumeChangeSpeed * Time.deltaTime);
-
-                if (fullBeepInstance.isValid())
-                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
+                if (fullBeepInstance.isValid() && signalScopeMute)
+                {
+                    signalScopeMute = !signalScopeMute;
+                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeMute ? 0f : 1f);
+                }
             }
 
 
@@ -163,11 +161,10 @@ public class SignalScope : Interactable
             float krngT = Mathf.InverseLerp(MinKrangle, MaxKrangle, Krangle);
             float ampAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - ampT);
             float freqAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - freqT);
-            float krangAngle = Mathf.Lerp(MinDialAngle, MaxDialAngle, 1 - krngT);
+            float krangAngle = Mathf.Lerp(MinModulDialAngle, MaxModulDialAngle, 1f - krngT);
             AmplitudeDial.localRotation = Quaternion.Euler(0f, 0f, ampAngle);
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
-            //KrangleDial.localRotation = Quaternion.Euler(0f, 0f, krngAngle);
-
+            ModuloDial.localRotation = Quaternion.Euler(0f, 0f, krangAngle);
 
             for (int i = 0; i < CorrectSettings.Length; i++)
             {
@@ -252,7 +249,7 @@ public class SignalScope : Interactable
                 {
                     EventInstance beep = RuntimeManager.CreateInstance(BeepSound);
                     beep.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
-                    beep.setParameterByName("ScopeVolume", signalScopeVolume);
+                    beep.setParameterByName("ScopeVolume", signalScopeMute ? 0f : 1f);
                     beep.start();
                     beep.release();
                 }
@@ -261,7 +258,7 @@ public class SignalScope : Interactable
             {
                 if (!FullBeepSound.IsPlaying())
                 {
-                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
+                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeMute ? 0f : 1f);
                     FullBeepSound.Play();
                 }
                 LightRenderer.material = LightOnMaterial;
