@@ -2908,6 +2908,26 @@ PrefabInstance:
       propertyPath: HasCamera
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
+      propertyPath: SnapSound.Path
+      value: event:/CameraTakePhoto
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
+      propertyPath: SnapSound.Guid.Data1
+      value: 632485542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
+      propertyPath: SnapSound.Guid.Data2
+      value: 1263875723
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
+      propertyPath: SnapSound.Guid.Data3
+      value: -1758217794
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
+      propertyPath: SnapSound.Guid.Data4
+      value: -385543161
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -59,6 +59,15 @@ public class PolaroidBook : MonoBehaviour
 
             if(isInteracting && Input.GetMouseButtonDown(1))
                 isInteracting = false;
+
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                FlipPage(-1);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                FlipPage(1);
+            }
         }
     }
 
