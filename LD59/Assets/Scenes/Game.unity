@@ -293,6 +293,13 @@ MonoBehaviour:
   LapsToActivate: 1
   Direction: 0
   CanRetrigger: 0
+  TriggerSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!136 &647820947
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -689,6 +696,13 @@ MonoBehaviour:
   LapsToActivate: 3
   Direction: 0
   CanRetrigger: 1
+  TriggerSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &1135474991
 GameObject:
   m_ObjectHideFlags: 0
