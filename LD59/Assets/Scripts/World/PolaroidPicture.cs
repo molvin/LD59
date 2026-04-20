@@ -10,6 +10,8 @@ public class PolaroidPicture : Pickupable
     public Image CanvasImage;
     public TextMeshProUGUI CanvasText;
 
+    public bool InBook;
+
     private void Start()
     {
         CanvasImage.sprite = Sprite.Create(Picture, new Rect(0, 0, Picture.width, Picture.height), new Vector2(0.5f, 0.5f));
@@ -18,7 +20,14 @@ public class PolaroidPicture : Pickupable
 
     protected override void Drop()
     {
-        FindFirstObjectByType<PolaroidBook>().AddPicture(Picture);    
-        Destroy(gameObject);
+        if(InBook)
+        {
+            base.Drop();
+        }
+        else
+        {
+            GameManager.Get().Book.AddPicture(Picture);
+            Destroy(gameObject);
+        }
     }
 }
