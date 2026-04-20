@@ -7354,7 +7354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
       propertyPath: HasCamera
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6995834188173292787, guid: 59d66b1ef1b5c384fa9edc07c6ff6fcb, type: 3}
       propertyPath: SnapSound.Path

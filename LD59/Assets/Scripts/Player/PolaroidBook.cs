@@ -43,7 +43,7 @@ public class PolaroidBook : MonoBehaviour
         if(Enabled && IsOpen)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(0))
+            if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(0) && !IsInteracting)
             {
                 foreach(var p in pictures)
                 {
