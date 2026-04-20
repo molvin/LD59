@@ -18,6 +18,8 @@ public class WorldManager : Subsystem<WorldManager>
 
     private List<GameObject> seaguls = new();
     private List<Vector2> seagulVelocities = new();
+    private GameObject seagullPrefab;
+    private GameObject seagullHolder;
     private GameObject koiPrefab;
     private GameObject koiHolder;
     private List<GameObject> kois = new();
@@ -40,19 +42,11 @@ public class WorldManager : Subsystem<WorldManager>
         worldTransfrom = new GameObject("World").transform;
         SetupTiles();
 
-        GameObject seagulPrefab = Resources.Load("Seagul") as GameObject;
-        for (int i = 0; i < 50; i++)
-        {
-            GameObject seagul = Instantiate(seagulPrefab, transform);
-            Vector3 pos = Random.onUnitSphere * 100;
-            pos.y = pos.y * 0.15f + 30;
-            seagul.transform.position = pos;
-            seaguls.Add(seagul);
-            seagulVelocities.Add(Random.onUnitCircle * 5);
-        }
+        seagullPrefab = Resources.Load("Seagul") as GameObject;
+        seagullHolder = new GameObject("Seagulls");
 
         koiPrefab = Resources.Load("koi") as GameObject;
-        koiHolder = new GameObject();
+        koiHolder = new GameObject("Kois");
     }
 
     private void SetupTiles()
@@ -136,15 +130,50 @@ public class WorldManager : Subsystem<WorldManager>
 
     private void SeagulSim()
     {
-        float vision = 50;
-        float minDist = 15;
-        float maxSpeed = 5;
-        float cohesion = 0.05f;
-        float align = 0.35f;
-        float separation = 0.6f;
-        float rngSpeed = 0.6f;
-        float maxDistanceFromPlayer = 200;
-        float turnStrength = 2.0f;
+        Transform player = GameManager.Get().Player.transform;
+
+        if (seaguls.Count < 40)
+        {
+            GameObject seagul = Instantiate(seagullPrefab, seagullHolder.transform);
+            Vector3 pos = Random.onUnitSphere * 100;
+            pos.y = pos.y * 0.15f + 30;
+            seagul.transform.position = player.transform.position + pos;
+            seaguls.Add(seagul);
+            seagulVelocities.Add(Random.onUnitCircle * 5);
+        }
+
+        foreach (GameObject seagull in seaguls)
+        {
+            Vector3 toSeagull = seagull.transform.position - player.transform.position;
+
+            Vector3 relativeSeagull = Vector3.zero;
+            if (toSeagull.x < -200)
+            {
+                relativeSeagull.x += 300;
+            }
+            if (toSeagull.x > 200)
+            {
+                relativeSeagull.x -= 300;
+            }
+            if (toSeagull.z < -200)
+            {
+                relativeSeagull.z += 300;
+            }
+            if (toSeagull.z > 200)
+            {
+                relativeSeagull.z -= 300;
+            }
+
+            seagull.transform.position += relativeSeagull;
+        }
+
+        float vision = 30;
+        float minDist = 13;
+        float maxSpeed = 4;
+        float cohesion = 0.12f;
+        float align = 0.03f;
+        float separation = 1.0f;
+        float rngSpeed = 0.9f;
 
         for (int i = 0; i < seaguls.Count; ++i)
         {
@@ -195,14 +224,6 @@ public class WorldManager : Subsystem<WorldManager>
 
             seagulVelocities[i] += (avoidance * separation) * Time.deltaTime;
 
-            Transform player = GameManager.Get().Player.transform;
-            Vector2 playerPos = new (player.position.x, player.position.z);
-
-            if (Vector2.Distance(seagulPos, playerPos) > maxDistanceFromPlayer)
-            {
-                seagulVelocities[i] += (playerPos - seagulPos).normalized * turnStrength * Time.deltaTime;
-            }
-
             if (seagulVelocities[i].magnitude > maxSpeed)
             {
                 seagulVelocities[i] = seagulVelocities[i].normalized * maxSpeed;
@@ -210,7 +231,7 @@ public class WorldManager : Subsystem<WorldManager>
 
             Vector3 velocity = new Vector3(seagulVelocities[i].x, 0, seagulVelocities[i].y);
             seaguls[i].transform.position += velocity * Time.deltaTime;
-            //seaguls[i].transform.rotation = Quaternion.LookRotation();
+            seaguls[i].transform.forward = velocity.normalized;
         }
     }
     
