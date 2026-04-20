@@ -148,11 +148,9 @@ public class SignalScope : Interactable
             }
             if(Input.GetKey(KeyCode.M))
             {
-                if (fullBeepInstance.isValid() && signalScopeMute)
-                {
-                    signalScopeMute = !signalScopeMute;
-                    fullBeepInstance.setParameterByName("ScopeVolume", signalScopeMute ? 0f : 1f);
-                }
+                signalScopeMute = !signalScopeMute;
+
+                FullBeepSound.SetParameter("ScopeVolume", signalScopeMute ? 0f : 1f);
             }
 
 
@@ -260,6 +258,7 @@ public class SignalScope : Interactable
                 {
                     fullBeepInstance.setParameterByName("ScopeVolume", signalScopeMute ? 0f : 1f);
                     FullBeepSound.Play();
+                    FullBeepSound.SetParameter("ScopeVolume", signalScopeMute ? 0f : 1f);
                 }
                 LightRenderer.material = LightOnMaterial;
             }
