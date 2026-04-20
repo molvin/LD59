@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701462724545754736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 39679395653833606}
   - component: {fileID: 7694251493620615341}
   - component: {fileID: 8462302577420702768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

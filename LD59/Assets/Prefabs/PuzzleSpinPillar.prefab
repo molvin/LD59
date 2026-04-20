@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 357886674799412995}
   - component: {fileID: 6605645296150107219}
   - component: {fileID: 5918291747571592174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PuzzleSpinPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

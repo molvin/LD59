@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4878077092325130099}
   - component: {fileID: 1405990854315919016}
   - component: {fileID: 1145272855161344655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
