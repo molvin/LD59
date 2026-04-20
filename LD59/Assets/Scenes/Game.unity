@@ -901,6 +901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1664418903}
   - component: {fileID: 1664418904}
+  - component: {fileID: 1664418905}
   m_Layer: 0
   m_Name: Islands & stuff
   m_TagString: Untagged
@@ -946,6 +947,27 @@ MonoBehaviour:
   - {fileID: 682181504}
   - {fileID: 768141149}
   - {fileID: 1206599300}
+--- !u!114 &1664418905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664418902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06bee592db217424f9c11e12f4b047ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dropoff
+  MinDistance: 300
+  MaxDistance: 310
+  MaxDropoff: 1000
+  DropoffList:
+  - {fileID: 4816920504950602208}
+  - {fileID: 682181504}
+  - {fileID: 1473347675}
+  - {fileID: 1206599300}
+  - {fileID: 768141149}
 --- !u!1 &1733772866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1173,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+--- !u!1 &4816920504950602208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4761241555348884633, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+  m_PrefabInstance: {fileID: 4816920504950602207}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
