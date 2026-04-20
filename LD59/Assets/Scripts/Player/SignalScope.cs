@@ -157,10 +157,6 @@ public class SignalScope : Interactable
                     fullBeepInstance.setParameterByName("ScopeVolume", signalScopeVolume);
             }
 
-            SineWaveMat.SetFloat("_Amplitude", Amplitude);
-            SineWaveMat.SetFloat("_Frequency", Frequency);
-            SineWaveMat.SetFloat("_Krangle", Krangle);
-            SineWaveMat.SetColor("_LineColor", GameManager.Get().IsDay ? new Color(1, 1, 1, 1) : new Color(0, 0, 0, 1));
 
             float ampT = Mathf.InverseLerp(MinAmplitude, MaxAmplitude, Amplitude);
             float freqT = Mathf.InverseLerp(MinFrequency, MaxFrequency, Frequency);
@@ -172,8 +168,6 @@ public class SignalScope : Interactable
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
             //KrangleDial.localRotation = Quaternion.Euler(0f, 0f, krngAngle);
 
-            // Text.text = GameManager.Get().IsDay ? $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}, Krng: {Krangle:F2}" : "";
-            Text.text = "";
 
             for (int i = 0; i < CorrectSettings.Length; i++)
             {
@@ -214,6 +208,16 @@ public class SignalScope : Interactable
             {
                 UpdateBeep(0);
             }
+        }
+
+        SineWaveMat.SetFloat("_Amplitude", Amplitude);
+        SineWaveMat.SetFloat("_Frequency", Frequency);
+        SineWaveMat.SetFloat("_Krangle", Krangle);
+        SineWaveMat.SetColor("_LineColor", GameManager.Get().IsDay ? new Color(1, 1, 1, 1) : new Color(0, 0, 0, 1));
+        Text.text = "";
+        if(!GameManager.Get().IsDay)
+        {
+            UpdateBeep(0);
         }
     }
 
@@ -272,11 +276,16 @@ public class SignalScope : Interactable
         }
         else
         {
+            if (FullBeepSound.IsPlaying())
+            {
+                FullBeepSound.Stop();
+            }
+
             if (fullBeepInstance.isValid())
             {
-                    fullBeepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    fullBeepInstance.release();
-                    fullBeepInstance = default;
+                fullBeepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                fullBeepInstance.release();
+                fullBeepInstance = default;
             }
 
             lightOn = false;
