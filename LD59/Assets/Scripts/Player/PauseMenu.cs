@@ -63,7 +63,12 @@ public class PauseMenu : MonoBehaviour
         sfxBus = FMODUnity.RuntimeManager.GetBus(SFXBusPath);
         musicBus = FMODUnity.RuntimeManager.GetBus(MusicBusPath);
         masterBus = FMODUnity.RuntimeManager.GetBus(MasterBusPath);
-        // TODO: set the sliders to the values of the busses
+        masterBus.getVolume(out float masterVol);
+        sfxBus.getVolume(out float sfxVol);
+        musicBus.getVolume(out float musicVol);
+        MasterSlider.SetValueWithoutNotify(masterVol);
+        SFXSlider.SetValueWithoutNotify(sfxVol);
+        MusicSlider.SetValueWithoutNotify(musicVol);
     }
 
     private void Update()
