@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4161792185252007361}
   - component: {fileID: 4234721213568726360}
   - component: {fileID: 7336680076097514996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmallGoldDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6640180364553908702}
   - component: {fileID: 6543079216397368266}
   - component: {fileID: 545532097239765792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7cc84583b4d669f478b06b477b0bcb9c, type: 2}
+  - {fileID: 2100000, guid: c44b777d6efa9084b9f66ef3acec8c62, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
