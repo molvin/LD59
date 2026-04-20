@@ -318,7 +318,7 @@ public class Player : MonoBehaviour
             inStartAnimation = true;
             Transform sp = GameManager.Get().Boat.StartPosition;
 
-            float duration = 0.5f;
+            float duration = 4f;
             float t = 0.0f;
             Vector3 forward = sp.transform.forward;
             forward.y = 0;
