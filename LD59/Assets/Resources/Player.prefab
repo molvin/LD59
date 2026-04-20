@@ -1424,14 +1424,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Change Amplitude: W/S
+  m_text: 'Amplitude: W/S
 
-    Change Frequency: A/D
+    Frequency: A/D
 
-    Change Modulation:
-    Q/E
+    Modulation: Q/E
 
-    Change Beep Volume: Z/X
+    Mute Volume:
+    M
 
     Open Picture Book: G
 
