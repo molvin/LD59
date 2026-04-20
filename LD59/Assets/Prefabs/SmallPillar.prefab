@@ -161,3 +161,10 @@ MonoBehaviour:
   LapsToActivate: 1
   Direction: 0
   CanRetrigger: 0
+  TriggerSound:
+    Guid:
+      Data1: -380801457
+      Data2: 1187479551
+      Data3: -887606111
+      Data4: 77034623
+    Path: event:/SecretComplete

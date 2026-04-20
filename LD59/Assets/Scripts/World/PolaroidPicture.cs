@@ -14,6 +14,11 @@ public class PolaroidPicture : Pickupable
 
     private void Start()
     {
+        UpdatePicture();
+    }
+
+    public void UpdatePicture()
+    {
         CanvasImage.sprite = Sprite.Create(Picture, new Rect(0, 0, Picture.width, Picture.height), new Vector2(0.5f, 0.5f));
         CanvasText.text = Text;
     }
@@ -26,7 +31,7 @@ public class PolaroidPicture : Pickupable
         }
         else
         {
-            GameManager.Get().Book.AddPicture(Picture);
+            GameManager.Get().Book.AddPicture(Text, Picture);
             Destroy(gameObject);
         }
     }

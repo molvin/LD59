@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public abstract class CircleAround : MonoBehaviour
@@ -13,6 +14,7 @@ public abstract class CircleAround : MonoBehaviour
     public int LapsToActivate = 3;
     public CircleDirection Direction = CircleDirection.Omnidirectional;
     public bool CanRetrigger = false;
+    public EventReference TriggerSound;
 
     private float? currentProgress;
     private Vector3 lastTrackedDirection;
@@ -65,6 +67,11 @@ public abstract class CircleAround : MonoBehaviour
 
         if (shouldTrigger)
         {
+            if (!TriggerSound.IsNull)
+            {
+                RuntimeManager.PlayOneShot(TriggerSound, transform.position);
+            }
+
             Trigger();
             if (CanRetrigger)
             {

@@ -9,17 +9,32 @@ public class Note : Pickupable
     private string title;
     private string text;
 
+    public bool InBook;
+
     private void Start()
     {
-        CanvasText.text = TextFile.text;
-        
-        title = TextFile.name;
-        text = TextFile.text;
+        if (TextFile != null)
+            UpdateText(TextFile.name, TextFile.text);
+    }
+
+    public void UpdateText(string title, string text)
+    {
+        this.title = title;
+        this.text = text;
+        CanvasText.text = this.text;
     }
 
     protected override void Drop()
     {
-        FindFirstObjectByType<PolaroidBook>().AddNote(title, text);
-        Destroy(gameObject);
+        if(!InBook)
+        {
+            FindFirstObjectByType<PolaroidBook>().AddNote(title, text);
+            Destroy(gameObject);
+        }
+        else
+        {
+            base.Drop();
+        }
+
     }
 }
