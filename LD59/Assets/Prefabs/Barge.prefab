@@ -117,10 +117,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: 5c5a6bad9fd12fd42ae67b6642517463, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e2c9add935ca424c8cb9e5c52e151df, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 5c5a6bad9fd12fd42ae67b6642517463, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a330031fb6d835d4c82d0953b1f72479, type: 2}
     - target: {fileID: 919132149155446097, guid: 5c5a6bad9fd12fd42ae67b6642517463, type: 3}
       propertyPath: m_Name
       value: Barge
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 5c5a6bad9fd12fd42ae67b6642517463, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d9fd47cbe01d442479326b58f1a86669, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

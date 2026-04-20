@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TentCloth
-  m_Shader: {fileID: -6465566751694194690, guid: c98d0d148b971b74a9b76ad394337f7a, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: eb13b2e03ca95984aabba96dbe802e27, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
