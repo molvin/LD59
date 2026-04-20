@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 2218797788208538341}
   - component: {fileID: 6495222448759007846}
   - component: {fileID: 2587533175412477348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.11666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 8f241113fa7b7f341b2682500e765d3d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 98847dae8efab0640bf8a00161e42bf8, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5239892855776109827
 GameObject:
@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 2397954913825897773}
   - component: {fileID: 3191159861920454516}
   m_Layer: 8
-  m_Name: Cube (3)
+  m_Name: NavemeshBrige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
