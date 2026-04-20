@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NightSkybox
-  m_Shader: {fileID: 4800000, guid: d578dd4dad730f64ca92db755e67007b, type: 3}
+  m_Name: Plaque_Singal_moon
+  m_Shader: {fileID: -6465566751694194690, guid: eb13b2e03ca95984aabba96dbe802e27, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -20,7 +20,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _RandomSignAmount
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -30,10 +30,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CloudNoise:
-        m_Texture: {fileID: 2800000, guid: 719c36907cc1c8a4aa70f44f5dc420ad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -52,16 +48,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Main:
+        m_Texture: {fileID: 2800000, guid: 80aeee3fcea9a554295f23e2664c07d4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetalicSmooth:
+        m_Texture: {fileID: 2800000, guid: 2fc1e341ed8d611478e22d1b49024790, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MoonTex:
-        m_Texture: {fileID: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 00f61c35c0f06774cae3b6ad194709f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -72,55 +76,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _RandomSign0Tex:
-        m_Texture: {fileID: 2800000, guid: 2f5eb81abb60f0e4b97ccf93f5a7d47d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _RandomSign1Tex:
-        m_Texture: {fileID: 2800000, guid: 378349059ca97ee499555a885e80da03, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _RandomSign2Tex:
-        m_Texture: {fileID: 2800000, guid: 56d963b38452806409df32cddb9bd81f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _StarSign0Tex:
-        m_Texture: {fileID: 2800000, guid: 348d2265b48c67342a4db2a7062813fa, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _StarSign1Tex:
-        m_Texture: {fileID: 2800000, guid: 27533226416c4f549b9bec9c024100f7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _StarSign2Tex:
-        m_Texture: {fileID: 2800000, guid: a4edfa5854cdec34b98b1c55f0562bdd, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _StarSign3Tex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Tex:
-        m_Texture: {fileID: 2800000, guid: a7e06068a7215854a84bf5ed8280ed15, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Tex0:
-        m_Texture: {fileID: 2800000, guid: 348d2265b48c67342a4db2a7062813fa, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Tex1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Tex2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Tex3:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -146,17 +102,6 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _CloudContrast: 0.3
-    - _CloudCoverage: 0.4
-    - _CloudDensity: 0.2
-    - _CloudDetailScale: 1.77
-    - _CloudDetailStrength: 0.34
-    - _CloudHorizonFade: 0.3
-    - _CloudPixels: 1024
-    - _CloudScale: 0.03
-    - _CloudScrollSpeed: 0.015
-    - _CloudScrollSpeedFactor: 0.0012
-    - _CloudThreshold: 0.23
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -167,67 +112,29 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HazeFalloff: 9.12
-    - _HazePixels: 102.63
-    - _HazeStrength: 0.5
-    - _HorizonOffset: 0.09426001
     - _Metallic: 0
-    - _MoonSize: 5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
-    - _RandomSignAmount: 10.6
-    - _RandomSignDensity: 0.002
-    - _RandomSignMaxHeight: 0
-    - _RandomSignMinHeight: 0.367
-    - _RandomSignSize: 3.58
     - _ReceiveShadows: 1
-    - _Size: 0.3
-    - _Size0: 0.3
-    - _Size1: 0.3
-    - _Size2: 0.3
-    - _Size3: 0.3
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StarDensity: 0.061
-    - _StarMaxSize: 0.106
-    - _StarMinSize: 0.022
-    - _StarPixelation: 50
-    - _StarSign0Size: 5
-    - _StarSign1Size: 5
-    - _StarSign2Size: 5
-    - _StarSignSize: 5
-    - _StarSize: 1
-    - _SunBloom: 0.4
-    - _SunPixels: 63
-    - _SunSize: 0.02
     - _Surface: 0
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CloudColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CloudScrollDir: {r: 113.12, g: 0.4, b: 0, a: 0}
-    - _CloudScrollSpeed: {r: 0.5, g: 0.2, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Dir: {r: 0, g: 1, b: 0, a: 0}
-    - _Dir0: {r: 1, g: 1.72, b: 1, a: 0}
-    - _Dir1: {r: 0, g: 1, b: 0, a: 0}
-    - _Dir2: {r: 0, g: 1, b: 0, a: 0}
-    - _Dir3: {r: 0, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HazeColor: {r: 0.80817604, g: 0.904088, b: 1, a: 1}
-    - _SkyColor: {r: 0, g: 0.07619739, b: 0.17610055, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _StarColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SunColor: {r: 1, g: 0.89339006, b: 0.58176094, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3749220855362538889
+--- !u!114 &1103851804685888961
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
