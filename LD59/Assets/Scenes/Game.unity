@@ -248,6 +248,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6390631091449101333, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
   m_PrefabInstance: {fileID: 1473347673}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &593043345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8373393109625644761, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+  m_PrefabInstance: {fileID: 1473347673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &682181502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -607,6 +612,16 @@ Transform:
 --- !u!1 &1206599300 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1904222054448428391, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
+  m_PrefabInstance: {fileID: 1206599298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1211129200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4286116829229425603, guid: 3c822225174e14b49b787cae4aae5c88, type: 3}
+  m_PrefabInstance: {fileID: 682181502}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1293759549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3974229788498165041, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
   m_PrefabInstance: {fileID: 1206599298}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1359460728
@@ -1256,28 +1271,45 @@ PrefabInstance:
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: moon.Target
       value: 
-      objectReference: {fileID: 1473347674}
+      objectReference: {fileID: 593043345}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: polaroidSunTarget
       value: 
       objectReference: {fileID: 1110547219}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: starSigns.Array.data[0].Height
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: starSigns.Array.data[0].Target
       value: 
-      objectReference: {fileID: 682181503}
+      objectReference: {fileID: 1211129200}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: starSigns.Array.data[1].Height
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: starSigns.Array.data[1].Target
       value: 
-      objectReference: {fileID: 1206599299}
+      objectReference: {fileID: 1293759549}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: starSigns.Array.data[2].Height
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: starSigns.Array.data[2].Target
       value: 
-      objectReference: {fileID: 768141148}
+      objectReference: {fileID: 2086194131}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+--- !u!4 &2086194131 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7897647737311773805, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
+  m_PrefabInstance: {fileID: 768141147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4094069089853794204
 PrefabInstance:
   m_ObjectHideFlags: 0

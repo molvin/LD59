@@ -104,6 +104,7 @@ public class SkyboxController : MonoBehaviour
     private Vector3 GetSkyboxDir(Vector3 targetPos, float height)
     {
         Player player = GameManager.Get().Player;
+        targetPos.y = player.transform.position.y;
         Vector3 planarDirToTarget = (targetPos - player.transform.position).normalized;
         planarDirToTarget.y = 0.0f;
 
@@ -182,12 +183,16 @@ public class SkyboxController : MonoBehaviour
             circledPillars = x;
             nightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Phases[circledPillars]);
 
-            if(circledPillars > 0)
-                nightTimeSkyboxMaterial.SetFloat("_StarSign0Size", 0);
-            if(circledPillars > 1)
-                nightTimeSkyboxMaterial.SetFloat("_StarSign1Size", 0);
-            if(circledPillars > 2)
-                nightTimeSkyboxMaterial.SetFloat("_StarSign2Size", 0);
+            foreach(int idx in GameManager.Get().happyPillars)
+            {
+                if (idx == 0)
+                    nightTimeSkyboxMaterial.SetFloat("_StarSign0Size", 0);
+                if (idx == 1)
+                    nightTimeSkyboxMaterial.SetFloat("_StarSign1Size", 0);
+                if (idx == 2)
+                    nightTimeSkyboxMaterial.SetFloat("_StarSign2Size", 0);
+            }
+
 
             // TODO: when all pillars have been circled, slowly move the moon into position
             if (circledPillars == 3)
