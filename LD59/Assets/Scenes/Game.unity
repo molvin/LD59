@@ -1028,6 +1028,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1110547219}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: moon.Phases.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: 'moon.Phases.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: 'moon.Phases.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 56d963b38452806409df32cddb9bd81f, type: 3}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: 'moon.Phases.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 378349059ca97ee499555a885e80da03, type: 3}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: 'moon.Phases.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 2f5eb81abb60f0e4b97ccf93f5a7d47d, type: 3}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: starSigns.Array.data[0].Target
       value: 
       objectReference: {fileID: 682181503}
@@ -1052,6 +1072,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1664418903}
     m_Modifications:
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Path
+      value: event:/NightSwitch
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data1
+      value: 1429752349
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data2
+      value: 1293146704
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data3
+      value: -1212383049
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data4
+      value: -994994016
+      objectReference: {fileID: 0}
     - target: {fileID: 4761241555348884633, guid: 9649532d8b7152e4295eace03a153267, type: 3}
       propertyPath: m_Name
       value: Obelisk
