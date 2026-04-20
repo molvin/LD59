@@ -51,11 +51,12 @@ MonoBehaviour:
   CanRetrigger: 0
   TriggerSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -380801457
+      Data2: 1187479551
+      Data3: -887606111
+      Data4: 77034623
+    Path: event:/SecretComplete
+  Index: 0
 --- !u!1001 &3610055941700451129
 PrefabInstance:
   m_ObjectHideFlags: 0
