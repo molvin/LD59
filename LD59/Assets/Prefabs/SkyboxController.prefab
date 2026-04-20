@@ -191,32 +191,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkyboxController
   dayTimeSkyboxMaterial: {fileID: 2100000, guid: 4c778a3f029f2d84eb4b5ca2db92d1e3, type: 2}
   nightTimeSkyboxMaterial: {fileID: 2100000, guid: 06767c99e5820974baa9edf0d80c266b, type: 2}
-  polaroidNightTimeSkyboxMaterial: {fileID: 2100000, guid: 7583c74a811a0d84f9319065fccea70c, type: 2}
   polaroidSun: {fileID: 7256545607312363497}
   daySun: {fileID: 1963123296919938793}
   nightSun: {fileID: 2176900016723989936}
   polaroidSunTarget: {fileID: 0}
   polaroidSunHeight: 35
   starSigns:
-  - Texture: {fileID: 2800000, guid: 348d2265b48c67342a4db2a7062813fa, type: 3}
+  - Texture: {fileID: 2800000, guid: 90487f8fbbba8a041a3a593f4e65da57, type: 3}
     Height: 36
-    Size: 5
+    Size: 8
     Target: {fileID: 0}
-  - Texture: {fileID: 2800000, guid: 27533226416c4f549b9bec9c024100f7, type: 3}
+  - Texture: {fileID: 2800000, guid: aeb126294763d8a4689cb877a5ddac1a, type: 3}
     Height: 25
-    Size: 5
+    Size: 8
     Target: {fileID: 0}
-  - Texture: {fileID: 2800000, guid: a4edfa5854cdec34b98b1c55f0562bdd, type: 3}
+  - Texture: {fileID: 2800000, guid: 14663153f8e22b24b8a02496f354d224, type: 3}
     Height: 42
-    Size: 5
+    Size: 8
     Target: {fileID: 0}
   moon:
     Phases:
-    - {fileID: 0}
+    - {fileID: 2800000, guid: cba76d53261052341b6804b5310e8e65, type: 3}
     - {fileID: 2800000, guid: 56d963b38452806409df32cddb9bd81f, type: 3}
     - {fileID: 2800000, guid: 378349059ca97ee499555a885e80da03, type: 3}
     - {fileID: 2800000, guid: 2f5eb81abb60f0e4b97ccf93f5a7d47d, type: 3}
-    Height: 50
+    Height: 25
     Size: 5
     Target: {fileID: 0}
   PlayerMinHeight: 0

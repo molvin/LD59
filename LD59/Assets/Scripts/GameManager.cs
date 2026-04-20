@@ -22,7 +22,7 @@ public class GameManager : Subsystem<GameManager>
 
     private Vector3 startPosition = new(0, 0.5f, 0);
     private Quaternion startRotation = Quaternion.identity;
-    private List<GameObject> happyPillars = new();
+    public List<GameObject> happyPillars = new();
     private List<DayNightBound> timeBound = new();
 
     public int HappyPillarCount => happyPillars.Count;

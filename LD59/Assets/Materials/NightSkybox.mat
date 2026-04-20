@@ -177,10 +177,10 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _RandomSignAmount: 10.6
-    - _RandomSignDensity: 0.002
+    - _RandomSignDensity: 0
     - _RandomSignMaxHeight: 0
-    - _RandomSignMinHeight: 0.367
-    - _RandomSignSize: 3.58
+    - _RandomSignMinHeight: 0
+    - _RandomSignSize: 0
     - _ReceiveShadows: 1
     - _Size: 0.3
     - _Size0: 0.3

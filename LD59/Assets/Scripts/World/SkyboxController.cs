@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.LightAnchor;
 
@@ -25,7 +26,6 @@ public class SkyboxController : MonoBehaviour
 
     [SerializeField] private Material dayTimeSkyboxMaterial;
     [SerializeField] private Material nightTimeSkyboxMaterial;
-    [SerializeField] private Material polaroidNightTimeSkyboxMaterial;
     [SerializeField] private Light polaroidSun;
     [SerializeField] private Light daySun;
     [SerializeField] private Light nightSun;
@@ -34,6 +34,7 @@ public class SkyboxController : MonoBehaviour
 
     [SerializeField] private StarSign[] starSigns;
     [SerializeField] private Moon moon;
+    [SerializeField] private float MoonMoveDuration = 8.0f;
 
     [Header("Horizon")]
     [SerializeField] private float PlayerMinHeight = 0.0f;
@@ -42,19 +43,20 @@ public class SkyboxController : MonoBehaviour
     [SerializeField] private float MaxHorizonOffset = 0.27f;
 
     private int circledPillars = 0;
+    private Vector3 moonDir = Vector3.up;
 
     private void Start()
     {
         dayTimeSkyboxMaterial = new Material(dayTimeSkyboxMaterial);
-        polaroidNightTimeSkyboxMaterial = new Material(polaroidNightTimeSkyboxMaterial);
         nightTimeSkyboxMaterial = new Material(nightTimeSkyboxMaterial);
 
         for (int i = 0; i < starSigns.Length; i++)
         {
-            polaroidNightTimeSkyboxMaterial.SetTexture("_StarSign" + i + "Tex", starSigns[i].Texture);
+            nightTimeSkyboxMaterial.SetTexture("_StarSign" + i + "Tex", starSigns[i].Texture);
         }
-        polaroidNightTimeSkyboxMaterial.SetTexture("_MoonTex", null);
+        nightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Phases[0]);
         UpdateSkybox();
+        UpdateStarSigns(true);
     }
 
     [ContextMenu("Update Skybox")]
@@ -73,10 +75,15 @@ public class SkyboxController : MonoBehaviour
             GameManager gm = GameManager.Get();
             gm.ToggleDayNight();
         }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Get().happyPillars.Add(new GameObject());
+        }
 
         UpdateSkybox();
         UpdatePolaroidSunPosition();
-        UpdateStarSigns();
+        UpdateNightSunPosition();
+        UpdateStarSigns(false);
         UpdateHorizonDropoff();
         UpdateMoonPhase();
     }
@@ -96,23 +103,25 @@ public class SkyboxController : MonoBehaviour
         polaroidSun.transform.forward = -GetSkyboxDir(polaroidSunTarget.position, polaroidSunHeight);
     }
 
-    private void UpdateStarSigns()
+    private void UpdateStarSigns(bool updateSize)
     {
         Player player = GameManager.Get().Player;
         for (int i = 0; i < starSigns.Length; i++)
         {
             StarSign sign = starSigns[i];
             string name = $"_StarSign{i}";
-            polaroidNightTimeSkyboxMaterial.SetVector(name + "Dir", GetSkyboxDir(sign.Target.position, sign.Height));
-            polaroidNightTimeSkyboxMaterial.SetFloat(name + "Size", sign.Size);
+            nightTimeSkyboxMaterial.SetVector(name + "Dir", GetSkyboxDir(sign.Target.position, sign.Height));
+            if(updateSize)
+                nightTimeSkyboxMaterial.SetFloat(name + "Size", sign.Size);
         }
 
-        polaroidNightTimeSkyboxMaterial.SetVector("_MoonDir", GetSkyboxDir(moon.Target.position, moon.Height));
-        polaroidNightTimeSkyboxMaterial.SetFloat("_MoonSize", moon.Size);
+        nightTimeSkyboxMaterial.SetVector("_MoonDir", moonDir);
+        nightTimeSkyboxMaterial.SetFloat("_MoonSize", moon.Size);
     }
 
     public void TakePicture()
     {
+        /*
         if(!GameManager.Get().IsDay)
         {
             RenderSettings.skybox = polaroidNightTimeSkyboxMaterial;
@@ -121,10 +130,12 @@ public class SkyboxController : MonoBehaviour
         {
             RenderSettings.skybox = dayTimeSkyboxMaterial;
         }
+        */
     }
 
     public void EndPicture()
     {
+        /*
         if(!GameManager.Get().IsDay)
         {
             RenderSettings.skybox = nightTimeSkyboxMaterial;
@@ -133,6 +144,7 @@ public class SkyboxController : MonoBehaviour
         {
             RenderSettings.skybox = dayTimeSkyboxMaterial;
         }
+        */
     }
 
     private void UpdateHorizonDropoff()
@@ -142,7 +154,11 @@ public class SkyboxController : MonoBehaviour
         float horizonOffset = Mathf.Lerp(MinHorizonOffset, MaxHorizonOffset, t);
         dayTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
         nightTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
-        polaroidNightTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
+    }
+
+    private void UpdateNightSunPosition()
+    {
+        nightSun.transform.forward = -moonDir;
     }
 
     private void UpdateMoonPhase()
@@ -151,7 +167,33 @@ public class SkyboxController : MonoBehaviour
         if (x != circledPillars)
         {
             circledPillars = x;
-            polaroidNightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Phases[circledPillars]);
+            nightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Phases[circledPillars]);
+
+            if(circledPillars > 0)
+                nightTimeSkyboxMaterial.SetFloat("_StarSign0Size", 0);
+            if(circledPillars > 1)
+                nightTimeSkyboxMaterial.SetFloat("_StarSign1Size", 0);
+            if(circledPillars > 2)
+                nightTimeSkyboxMaterial.SetFloat("_StarSign2Size", 0);
+
+            // TODO: when all pillars have been circled, slowly move the moon into position
+            if (circledPillars == 3)
+            {
+                StartCoroutine(MoveMoon());
+            }
+        }
+    }
+    private IEnumerator MoveMoon()
+    {
+        Vector3 currentDir = moonDir;
+        Vector3 targetDir = GetSkyboxDir(moon.Target.position, moon.Height);
+
+        float t = 0;
+        while (t <= MoonMoveDuration)
+        {
+            t += Time.deltaTime;
+            moonDir = Vector3.Lerp(currentDir, targetDir, t / MoonMoveDuration);
+            yield return null;
         }
     }
 }
