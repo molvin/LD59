@@ -1703,7 +1703,7 @@ MonoBehaviour:
       Data4: 1868899165
     Path: event:/Footstep
   FootstepSounds:
-  - name: DEBUG_Brown
+  - name: DEBUG_Brown (Instance)
     sound: 1
   - name: Dirt
     sound: 0
@@ -1713,7 +1713,7 @@ MonoBehaviour:
     sound: 2
   - name: Tiles
     sound: 0
-  FootstepStride: 0.7
+  FootstepStride: 0.9
   MovementEnabled: 1
   HoldingPickup: 0
 --- !u!1 &1884726478380355942
