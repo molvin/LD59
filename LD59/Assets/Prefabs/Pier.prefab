@@ -41,20 +41,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 5883022307501881914}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -62,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -74,16 +86,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4861754447549045607, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
     - target: {fileID: 919132149155446097, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
       propertyPath: m_Name
       value: Jetty
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550463727306718371, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325183608568942523, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740984516714099051, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246759607503262811, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
+    - target: {fileID: 8247994413960396516, guid: b963fd1db98bb4d45a9e99d37d95f05b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

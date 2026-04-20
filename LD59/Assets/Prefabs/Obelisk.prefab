@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1085587507408131809
+--- !u!1 &4761241555348884633
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7701197711211888571}
-  - component: {fileID: 4878077092325130099}
-  - component: {fileID: 1405990854315919016}
-  - component: {fileID: 1145272855161344655}
-  - component: {fileID: 3588393296369177695}
+  - component: {fileID: 7469676225600843032}
+  - component: {fileID: 2759024076031055699}
+  - component: {fileID: 5864109976827085165}
+  - component: {fileID: 3028691659303577433}
+  - component: {fileID: 3116824446977868414}
   m_Layer: 8
-  m_Name: Crate
+  m_Name: Obelisk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7701197711211888571
+--- !u!4 &7469676225600843032
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085587507408131809}
+  m_GameObject: {fileID: 4761241555348884633}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 102.72319, y: 10.7774, z: 42.13472}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: -10.3}
+  m_LocalScale: {x: 5, y: 60, z: 5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4878077092325130099
+--- !u!33 &2759024076031055699
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085587507408131809}
+  m_GameObject: {fileID: 4761241555348884633}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1405990854315919016
+--- !u!23 &5864109976827085165
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085587507408131809}
+  m_GameObject: {fileID: 4761241555348884633}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
+  - {fileID: 2100000, guid: 3e43da4d6f179774fa7ff93aff432988, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,13 +92,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1145272855161344655
+--- !u!65 &3028691659303577433
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085587507408131809}
+  m_GameObject: {fileID: 4761241555348884633}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -113,17 +113,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3588393296369177695
+--- !u!114 &3116824446977868414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085587507408131809}
+  m_GameObject: {fileID: 4761241555348884633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e55a63df6038974f9d2764fa7b49402, type: 3}
+  m_Script: {fileID: 11500000, guid: c8319ee70dece524587bc2eb82f68a8b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PolaroidControlled
-  ShowInPhoto: 0
-  IgnoreIfNightTime: 0
+  m_EditorClassIdentifier: Assembly-CSharp::CircleToNight
+  MaxDistance: 50
+  LapsToActivate: 3
+  Direction: 0
+  CanRetrigger: 1
+  TriggerSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

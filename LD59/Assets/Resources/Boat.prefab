@@ -1177,6 +1177,10 @@ PrefabInstance:
       value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: VolumeChangeSpeed
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: FullBeepSound.Path
       value: event:/RadioBeeps/FullRadioBeep
       objectReference: {fileID: 0}
@@ -1318,6 +1322,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.449
       objectReference: {fileID: 0}
+    - target: {fileID: 4907989187588639028, guid: e472f0a66d062c84892a0984e2070252, type: 3}
+      propertyPath: Picture
+      value: 
+      objectReference: {fileID: 2800000, guid: f12b088e373c2c24b948acc3493341f2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
