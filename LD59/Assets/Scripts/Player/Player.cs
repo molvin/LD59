@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     public float MoveDeceleration = 0.03f;
     public EventReference Footstep;
     public List<FootSound> FootstepSounds;
-    public float FootstepsMetersPerSecond = 1.8f;
-    private float lastFootstep;
+    public float FootstepStride = 0.8f;
+    private float distanceTraveledSinceLastFootstep;
 
     [HideInInspector] public bool MovementEnabled = true;
     [HideInInspector] public bool HoldingPickup = false;
@@ -179,26 +179,6 @@ public class Player : MonoBehaviour
                 }
 
                 transform.position = hit.position;
-
-                if (Time.time - lastFootstep > FootstepsMetersPerSecond / velocity.magnitude)
-                {
-                    lastFootstep = Time.time;
-
-                    int terrainSound = 0;
-                    if (FootstepSounds.Any(foot => foot.name.Equals(textureName)))
-                    {
-                        terrainSound = FootstepSounds.Find(foot => foot.name.Equals(textureName)).sound;
-                    }
-
-                    if (!Footstep.IsNull)
-                    {
-                        EventInstance step = RuntimeManager.CreateInstance(Footstep);
-                        step.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
-                        step.setParameterByName("Terrain", terrainSound);
-                        step.start();
-                        step.release();
-                    }
-                }
             }
             else
             {
@@ -210,7 +190,29 @@ public class Player : MonoBehaviour
             velocity = Vector3.zero;
         }
 
+        Vector3 lastOffset = localSpaceOffset;
         localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
+
+        distanceTraveledSinceLastFootstep += Vector3.Distance(lastOffset, localSpaceOffset);
+        if (distanceTraveledSinceLastFootstep > FootstepStride)
+        {
+            distanceTraveledSinceLastFootstep = 0;
+
+            int terrainSound = 0;
+            if (FootstepSounds.Any(foot => foot.name.Equals(textureName)))
+            {
+                terrainSound = FootstepSounds.Find(foot => foot.name.Equals(textureName)).sound;
+            }
+
+            if (!Footstep.IsNull)
+            {
+                EventInstance step = RuntimeManager.CreateInstance(Footstep);
+                step.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+                step.setParameterByName("Terrain", terrainSound);
+                step.start();
+                step.release();
+            }
+        }
 
         if (isSteering)
         {
