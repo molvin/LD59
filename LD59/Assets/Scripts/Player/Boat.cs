@@ -54,7 +54,7 @@ public class Boat : MonoBehaviour
     private bool isSteering = false;
     private bool isThrottling = false;
     private RayCollisionSettings rayCollisionSettings;
-
+    public Transform StartPosition;
     public Vector3 DeltaVelocity => deltaVelocity;
     public float DeltaRotation => deltaRotation;
 
