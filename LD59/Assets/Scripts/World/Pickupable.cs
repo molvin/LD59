@@ -4,6 +4,7 @@ public class Pickupable : Interactable
 {
     public float HoldDistance = 1.5f;
     public float RotateSpeed = 90f;
+    public bool Interactable = true;
 
     private bool holding;
     private Player player;
@@ -21,6 +22,9 @@ public class Pickupable : Interactable
 
     protected override void Interact(Transform interactorTransform)
     {
+        if (!Interactable)
+            return;
+
         cam = Camera.main;
         player = FindFirstObjectByType<Player>();
         player.MovementEnabled = false;
