@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.K) && Time.time - lastTimeStandingOnBoat > 120.0f)
         {
-            Unstuck();
+            // Unstuck();
         }
 
         standingOn = GroundType.None;

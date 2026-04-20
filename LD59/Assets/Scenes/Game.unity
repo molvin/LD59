@@ -1707,6 +1707,10 @@ PrefabInstance:
       value: SkyboxController
       objectReference: {fileID: 0}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: moon.Size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: moon.Height
       value: 22
       objectReference: {fileID: 0}
