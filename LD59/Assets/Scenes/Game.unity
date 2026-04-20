@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6778e4015b299ea4a9ba06df1ff30654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  happyPillars: 
 --- !u!4 &415542040
 Transform:
   m_ObjectHideFlags: 1
@@ -242,6 +243,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &593043344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6390631091449101333, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+  m_PrefabInstance: {fileID: 1473347673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &682181502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,6 +331,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1664418903}
     m_Modifications:
+    - target: {fileID: 2132859295898246780, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
+      propertyPath: Index
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4044880996539317603, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
       propertyPath: m_LocalPosition.x
       value: -307
@@ -494,6 +504,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PillarIsland
       objectReference: {fileID: 0}
+    - target: {fileID: 5126266338048747296, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
+      propertyPath: Index
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8923805644806853366, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 357
@@ -577,6 +591,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 60.261
       objectReference: {fileID: 0}
+    - target: {fileID: 1714907235204276587, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: GoldenDoorObject
+      value: 
+      objectReference: {fileID: 593043344}
     - target: {fileID: 3203828012559319891, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -689,6 +707,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.867
       objectReference: {fileID: 0}
+    - target: {fileID: 6390631091449101333, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6420329743810844126, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.05
@@ -732,6 +754,10 @@ PrefabInstance:
     - target: {fileID: 7610105495335124078, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.506
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756112239644730619, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7952600594985736324, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_Name
@@ -1020,6 +1046,10 @@ PrefabInstance:
       value: SkyboxController
       objectReference: {fileID: 0}
     - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
+      propertyPath: moon.Height
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748887933329802295, guid: af1213c79342e7a4f808bdb321ac12a1, type: 3}
       propertyPath: moon.Target
       value: 
       objectReference: {fileID: 1473347674}
@@ -1052,6 +1082,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1664418903}
     m_Modifications:
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Path
+      value: event:/NightSwitch
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data1
+      value: 1429752349
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data2
+      value: 1293146704
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data3
+      value: -1212383049
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116824446977868414, guid: 9649532d8b7152e4295eace03a153267, type: 3}
+      propertyPath: TriggerSound.Guid.Data4
+      value: -994994016
+      objectReference: {fileID: 0}
     - target: {fileID: 4761241555348884633, guid: 9649532d8b7152e4295eace03a153267, type: 3}
       propertyPath: m_Name
       value: Obelisk

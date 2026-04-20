@@ -31,7 +31,7 @@ public class PolaroidBook : MonoBehaviour
         Open(false);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (Enabled && !IsOpen && Input.GetKeyDown(KeyCode.G))
         {
@@ -49,21 +49,33 @@ public class PolaroidBook : MonoBehaviour
                 {
                     if (hit.collider.gameObject == p.gameObject)
                     {
-                        p.Interact(transform);
-                        IsInteracting = true;
+                        if(GameManager.Get().SignalScope.Enabled)
+                        {
+                            GameManager.Get().SignalScope.PinPolaroid(p.Picture);
+                            Open(false);                            
+                        }
+                        else
+                        {
+                            p.Interact(transform);
+                            IsInteracting = true;
+                        }
                         break;
                     }
                 }
 
-                foreach(var n in notes)
+                if(!GameManager.Get().SignalScope.Enabled)
                 {
-                    if (hit.collider.gameObject == n.gameObject)
+                    foreach(var n in notes)
                     {
-                        n.Interact(transform);
-                        IsInteracting = true;
-                        break;
+                        if (hit.collider.gameObject == n.gameObject)
+                        {
+                            n.Interact(transform);
+                            IsInteracting = true;
+                            break;
+                        }
                     }
                 }
+                
             }
 
             if(!IsInteracting && Input.GetMouseButtonDown(1))
@@ -89,18 +101,18 @@ public class PolaroidBook : MonoBehaviour
     {
         IsOpen = open;
         Root.SetActive(open);
-        player.MovementEnabled = !open;
+        player.MovementEnabled = !open && !GameManager.Get().SignalScope.Enabled;
         Cursor.lockState = open ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = open;
 
         foreach(var p in pictures)
         {
-            p.Interactable = open;
+            p.CanBeInteractedWith = open;
         }
 
         foreach(var n in notes)
         {
-            n.Interactable = open;
+            n.CanBeInteractedWith = open;
         }
 
         if(open)
@@ -142,14 +154,14 @@ public class PolaroidBook : MonoBehaviour
             {
                 (string text, Texture2D texture) = polaroids[idx];
                 picture.gameObject.SetActive(true);
-                picture.Interactable = true;
+                picture.CanBeInteractedWith = true;
                 picture.Text = text;
                 picture.Picture = texture;
                 picture.UpdatePicture();
             }
             else
             {
-                picture.Interactable = false;
+                picture.CanBeInteractedWith = false;
                 picture.gameObject.SetActive(false);
             }
         }
