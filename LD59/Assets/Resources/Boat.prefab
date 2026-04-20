@@ -1210,6 +1210,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: MaxModulDialAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: MinModulDialAngle
+      value: -30
+      objectReference: {fileID: 0}
     - target: {fileID: 3270022694665281837, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1229,6 +1237,18 @@ PrefabInstance:
     - target: {fileID: 5826484626918431737, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119292922259952321, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 772ddb4060d627b47aa6f3adccc1205a, type: 2}
+    - target: {fileID: 8119292922259952321, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7591900335892879352, guid: 772ddb4060d627b47aa6f3adccc1205a, type: 2}
+    - target: {fileID: 8119292922259952321, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_Name
