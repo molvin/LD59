@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6778e4015b299ea4a9ba06df1ff30654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  happyPillars: []
+  happyPillars: 
 --- !u!4 &415542040
 Transform:
   m_ObjectHideFlags: 1
@@ -331,6 +331,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1664418903}
     m_Modifications:
+    - target: {fileID: 2132859295898246780, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
+      propertyPath: Index
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4044880996539317603, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
       propertyPath: m_LocalPosition.x
       value: -307
@@ -499,6 +503,10 @@ PrefabInstance:
     - target: {fileID: 1904222054448428391, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
       propertyPath: m_Name
       value: PillarIsland
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126266338048747296, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
+      propertyPath: Index
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8923805644806853366, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
       propertyPath: m_LocalPosition.x

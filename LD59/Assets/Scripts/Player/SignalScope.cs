@@ -63,9 +63,9 @@ public class SignalScope : Interactable
     private Vector3 camOriginalLocalPos;
     private Quaternion camOriginalLocalRot;
     private PolaroidCamera polaroidCamera;
-    private PolaroidBook polaroidBook;
 
     public PolaroidPicture PinnedPolaroid;
+    public GameObject Tutorial;
 
     private Texture2D pinnedPicture = null;
 
@@ -84,12 +84,6 @@ public class SignalScope : Interactable
         polaroidCamera = FindFirstObjectByType<PolaroidCamera>();
         if (polaroidCamera != null) polaroidCamera.Enabled = false;
 
-        polaroidBook = FindFirstObjectByType<PolaroidBook>();
-        if (polaroidBook != null)
-        {
-            polaroidBook.Open(false);
-            polaroidBook.Enabled = false;
-        }
         player = FindFirstObjectByType<Player>();
         player.MovementEnabled = false;
         Enabled = true;
@@ -108,45 +102,17 @@ public class SignalScope : Interactable
 
     private void Update()
     {
-        CanBeInteractedWith = GameManager.Get().IsDay;
-
-        if(!CanBeInteractedWith)
-        {
-            Amplitude = Frequency = Krangle = 0;
-
-
-            if (Enabled)
-            {
-                Enabled = false;
-                cam.transform.SetParent(camOriginalParent);
-                cam.transform.SetLocalPositionAndRotation(camOriginalLocalPos, camOriginalLocalRot);
-                player.MovementEnabled = true;
-                if (polaroidCamera != null) polaroidCamera.Enabled = true;
-                if (polaroidBook != null) polaroidBook.Enabled = true;
-            }
-            UpdateBeep(0);
-
-            SineWaveMat.SetFloat("_Amplitude", Amplitude);
-            SineWaveMat.SetFloat("_Frequency", Frequency);
-            SineWaveMat.SetFloat("_Krangle", Krangle);
-            Text.text = "";
-
-            return;
-        }
-
-
         if(Enabled)
         {
             cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !GameManager.Get().Book.IsOpen)
             {
                 Enabled = false;
                 cam.transform.SetParent(camOriginalParent);
                 cam.transform.SetLocalPositionAndRotation(camOriginalLocalPos, camOriginalLocalRot);
                 player.MovementEnabled = true;
                 if (polaroidCamera != null) polaroidCamera.Enabled = true;
-                if (polaroidBook != null) polaroidBook.Enabled = true;
                 return;
             }
 
@@ -194,6 +160,7 @@ public class SignalScope : Interactable
             SineWaveMat.SetFloat("_Amplitude", Amplitude);
             SineWaveMat.SetFloat("_Frequency", Frequency);
             SineWaveMat.SetFloat("_Krangle", Krangle);
+            SineWaveMat.SetColor("_LineColor", GameManager.Get().IsDay ? new Color(1, 1, 1, 1) : new Color(0, 0, 0, 1));
 
             float ampT = Mathf.InverseLerp(MinAmplitude, MaxAmplitude, Amplitude);
             float freqT = Mathf.InverseLerp(MinFrequency, MaxFrequency, Frequency);
@@ -205,7 +172,8 @@ public class SignalScope : Interactable
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
             //KrangleDial.localRotation = Quaternion.Euler(0f, 0f, krngAngle);
 
-            Text.text = $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}, Krng: {Krangle:F2}";
+            // Text.text = GameManager.Get().IsDay ? $"Amp: {Amplitude:F2}, Freq: {Frequency:F2}, Krng: {Krangle:F2}" : "";
+            Text.text = "";
 
             for (int i = 0; i < CorrectSettings.Length; i++)
             {
@@ -240,7 +208,7 @@ public class SignalScope : Interactable
                 float innerProduct = Vector3.Dot(toDestination2D, new Vector3(origin.forward.x, 0, origin.forward.z).normalized);
 
                 float t = (innerProduct + 1.0f) / 2.0f + 0.01f;
-                UpdateBeep(t);
+                UpdateBeep(GameManager.Get().IsDay ? t : 0);
             }
             else
             {
@@ -325,6 +293,7 @@ public class SignalScope : Interactable
         PinnedPolaroid.Picture = pic;
         PinnedPolaroid.Text = "";
         PinnedPolaroid.UpdatePicture();
+        Tutorial.SetActive(false);
     }
 
 }

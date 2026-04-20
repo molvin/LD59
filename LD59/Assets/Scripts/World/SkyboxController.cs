@@ -77,7 +77,7 @@ public class SkyboxController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.L))
         {
-            GameManager.Get().happyPillars.Add(new GameObject());
+            GameManager.Get().happyPillars.Add(GameManager.Get().HappyPillarCount);
         }
 
         UpdateSkybox();
