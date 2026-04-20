@@ -25,7 +25,7 @@ public class Controls : MonoBehaviour
 
         BoatingControls.SetActive(gm.Player.isSteering);
         PolaroidControls.SetActive(gm.PolaroidCamera.TakingPicture);
-        PictureBookControls.SetActive(gm.Book.IsOpen);
+        PictureBookControls.SetActive(gm.Book.IsOpen && !gm.Player.HoldingPickup);
         PickupControls.SetActive(gm.Player.HoldingPickup);
         SignalScopeControls.SetActive(gm.SignalScope.Enabled);
 
