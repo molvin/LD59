@@ -3,6 +3,8 @@ using UnityEngine;
 public class GoldenDoor : MonoBehaviour
 {
     public GameObject GoldenDoorObject;
+    public GameObject Portal;
+    public GameObject Credits;
     public float ActivationDistance = 10;
 
     void Update()
@@ -14,6 +16,8 @@ public class GoldenDoor : MonoBehaviour
             if (Vector3.Distance(GameManager.Get().Player.transform.position, GoldenDoorObject.transform.position) < ActivationDistance)
             {
                 Debug.Log("YOU'RE WINNER!");
+                Portal.SetActive(true);
+                Credits.SetActive(true);
             }
         }
     }
