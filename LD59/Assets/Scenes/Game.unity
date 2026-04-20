@@ -375,6 +375,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4044880996539317603, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
   m_PrefabInstance: {fileID: 768141147}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &768141149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4178037429768323241, guid: f0cef2cad1833764291e94207c24dd20, type: 3}
+  m_PrefabInstance: {fileID: 768141147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +558,13 @@ MonoBehaviour:
   LapsToActivate: 3
   Direction: 0
   CanRetrigger: 1
+  TriggerSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &1135474991
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +591,7 @@ Transform:
   m_GameObject: {fileID: 1135474991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.63713753, z: -0, w: 0.7707502}
-  m_LocalPosition: {x: -47.6, y: 0, z: -83.8}
+  m_LocalPosition: {x: -396.3, y: 0, z: -408.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -897,7 +909,7 @@ MonoBehaviour:
   Dests:
   - {fileID: 1473347675}
   - {fileID: 682181504}
-  - {fileID: 1206599300}
+  - {fileID: 768141149}
   - {fileID: 1206599300}
 --- !u!1 &1733772866
 GameObject:
