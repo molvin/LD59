@@ -108,6 +108,33 @@ public class SignalScope : Interactable
 
     private void Update()
     {
+        CanBeInteractedWith = GameManager.Get().IsDay;
+
+        if(!CanBeInteractedWith)
+        {
+            Amplitude = Frequency = Krangle = 0;
+
+
+            if (Enabled)
+            {
+                Enabled = false;
+                cam.transform.SetParent(camOriginalParent);
+                cam.transform.SetLocalPositionAndRotation(camOriginalLocalPos, camOriginalLocalRot);
+                player.MovementEnabled = true;
+                if (polaroidCamera != null) polaroidCamera.Enabled = true;
+                if (polaroidBook != null) polaroidBook.Enabled = true;
+            }
+            UpdateBeep(0);
+
+            SineWaveMat.SetFloat("_Amplitude", Amplitude);
+            SineWaveMat.SetFloat("_Frequency", Frequency);
+            SineWaveMat.SetFloat("_Krangle", Krangle);
+            Text.text = "";
+
+            return;
+        }
+
+
         if(Enabled)
         {
             cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
