@@ -18,7 +18,7 @@ public abstract class CircleAround : MonoBehaviour
 
     private float? currentProgress;
     private Vector3 lastTrackedDirection;
-    private bool hasTriggered;
+    protected bool hasTriggered;
 
     protected abstract void Trigger();
 

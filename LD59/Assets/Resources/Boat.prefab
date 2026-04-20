@@ -964,7 +964,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.11666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 99d0c7fa1fc102c4cbb38efb807765c5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 931a37285afc1104fb2e939a41a5abff, type: 2}
   m_BuildHeightMesh: 0
 --- !u!114 &880218753869541324
 MonoBehaviour:
@@ -1148,117 +1148,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.955
       objectReference: {fileID: 0}
-    - target: {fileID: 197384434029307361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
+    - target: {fileID: 5568506363361189212, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: Interactable
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 197384434029307361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.438
-      objectReference: {fileID: 0}
-    - target: {fileID: 197384434029307361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.842
-      objectReference: {fileID: 0}
-    - target: {fileID: 2024394527103104697, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2382224011313330687, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: BeepSound.Path
-      value: event:/RadioBeeps/RadioBeep
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: FullBeepThreshold
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: VolumeChangeSpeed
-      value: 0.37
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: FullBeepSound.Path
-      value: event:/RadioBeeps/FullRadioBeep
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: BeepSound.Guid.Data1
-      value: -2097094246
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: BeepSound.Guid.Data2
-      value: 1173055990
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: BeepSound.Guid.Data3
-      value: 852340414
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: BeepSound.Guid.Data4
-      value: -168139508
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: FullBeepSound.Guid.Data1
-      value: 121391875
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: FullBeepSound.Guid.Data2
-      value: 1174886935
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: FullBeepSound.Guid.Data3
-      value: 466631300
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: FullBeepSound.Guid.Data4
-      value: -166360025
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094220231537989472, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4269086360576456052, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800676340367831162, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4915194694470985233, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5232066295050201999, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5826484626918431737, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6353053436813884875, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6403166453888134116, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6531283932681052143, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
+    - target: {fileID: 5568506363361189212, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: ControlPlayerMovement
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_Name
       value: SignalScope
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359461239134155361, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
