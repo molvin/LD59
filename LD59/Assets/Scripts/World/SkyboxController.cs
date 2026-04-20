@@ -210,12 +210,12 @@ public class SkyboxController : MonoBehaviour
     private IEnumerator MoveMoon()
     {
         Vector3 currentDir = moonDir;
-        Vector3 targetDir = GetSkyboxDir(moon.Target.position, moon.Height);
 
         float t = 0;
         updateMoonPos = false;
         while (t <= MoonMoveDuration)
         {
+            Vector3 targetDir = GetSkyboxDir(moon.Target.position, moon.Height);
             t += Time.deltaTime;
             moonDir = Vector3.Lerp(currentDir, targetDir, t / MoonMoveDuration);
             yield return null;
