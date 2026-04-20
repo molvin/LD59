@@ -15,10 +15,10 @@ public class PolaroidBook : MonoBehaviour
 
     private PolaroidPicture[] pictures;
     private Note[] notes;
-
-    private List<Texture2D> polaroids = new();
+    private List<(string, Texture2D)> polaroids = new();
     private Player player;
     private int currentPage;
+    private bool isInteracting;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class PolaroidBook : MonoBehaviour
 
     private void Update()
     {
-        if (Enabled && Input.GetKeyDown(KeyCode.G))
+        if (Enabled && !IsOpen && Input.GetKeyDown(KeyCode.G))
         {
             PolaroidCamera cam = GameManager.Get().PolaroidCamera;
             if (cam == null || !cam.TakingPicture && !player.HoldingPickup)
@@ -40,13 +40,34 @@ public class PolaroidBook : MonoBehaviour
 
         if(Enabled && IsOpen)
         {
-            foreach(var p in pictures)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(0))
             {
-                p.TryInteract(Camera.main.transform);
+                foreach(var p in pictures)
+                {
+                    if (hit.collider.gameObject == p.gameObject)
+                    {
+                        p.Interact(transform);
+                        isInteracting = true;
+                        break;
+                    }
+                }
             }
 
-            if(Input.GetMouseButtonDown(1))
+            if(!isInteracting && Input.GetMouseButtonDown(1))
                 Open(false);
+
+            if(isInteracting && Input.GetMouseButtonDown(1))
+                isInteracting = false;
+
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                FlipPage(-1);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                FlipPage(1);
+            }
         }
     }
 
@@ -83,22 +104,30 @@ public class PolaroidBook : MonoBehaviour
 
         for (int i = 0; i < pictures.Length; i++)
         {
+            PolaroidPicture picture = pictures[i];
+
             int idx = startIndex + i;
-            if (idx < polaroids.Count && polaroids[idx] != null)
+            if (idx < polaroids.Count)
             {
-                pictures[i].gameObject.SetActive(true);
+                (string text, Texture2D texture) = polaroids[idx]; 
+                picture.gameObject.SetActive(true);
+                picture.Interactable = true;
+                picture.Text = text;
+                picture.Picture = texture;
+                picture.UpdatePicture();
             }
             else
             {
-                pictures[i].gameObject.SetActive(false);
+                picture.Interactable = false;
+                picture.gameObject.SetActive(false);
             }
         }
 
     }
 
-    public void AddPicture(Texture2D texture)
+    public void AddPicture(string text, Texture2D texture)
     {
-        polaroids.Add(texture);
+        polaroids.Add((text, texture));
     }
 
     public void AddNote(string title, string text)
