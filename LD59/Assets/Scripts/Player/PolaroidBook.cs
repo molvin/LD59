@@ -101,7 +101,8 @@ public class PolaroidBook : MonoBehaviour
             n.Interactable = open;
         }
 
-        UpdatePicturesAndNotes();
+        if(open)
+            UpdatePicturesAndNotes();
     }
 
     private int PolaroidPageCount()
