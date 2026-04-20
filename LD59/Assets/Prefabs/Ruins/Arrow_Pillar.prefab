@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 56bd8a367408a524abe6d07e7262a9d4, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ec65697db7ef8e443aeb1cbdc4606123, type: 2}
+      objectReference: {fileID: 2100000, guid: b43d2c4943db2ec49b2ef4646765c193, type: 2}
     - target: {fileID: 919132149155446097, guid: 56bd8a367408a524abe6d07e7262a9d4, type: 3}
       propertyPath: m_Name
       value: Arrow_Pillar
