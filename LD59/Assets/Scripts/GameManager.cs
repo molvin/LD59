@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : Subsystem<GameManager>
@@ -22,7 +23,7 @@ public class GameManager : Subsystem<GameManager>
 
     private Vector3 startPosition = new(0, 0.5f, 0);
     private Quaternion startRotation = Quaternion.identity;
-    private List<GameObject> happyPillars = new();
+    public List<int> happyPillars = new();
     private List<DayNightBound> timeBound = new();
 
     public int HappyPillarCount => happyPillars.Count;
@@ -37,7 +38,7 @@ public class GameManager : Subsystem<GameManager>
         }
     }
 
-    public void RegisterHappyPillar(GameObject pillar)
+    public void RegisterHappyPillar(int pillar)
     {
         if (!happyPillars.Contains(pillar))
         {

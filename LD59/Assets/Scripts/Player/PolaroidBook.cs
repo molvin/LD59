@@ -31,7 +31,7 @@ public class PolaroidBook : MonoBehaviour
         Open(false);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (Enabled && !IsOpen && Input.GetKeyDown(KeyCode.G))
         {
@@ -49,21 +49,33 @@ public class PolaroidBook : MonoBehaviour
                 {
                     if (hit.collider.gameObject == p.gameObject)
                     {
-                        p.Interact(transform);
-                        IsInteracting = true;
+                        if(GameManager.Get().SignalScope.Enabled)
+                        {
+                            GameManager.Get().SignalScope.PinPolaroid(p.Picture);
+                            Open(false);                            
+                        }
+                        else
+                        {
+                            p.Interact(transform);
+                            IsInteracting = true;
+                        }
                         break;
                     }
                 }
 
-                foreach(var n in notes)
+                if(!GameManager.Get().SignalScope.Enabled)
                 {
-                    if (hit.collider.gameObject == n.gameObject)
+                    foreach(var n in notes)
                     {
-                        n.Interact(transform);
-                        IsInteracting = true;
-                        break;
+                        if (hit.collider.gameObject == n.gameObject)
+                        {
+                            n.Interact(transform);
+                            IsInteracting = true;
+                            break;
+                        }
                     }
                 }
+                
             }
 
             if(!IsInteracting && Input.GetMouseButtonDown(1))
@@ -89,7 +101,7 @@ public class PolaroidBook : MonoBehaviour
     {
         IsOpen = open;
         Root.SetActive(open);
-        player.MovementEnabled = !open;
+        player.MovementEnabled = !open && !GameManager.Get().SignalScope.Enabled;
         Cursor.lockState = open ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = open;
 

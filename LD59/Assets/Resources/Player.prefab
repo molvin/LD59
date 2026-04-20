@@ -1433,6 +1433,8 @@ MonoBehaviour:
 
     Change Beep Volume: Z/X
 
+    Open Picture Book: G
+
     Exit: Right Click'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1460,8 +1462,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1693,6 +1695,25 @@ MonoBehaviour:
   MouseSensitivity: 80
   MoveAcceleration: 12
   MoveDeceleration: 0.01
+  Footstep:
+    Guid:
+      Data1: 362656416
+      Data2: 1327003292
+      Data3: -931430763
+      Data4: 1868899165
+    Path: event:/Footstep
+  FootstepSounds:
+  - name: DEBUG_Brown
+    sound: 1
+  - name: Dirt
+    sound: 0
+  - name: Grass
+    sound: 3
+  - name: Pebles
+    sound: 2
+  - name: Tiles
+    sound: 0
+  FootstepStride: 0.7
   MovementEnabled: 1
   HoldingPickup: 0
 --- !u!1 &1884726478380355942
