@@ -38,7 +38,7 @@ public class PolaroidCamera : MonoBehaviour
         }
     }
 
-    private IEnumerator TakePicture()
+    public IEnumerator TakePicture()
     {
         Player player = GameManager.Get().Player;
 
