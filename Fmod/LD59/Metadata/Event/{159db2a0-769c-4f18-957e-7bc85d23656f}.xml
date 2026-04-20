@@ -2,8 +2,8 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{159db2a0-769c-4f18-957e-7bc85d23656f}">
 		<property name="note">
-			<value>0. Wood
-1. Stone
+			<value>0. Stone 
+1. Wood
 2. Gravel
 3. Grass</value>
 		</property>
@@ -111,9 +111,6 @@
 		<property name="start">
 			<value>3</value>
 		</property>
-		<property name="length">
-			<value>0.80000000000000004</value>
-		</property>
 		<relationship name="sounds">
 			<destination>{684bdc72-de1a-4591-9d29-13ccb2b9118e}</destination>
 			<destination>{43c43861-1c1f-45db-badd-ac98a9e2f816}</destination>
@@ -128,9 +125,6 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{72350032-1187-4cd1-90cb-16451c79b6f0}">
-		<property name="length">
-			<value>0.80000000000000004</value>
-		</property>
 		<relationship name="sounds">
 			<destination>{51b84168-567e-4486-adfd-a6c3e1bb2a8d}</destination>
 			<destination>{0500f47a-297b-43bf-860b-65fdfbfda7bb}</destination>
@@ -164,9 +158,6 @@
 	<object class="MultiSound" id="{8a214462-43a4-4b71-ad86-d81f51d34e71}">
 		<property name="start">
 			<value>1</value>
-		</property>
-		<property name="length">
-			<value>0.80000000000000004</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{2192426a-5b78-4a6a-823c-f7e164c94070}</destination>
