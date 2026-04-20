@@ -826,7 +826,7 @@ PrefabInstance:
     - target: {fileID: 3508511421521374165, guid: d8343b279ea54c644a0832a6d7dc4196, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 035bc3ad3caa8e34f8ca8ae82a79d515, type: 2}
+      objectReference: {fileID: 2100000, guid: fe7403fc7cd0e7e46ab15a0f224495d6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1790,7 +1790,7 @@ PrefabInstance:
     - target: {fileID: 3508511421521374165, guid: d8343b279ea54c644a0832a6d7dc4196, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 2675203eec817ee47a57528a917643a1, type: 2}
+      objectReference: {fileID: 2100000, guid: cc19deeca4ddb0143800ffe4c69eecde, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5690,6 +5690,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 6592769631143261427, guid: f0475bbfb5a9ac14b84864fff808a101, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e88743ccfa8afc4ca210573b49789fe, type: 2}
     - target: {fileID: 9120586603671136767, guid: f0475bbfb5a9ac14b84864fff808a101, type: 3}
       propertyPath: m_Name
       value: Plaque_With_Tarp
