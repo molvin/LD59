@@ -2405,6 +2405,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: PolaroidPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 390434061076902385, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
+      propertyPath: m_Name
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018034625601334091, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2762002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018034625601334091, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2762002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018034625601334091, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2762002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018034625601334091, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018034625601334091, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.021
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018034625601334091, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.074
+      objectReference: {fileID: 0}
     - target: {fileID: 2988574933179074837, guid: 80286e9e1591fed4da06c8acbcf24fe2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.698
