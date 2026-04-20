@@ -51,6 +51,7 @@ public class SkyboxController : MonoBehaviour
     private float nightTemp;
     private Color dayColor;
     private Color nightColor;
+    private bool updateMoonPos;
 
     private void Start()
     {
@@ -127,6 +128,11 @@ public class SkyboxController : MonoBehaviour
             nightTimeSkyboxMaterial.SetVector(name + "Dir", GetSkyboxDir(sign.Target.position, sign.Height));
             if(updateSize)
                 nightTimeSkyboxMaterial.SetFloat(name + "Size", sign.Size);
+        }
+
+        if(updateMoonPos)
+        {
+            moonDir = GetSkyboxDir(moon.Target.position, moon.Height);
         }
 
         nightTimeSkyboxMaterial.SetVector("_MoonDir", moonDir);
@@ -207,12 +213,14 @@ public class SkyboxController : MonoBehaviour
         Vector3 targetDir = GetSkyboxDir(moon.Target.position, moon.Height);
 
         float t = 0;
+        updateMoonPos = false;
         while (t <= MoonMoveDuration)
         {
             t += Time.deltaTime;
             moonDir = Vector3.Lerp(currentDir, targetDir, t / MoonMoveDuration);
             yield return null;
         }
+        updateMoonPos = true;
     }
 
     public void SetDayNightTransition(float t)

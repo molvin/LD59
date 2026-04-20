@@ -243,11 +243,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &593043344 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6390631091449101333, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
-  m_PrefabInstance: {fileID: 1473347673}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &593043345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8373393109625644761, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
@@ -624,6 +619,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3974229788498165041, guid: a0cd61588cdfb84439cfcedd3d21cba8, type: 3}
   m_PrefabInstance: {fileID: 1206599298}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1312201679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 681252078298882507, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+  m_PrefabInstance: {fileID: 1473347673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1359460728
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +768,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1664418903}
     m_Modifications:
+    - target: {fileID: 681252078298882507, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 801321945624717405, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.86488605
@@ -791,7 +795,11 @@ PrefabInstance:
     - target: {fileID: 1714907235204276587, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: GoldenDoorObject
       value: 
-      objectReference: {fileID: 593043344}
+      objectReference: {fileID: 1312201679}
+    - target: {fileID: 1714907235204276587, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
+      propertyPath: ActivationDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3203828012559319891, guid: b6b03460e04530b469aa2870dda91d7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
