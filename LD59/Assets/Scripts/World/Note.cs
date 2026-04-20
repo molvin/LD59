@@ -40,6 +40,19 @@ public class Note : Pickupable
         this.title = title;
         this.text = text;
         CanvasText.text = this.text;
+
+        if(holding)
+        {
+            CloseUpNote.SetActive(true);
+            FarAwayNote.SetActive(false);
+            CanvasText.text = text;
+        }
+        else
+        {
+            CloseUpNote.SetActive(false);
+            FarAwayNote.SetActive(true);
+            CanvasText.text = "";
+        }
     }
 
     protected override void Drop()
