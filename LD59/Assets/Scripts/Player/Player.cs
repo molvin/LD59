@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
     public EventReference Footstep;
     public List<FootSound> FootstepSounds;
     public float FootstepStride = 0.8f;
+    [Header("Headbob")]
+    public float HeadbobFrequency = 3.8f;
+    public float HeadbobSideRatio = 0.008f;
+    public float HeadbobVerticalRatio = 0.016f;
     private float distanceTraveledSinceLastFootstep;
 
     [HideInInspector] public bool MovementEnabled = true;
@@ -107,7 +111,7 @@ public class Player : MonoBehaviour
         return terrainData.terrainLayers[dominantIndex].name;
     }
 
-    void Update()
+    void LateUpdate()
     {
         CheckForDayNightShift();
         
@@ -210,7 +214,10 @@ public class Player : MonoBehaviour
         Vector3 lastOffset = localSpaceOffset;
         localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
 
-        distanceTraveledSinceLastFootstep += Vector3.Distance(lastOffset, localSpaceOffset);
+        float deltaPos = Vector3.Distance(lastOffset, localSpaceOffset);
+        HeadBob(deltaPos);
+
+        distanceTraveledSinceLastFootstep += deltaPos;
         if (distanceTraveledSinceLastFootstep > FootstepStride)
         {
             distanceTraveledSinceLastFootstep = 0;
@@ -335,5 +342,14 @@ public class Player : MonoBehaviour
             inStartAnimation = false;
         }
         StartCoroutine(Animation());
+    }
+
+    private void HeadBob(float speed)
+    {
+        float bobAmount = speed;
+        float bobX = Mathf.Sin(Time.time * HeadbobFrequency) * bobAmount * HeadbobSideRatio;
+        float bobY = Mathf.Abs(Mathf.Cos(Time.time * HeadbobFrequency)) * bobAmount * HeadbobVerticalRatio;
+
+        camera.transform.localPosition = Vector3.up * (PLAYER_HEIGHT + bobY) + Vector3.right * bobX;
     }
 }
