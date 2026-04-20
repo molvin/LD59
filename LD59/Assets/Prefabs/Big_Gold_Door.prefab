@@ -96,10 +96,30 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c44b777d6efa9084b9f66ef3acec8c62, type: 2}
+    - target: {fileID: -4597499287114759165, guid: 588b38e7148140443ae4e165d689a949, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5bf8f6b5ed9fac0489fc7c1d461d5e80, type: 2}
+    - target: {fileID: -3272517899884228061, guid: 588b38e7148140443ae4e165d689a949, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3272517899884228061, guid: 588b38e7148140443ae4e165d689a949, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3272517899884228061, guid: 588b38e7148140443ae4e165d689a949, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 588b38e7148140443ae4e165d689a949, type: 3}
       propertyPath: m_Name
       value: Big_Gold_Door
       objectReference: {fileID: 0}
+    - target: {fileID: 1735261068935882654, guid: 588b38e7148140443ae4e165d689a949, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7489b508042157841b43b775f7fda97e, type: 2}
     - target: {fileID: 5534900643467966286, guid: 588b38e7148140443ae4e165d689a949, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
