@@ -6,6 +6,8 @@ public class Note : Pickupable
     public TextAsset TextFile;
     public TextMeshProUGUI CanvasText;
 
+    public GameObject CloseUpNote, FarAwayNote;
+
     private string title;
     private string text;
 
@@ -19,7 +21,18 @@ public class Note : Pickupable
     
     private void Update()
     {
-        CanvasText.text = holding || InBook ? text : "";
+        if(holding)
+        {
+            CloseUpNote.SetActive(true);
+            FarAwayNote.SetActive(false);
+            CanvasText.text = text;
+        }
+        else
+        {
+            CloseUpNote.SetActive(false);
+            FarAwayNote.SetActive(true);
+            CanvasText.text = "";
+        }
     }
 
     public void UpdateText(string title, string text)
