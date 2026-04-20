@@ -48,7 +48,7 @@ public class PauseMenu : MonoBehaviour
         int currentIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
-            resOptions.Add($"{resolutions[i].width}x{resolutions[i].height} {resolutions[i].refreshRateRatio.numerator}Hz");
+            resOptions.Add($"{resolutions[i].width}x{resolutions[i].height} {Mathf.RoundToInt((float)resolutions[i].refreshRateRatio.value)}Hz");
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                 currentIndex = i;
         }
