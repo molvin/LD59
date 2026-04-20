@@ -34,8 +34,11 @@ public class PolaroidPicture : Pickupable
 
     public void UpdatePicture()
     {
-        CanvasImage.sprite = Sprite.Create(Picture, new Rect(0, 0, Picture.width, Picture.height), new Vector2(0.5f, 0.5f));
-        CanvasText.text = Text;
+        if(Picture != null)
+        {
+            CanvasImage.sprite = Sprite.Create(Picture, new Rect(0, 0, Picture.width, Picture.height), new Vector2(0.5f, 0.5f));
+            CanvasText.text = Text;
+        }
     }
 
     protected override void Drop()
