@@ -5,7 +5,7 @@
 			<value>CloseBook</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{14fd9fbd-5255-44cf-b9ea-f9561d9eb89a}</destination>
@@ -76,7 +76,7 @@
 	</object>
 	<object class="SingleSound" id="{51f69955-ec7a-4ab6-81d5-45c48b91f887}">
 		<property name="length">
-			<value>1.1815208333333334</value>
+			<value>1.278375</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{f9328154-8912-43fc-8ffb-a830f6cce1e5}</destination>
