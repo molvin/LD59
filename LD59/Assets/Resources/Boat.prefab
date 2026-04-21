@@ -1218,6 +1218,10 @@ PrefabInstance:
       propertyPath: MinModulDialAngle
       value: -30
       objectReference: {fileID: 0}
+    - target: {fileID: 2658972593469129675, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
+      propertyPath: CorrectSettingsPercentageMargin
+      value: 0.13
+      objectReference: {fileID: 0}
     - target: {fileID: 3270022694665281837, guid: f62c61896d4676f489e09fcc07ae734f, type: 3}
       propertyPath: m_IsActive
       value: 0
