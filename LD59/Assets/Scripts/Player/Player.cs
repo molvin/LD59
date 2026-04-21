@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.K) && Time.time - lastTimeStandingOnBoat > 120.0f)
         {
-            Unstuck();
+            // Unstuck();
         }
 
         standingOn = GroundType.None;
@@ -215,7 +215,7 @@ public class Player : MonoBehaviour
         localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
 
         float deltaPos = Vector3.Distance(lastOffset, localSpaceOffset);
-        HeadBob(deltaPos);
+       // HeadBob(deltaPos);
 
         distanceTraveledSinceLastFootstep += deltaPos;
         if (distanceTraveledSinceLastFootstep > FootstepStride)
@@ -346,10 +346,12 @@ public class Player : MonoBehaviour
 
     private void HeadBob(float speed)
     {
-        float bobAmount = speed;
-        float bobX = Mathf.Sin(Time.time * HeadbobFrequency) * bobAmount * HeadbobSideRatio;
-        float bobY = Mathf.Abs(Mathf.Cos(Time.time * HeadbobFrequency)) * bobAmount * HeadbobVerticalRatio;
-
-        camera.transform.localPosition = Vector3.up * (PLAYER_HEIGHT + bobY) + Vector3.right * bobX;
+        if(camera.transform.parent != null)
+        {
+            float bobAmount = speed;
+            float bobX = Mathf.Sin(Time.time * HeadbobFrequency) * bobAmount * HeadbobSideRatio;
+            float bobY = Mathf.Abs(Mathf.Cos(Time.time * HeadbobFrequency)) * bobAmount * HeadbobVerticalRatio;
+            camera.transform.localPosition = Vector3.up * (PLAYER_HEIGHT + bobY) + Vector3.right * bobX;
+        }
     }
 }

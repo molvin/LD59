@@ -271,8 +271,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5513906, y: 1, z: 1.425256}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.7474388, y: 1, z: 1.4244764}
+  m_Center: {x: -0.006889264, y: 0, z: 0.024897724}
 --- !u!1 &4027148115372415046
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +660,7 @@ Transform:
   m_GameObject: {fileID: 6706164715627074514}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071069, z: -0, w: -0.70710677}
-  m_LocalPosition: {x: -2.906, y: 0.713, z: -2.03}
+  m_LocalPosition: {x: -2.906, y: 0.84, z: -1.444}
   m_LocalScale: {x: 0.68932, y: 1.1831, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -702,7 +702,7 @@ MonoBehaviour:
   InteractDistance: 3
   InteractError: 0.5
   CanBeInteractedWith: 1
-  SampleDistance: 1
+  SampleDistance: 1.8
 --- !u!1 &6876507824023754695
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +827,7 @@ Transform:
   m_GameObject: {fileID: 7771302796920241095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.848, y: 0.713, z: -2.032}
+  m_LocalPosition: {x: 2.848, y: 0.773, z: -1.43}
   m_LocalScale: {x: 0.68932, y: 1.1831, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -869,7 +869,7 @@ MonoBehaviour:
   InteractDistance: 3
   InteractError: 0.5
   CanBeInteractedWith: 1
-  SampleDistance: 1
+  SampleDistance: 1.8
 --- !u!1 &7945921454809496981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1408,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5eb2de0030c5c144883bcd51305b5241, type: 2}
+    - target: {fileID: 6505912596536071647, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6505912596536071647, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.86
+      objectReference: {fileID: 0}
     - target: {fileID: 6872020622914918042, guid: e65d5063f431dce41bd5fdee47c7c9cc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

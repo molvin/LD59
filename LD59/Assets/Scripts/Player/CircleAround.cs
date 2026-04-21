@@ -73,8 +73,10 @@ public abstract class CircleAround : MonoBehaviour
                 RuntimeManager.PlayOneShot(TriggerSound, transform.position);
             }
             
-            TriggerAnimation.SetActive(true);
-
+            if (TriggerAnimation != null)
+            {
+                TriggerAnimation.SetActive(true);
+            }
 
             Trigger();
             if (CanRetrigger)

@@ -3795,7 +3795,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 800
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -7031,7 +7031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   Image: {fileID: 520497577144587049}
   Default: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  Interactable: {fileID: 21300000, guid: 2f5eb81abb60f0e4b97ccf93f5a7d47d, type: 3}
+  Interactable: {fileID: 21300000, guid: f12b088e373c2c24b948acc3493341f2, type: 3}
   DefaultSize: 8
   InteractableSize: 35
 --- !u!1 &8510271421723951504
