@@ -86,12 +86,12 @@ public class SkyboxController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameManager gm = GameManager.Get();
-            gm.ToggleDayNight();
+            // GameManager gm = GameManager.Get();
+            // gm.ToggleDayNight();
         }
         if(Input.GetKeyDown(KeyCode.L))
         {
-            GameManager.Get().happyPillars.Add(GameManager.Get().HappyPillarCount);
+            // GameManager.Get().happyPillars.Add(GameManager.Get().HappyPillarCount);
         }
 
         // UpdateSkybox();
