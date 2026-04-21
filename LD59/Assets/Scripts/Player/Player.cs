@@ -215,7 +215,7 @@ public class Player : MonoBehaviour
         localSpaceOffset = boat.transform.InverseTransformPoint(transform.position);
 
         float deltaPos = Vector3.Distance(lastOffset, localSpaceOffset);
-        HeadBob(deltaPos);
+       // HeadBob(deltaPos);
 
         distanceTraveledSinceLastFootstep += deltaPos;
         if (distanceTraveledSinceLastFootstep > FootstepStride)
