@@ -42,6 +42,15 @@ public class SkyboxController : MonoBehaviour
     [SerializeField] private float MinHorizonOffset = 0.09f;
     [SerializeField] private float MaxHorizonOffset = 0.27f;
 
+    private static readonly int MoonTexID       = Shader.PropertyToID("_MoonTex");
+    private static readonly int MoonDirID       = Shader.PropertyToID("_MoonDir");
+    private static readonly int MoonSizeID      = Shader.PropertyToID("_MoonSize");
+    private static readonly int HorizonOffsetID = Shader.PropertyToID("_HorizonOffset");
+
+    private int[] starSignTexIDs;
+    private int[] starSignDirIDs;
+    private int[] starSignSizeIDs;
+
     private int circledPillars = 0;
     private Vector3 moonDir = Vector3.up;
 
@@ -65,11 +74,17 @@ public class SkyboxController : MonoBehaviour
         dayTimeSkyboxMaterial = new Material(dayTimeSkyboxMaterial);
         nightTimeSkyboxMaterial = new Material(nightTimeSkyboxMaterial);
 
+        starSignTexIDs  = new int[starSigns.Length];
+        starSignDirIDs  = new int[starSigns.Length];
+        starSignSizeIDs = new int[starSigns.Length];
         for (int i = 0; i < starSigns.Length; i++)
         {
-            nightTimeSkyboxMaterial.SetTexture("_StarSign" + i + "Tex", starSigns[i].Texture);
+            starSignTexIDs[i]  = Shader.PropertyToID($"_StarSign{i}Tex");
+            starSignDirIDs[i]  = Shader.PropertyToID($"_StarSign{i}Dir");
+            starSignSizeIDs[i] = Shader.PropertyToID($"_StarSign{i}Size");
+            nightTimeSkyboxMaterial.SetTexture(starSignTexIDs[i], starSigns[i].Texture);
         }
-        nightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Phases[0]);
+        nightTimeSkyboxMaterial.SetTexture(MoonTexID, moon.Phases[0]);
         UpdateSkybox();
         UpdateStarSigns(true);
     }
@@ -124,10 +139,9 @@ public class SkyboxController : MonoBehaviour
         for (int i = 0; i < starSigns.Length; i++)
         {
             StarSign sign = starSigns[i];
-            string name = $"_StarSign{i}";
-            nightTimeSkyboxMaterial.SetVector(name + "Dir", GetSkyboxDir(sign.Target.position, sign.Height));
+            nightTimeSkyboxMaterial.SetVector(starSignDirIDs[i], GetSkyboxDir(sign.Target.position, sign.Height));
             if(updateSize)
-                nightTimeSkyboxMaterial.SetFloat(name + "Size", sign.Size);
+                nightTimeSkyboxMaterial.SetFloat(starSignSizeIDs[i], sign.Size);
         }
 
         if(updateMoonPos)
@@ -135,8 +149,8 @@ public class SkyboxController : MonoBehaviour
             moonDir = GetSkyboxDir(moon.Target.position, moon.Height);
         }
 
-        nightTimeSkyboxMaterial.SetVector("_MoonDir", moonDir);
-        nightTimeSkyboxMaterial.SetFloat("_MoonSize", moon.Size);
+        nightTimeSkyboxMaterial.SetVector(MoonDirID, moonDir);
+        nightTimeSkyboxMaterial.SetFloat(MoonSizeID, moon.Size);
     }
 
     public void TakePicture()
@@ -172,8 +186,8 @@ public class SkyboxController : MonoBehaviour
         Player player = GameManager.Get().Player;
         float t = Mathf.InverseLerp(PlayerMinHeight, PlayerMaxHeight, player.transform.position.y);
         float horizonOffset = Mathf.Lerp(MinHorizonOffset, MaxHorizonOffset, t);
-        dayTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
-        nightTimeSkyboxMaterial.SetFloat("_HorizonOffset", horizonOffset);
+        dayTimeSkyboxMaterial.SetFloat(HorizonOffsetID, horizonOffset);
+        nightTimeSkyboxMaterial.SetFloat(HorizonOffsetID, horizonOffset);
     }
 
     private void UpdateNightSunPosition()
@@ -187,16 +201,12 @@ public class SkyboxController : MonoBehaviour
         if (x != circledPillars)
         {
             circledPillars = x;
-            nightTimeSkyboxMaterial.SetTexture("_MoonTex", moon.Phases[circledPillars]);
+            nightTimeSkyboxMaterial.SetTexture(MoonTexID, moon.Phases[circledPillars]);
 
             foreach(int idx in GameManager.Get().happyPillars)
             {
-                if (idx == 0)
-                    nightTimeSkyboxMaterial.SetFloat("_StarSign0Size", 0);
-                if (idx == 1)
-                    nightTimeSkyboxMaterial.SetFloat("_StarSign1Size", 0);
-                if (idx == 2)
-                    nightTimeSkyboxMaterial.SetFloat("_StarSign2Size", 0);
+                if (idx < starSignSizeIDs.Length)
+                    nightTimeSkyboxMaterial.SetFloat(starSignSizeIDs[idx], 0);
             }
 
 

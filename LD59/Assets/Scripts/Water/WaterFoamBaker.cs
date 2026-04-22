@@ -133,7 +133,6 @@ public class WaterFoamBaker : MonoBehaviour
             }
         }
 
-        Debug.Log($"WaterFoamBaker: baked {tilesRoot.childCount} tiles at {TextureSize}×{TextureSize}.");
     }
 
     private void ExportToPng(RenderTexture rt, int index)
@@ -163,6 +162,5 @@ public class WaterFoamBaker : MonoBehaviour
 
         DestroyImmediate(readback);
         DestroyImmediate(export);
-        Debug.Log($"WaterFoamBaker: saved tile {index} to {path}");
     }
 }

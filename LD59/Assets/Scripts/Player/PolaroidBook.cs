@@ -24,8 +24,26 @@ public class PolaroidBook : MonoBehaviour
     private Player player;
     private int currentPage;
     public bool IsInteracting { get; private set; }
+    public bool IsInteractingWithPolaroid { get; private set; }
+    private PolaroidPicture currentPolaroid = null;
 
     public List<Texture2D> startPictures;
+
+    private void Awake()
+    {
+        try
+        {
+            if (!OpenBookSound.IsNull) RuntimeManager.GetEventDescription(OpenBookSound).loadSampleData();
+            if (!CloseBookSound.IsNull) RuntimeManager.GetEventDescription(CloseBookSound).loadSampleData();
+            if (!FlipPageSound.IsNull) RuntimeManager.GetEventDescription(FlipPageSound).loadSampleData();
+            if (!InspectSound.IsNull) RuntimeManager.GetEventDescription(InspectSound).loadSampleData();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("Error loading audio samples: " + ex.Message);
+        }
+    }
+
 
     private void Start()
     {
@@ -44,7 +62,7 @@ public class PolaroidBook : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Enabled && !IsOpen && Input.GetKeyDown(KeyCode.G))
+        if (Enabled && !IsOpen && Input.GetKeyDown(KeyCode.G) && !player.isSteering)
         {
             PolaroidCamera cam = GameManager.Get().PolaroidCamera;
             if (cam == null || !cam.TakingPicture && !player.HoldingPickup)
@@ -59,8 +77,9 @@ public class PolaroidBook : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(0) && !IsInteracting)
             {
-                foreach(var p in pictures)
+                for (int i = 0; i < pictures.Length; i++)
                 {
+                    PolaroidPicture p = pictures[i];
                     if (hit.collider.gameObject == p.gameObject)
                     {
                         if(GameManager.Get().SignalScope.Enabled)
@@ -72,6 +91,8 @@ public class PolaroidBook : MonoBehaviour
                         {
                             p.Interact(transform);
                             IsInteracting = true;
+                            IsInteractingWithPolaroid = true;
+                            currentPolaroid = p;
                             RuntimeManager.PlayOneShot(InspectSound, transform.position);
                         }
                         break;
@@ -97,9 +118,23 @@ public class PolaroidBook : MonoBehaviour
             if(!IsInteracting && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.G)))
                 Open(false);
 
+            if (IsInteractingWithPolaroid && Input.GetKeyDown(KeyCode.Delete))
+            {
+                IsInteracting = false;
+                IsInteractingWithPolaroid = false;
+                currentPolaroid.InternalDrop();
+                polaroids.Remove(("", currentPolaroid.Picture));
+                currentPolaroid = null;
+                RuntimeManager.PlayOneShot(InspectSound, transform.position);
+                
+                UpdatePicturesAndNotes();
+            }
+
             if(IsInteracting && Input.GetMouseButtonDown(1))
             {
                 IsInteracting = false;
+                IsInteractingWithPolaroid = false;
+                currentPolaroid = null;
                 RuntimeManager.PlayOneShot(InspectSound, transform.position);
             }
 

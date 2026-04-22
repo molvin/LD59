@@ -15,8 +15,7 @@ public class GoldenDoor : MonoBehaviour
 
             if (Vector3.Distance(GameManager.Get().Player.transform.position, GoldenDoorObject.transform.position) < ActivationDistance)
             {
-                Debug.Log("YOU'RE WINNER!");
-                Portal.SetActive(true);
+Portal.SetActive(true);
                 Credits.SetActive(true);
             }
         }

@@ -23,6 +23,16 @@ public abstract class CircleAround : MonoBehaviour
 
     protected abstract void Trigger();
 
+    void Awake()
+    {
+        try
+        {
+            if (!TriggerSound.IsNull) RuntimeManager.GetEventDescription(TriggerSound).loadSampleData();
+        }
+        catch (System.Exception ex) { Debug.LogWarning("Error loading audio samples: " + ex.Message); }
+    }
+
+
     void Update()
     {
         if (hasTriggered)

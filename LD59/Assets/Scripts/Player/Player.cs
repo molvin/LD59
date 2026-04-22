@@ -80,7 +80,15 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         CameraAnimator.enabled = false;
+
+        try
+        {
+            if (!Footstep.IsNull) RuntimeManager.GetEventDescription(Footstep).loadSampleData();
+            if (!NightSwitchSound.IsNull) RuntimeManager.GetEventDescription(NightSwitchSound).loadSampleData();
+        }
+        catch (System.Exception ex) { Debug.LogWarning("Error loading audio samples: " + ex.Message); }
     }
+
 
     public void Unstuck()
     {
@@ -233,8 +241,8 @@ public class Player : MonoBehaviour
             if (!Footstep.IsNull && !inStartAnimation)
             {
                 EventInstance step = RuntimeManager.CreateInstance(Footstep);
-                step.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
                 step.setParameterByName("Terrain", terrainSound);
+                step.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
                 step.start();
                 step.release();
             }

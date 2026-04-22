@@ -9,6 +9,10 @@ Shader "Custom/SineWave"
         _BgColor ("Background Color", Color) = (0, 0, 0, 1)
         _Thickness ("Line Thickness", Float) = 0.01
         _ScrollSpeed ("Scroll Speed", Float) = 1.0
+
+        [Header(Dropoff)]
+        _CurveFactor ("How Much Curve per Meter Distance", Float) = 0.04
+        _CurvePower  ("Falloff Power of the Curve",        Float) = 1.8
     }
     SubShader
     {
@@ -43,12 +47,17 @@ Shader "Custom/SineWave"
                 float4 _BgColor;
                 float _Thickness;
                 float _ScrollSpeed;
+                float _CurveFactor;
+                float _CurvePower;
             CBUFFER_END
 
             Varyings vert(Attributes IN)
             {
                 Varyings OUT;
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                float3 worldPos = TransformObjectToWorld(IN.positionOS.xyz);
+                float dist = distance(_WorldSpaceCameraPos.xz, worldPos.xz);
+                worldPos.y -= pow(abs(dist * _CurveFactor), _CurvePower);
+                OUT.positionHCS = TransformWorldToHClip(worldPos);
                 OUT.uv = IN.uv;
                 return OUT;
             }

@@ -29,10 +29,20 @@ public class PolaroidCamera : MonoBehaviour
     public bool TakingPicture { get; private set; }
     private Vector3 visualObjectStartPos;
 
+    private void Awake()
+    {
+        try
+        {
+            if (!SnapSound.IsNull) RuntimeManager.GetEventDescription(SnapSound).loadSampleData();
+            if (!WhirrSound.IsNull) RuntimeManager.GetEventDescription(WhirrSound).loadSampleData();
+        }
+        catch (System.Exception ex) { Debug.LogWarning("Error loading audio samples: " + ex.Message); }
+    }
+
+
     private void Update()
     {
-        PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
-        if(HasCamera && Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen) && !GameManager.Get().Player.HoldingPickup)
+        if(HasCamera && Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && !GameManager.Get().Book.IsOpen && !GameManager.Get().Player.HoldingPickup)
         {
             StartCoroutine(TakePicture());
         }
@@ -120,15 +130,11 @@ public class PolaroidCamera : MonoBehaviour
 
         while (true)
         {
-            if(Input.GetKeyDown(KeyCode.D))
+            if(Input.GetKeyDown(KeyCode.T) || Input.GetMouseButtonDown(1))
             {
                 PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
                 if (book != null)
                     book.AddPicture("", photo);
-                break;
-            }
-            else if(Input.GetKeyDown(KeyCode.A)) 
-            {
                 break;
             }
 
