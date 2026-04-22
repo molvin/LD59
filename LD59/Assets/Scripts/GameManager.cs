@@ -70,8 +70,7 @@ public class GameManager : Subsystem<GameManager>
 
         if(startPoint != null)
         {
-            Debug.Log($"SPAWNING AT: {startPoint.transform.position}");
-            startPosition = startPoint.transform.position;
+startPosition = startPoint.transform.position;
             startRotation = startPoint.transform.rotation;
         }
 

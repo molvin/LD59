@@ -61,14 +61,18 @@ public class Pickupable : Interactable
 
         if (Input.GetMouseButtonDown(1))
         {
-            holding = false;
-            if(ControlPlayerMovement)
-            {
-                player.MovementEnabled = true;
-                player.HoldingPickup = false;
-            }
-            Drop();
+            InternalDrop();
         }
+    }
+    public void InternalDrop()
+    {
+        holding = false;
+        if(ControlPlayerMovement)
+        {
+            player.MovementEnabled = true;
+            player.HoldingPickup = false;
+        }
+        Drop();
     }
 
     protected virtual void Drop()
