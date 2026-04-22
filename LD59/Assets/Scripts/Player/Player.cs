@@ -1,10 +1,12 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FMOD.Studio;
-using FMODUnity;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Windows;
+using Input = UnityEngine.Input;
 
 public class Player : MonoBehaviour
 {
@@ -290,6 +292,7 @@ public class Player : MonoBehaviour
     {
         IEnumerator DayShiftAnimation(bool goingToNight)
         {
+            Boat boat = GameManager.Get().Boat;
             CameraAnimator.enabled = true;
             MovementEnabled = false;
             RuntimeManager.PlayOneShot(NightSwitchSound, transform.position);
@@ -305,6 +308,7 @@ public class Player : MonoBehaviour
             while (t < duration)
             {
                 skybox.SetDayNightTransition(t / duration);
+                boat.Throttle(-.2f);
                 t += Time.deltaTime;
                 yield return null;
             }

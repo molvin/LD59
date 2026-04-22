@@ -10,7 +10,7 @@ public class CameraPickup : Pickupable
         Transform camT = Camera.main.transform;
         TutorialCanvas.transform.forward = -camT.forward;
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && holding)
         {
             holding = false;
             if (ControlPlayerMovement)
