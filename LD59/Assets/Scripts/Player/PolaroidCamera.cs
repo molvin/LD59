@@ -42,8 +42,7 @@ public class PolaroidCamera : MonoBehaviour
 
     private void Update()
     {
-        PolaroidBook book = FindFirstObjectByType<PolaroidBook>();
-        if(HasCamera && Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && (book == null || !book.IsOpen) && !GameManager.Get().Player.HoldingPickup)
+        if(HasCamera && Enabled && Input.GetKeyDown(KeyCode.T) && !TakingPicture && !GameManager.Get().Book.IsOpen && !GameManager.Get().Player.HoldingPickup)
         {
             StartCoroutine(TakePicture());
         }
