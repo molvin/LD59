@@ -4,6 +4,7 @@ using UnityEngine;
 public class WalkingControls : MonoBehaviour
 {
     public TextMeshProUGUI Text;
+    public string ExtraWhenBoated = "Disembark boat by clicking ladders when close to a dock";
     public string ExtraTextWithPolaroid;
 
     private string commonText;
@@ -15,14 +16,19 @@ public class WalkingControls : MonoBehaviour
 
     void Update()
     {
+        string targetText = commonText;
         PolaroidCamera polaroid = GameManager.Get().PolaroidCamera;
         if(polaroid.HasCamera)
         {
-            Text.text = commonText + "\n" + ExtraTextWithPolaroid;
+            targetText = commonText + "\n" + ExtraTextWithPolaroid;
         }
-        else
+
+        Player player = GameManager.Get().Player;
+        if(player.Boated)
         {
-            Text.text = commonText;
+            targetText += "\n" + ExtraWhenBoated;
         }
+
+        Text.text = targetText;
     }
 }

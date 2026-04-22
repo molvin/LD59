@@ -70,6 +70,10 @@ public class SignalScope : Interactable
 
     public PolaroidPicture PinnedPolaroid;
     public GameObject Tutorial;
+    public TextMeshProUGUI TutorialText;
+
+    public Material TutorialEnabledMat;
+    public Material TutorialDisabledMat;
 
     private Texture2D pinnedPicture = null;
 
@@ -102,10 +106,18 @@ public class SignalScope : Interactable
         SineWaveMat.SetFloat("_Amplitude", Amplitude);
         SineWaveMat.SetFloat("_Frequency", Frequency);
         SineWaveMat.SetFloat("_Krangle", Krangle);
+
+        try
+        {
+            if (!BeepSound.IsNull) RuntimeManager.GetEventDescription(BeepSound).loadSampleData();
+        }
+        catch (System.Exception ex) { Debug.LogWarning("Error loading audio samples: " + ex.Message); }
     }
+
 
     private void Update()
     {
+
         if(Enabled)
         {
             cam.transform.SetPositionAndRotation(CameraPoint.position, CameraPoint.rotation);
@@ -164,11 +176,6 @@ public class SignalScope : Interactable
             FrequencyDial.localRotation = Quaternion.Euler(0f, 0f, freqAngle);
             ModuloDial.localRotation = Quaternion.Euler(0f, 0f, krangAngle);
 
-            for (int i = 0; i < CorrectSettings.Length; i++)
-            {
-                var result = GetError(CorrectSettings[i].Amplitude, CorrectSettings[i].Frequency, CorrectSettings[i].Krangle);
-                Debug.Log($"Setting {i}: amp error {result.ampError * 100f:F1}%, freq error {result.freqError * 100f:F1}%, krng error {result.krngError * 100f:F1}%, total {result.totalError * 100f:F1}%");
-            }
         }
 
         if (CorrectSettings.Length == WorldManager.Get().Destinations.Count)
@@ -185,7 +192,7 @@ public class SignalScope : Interactable
                 }
             }
 
-            if (bestSetting >= 0 && error < 0.05f)
+            if (bestSetting >= 0 && error < 0.10f)
             {
                 Transform destination = WorldManager.Get().Destinations[bestSetting].transform;
                 Transform origin = GameManager.Get().Boat.transform;
@@ -221,6 +228,12 @@ public class SignalScope : Interactable
         {
             UpdateBeep(0);
         }
+
+        if(Tutorial.activeSelf)
+        {
+            TutorialText.enabled = Enabled;
+            Tutorial.GetComponentInChildren<Renderer>().material = Enabled ? TutorialEnabledMat : TutorialDisabledMat;
+        }
     }
 
     private (float ampError, float freqError, float krngError, float totalError) GetError(float CorrectAmplitude, float CorrectFrequency, float CorrectKrangle)
@@ -240,8 +253,6 @@ public class SignalScope : Interactable
 
         if (t > 0)
         {
-            Debug.Log($"BEEP: {t}");
-
             float interval = Mathf.Lerp(BeepMaxInterval, BeepMinInterval, t);
             beepTimer -= Time.deltaTime;
             if (beepTimer <= 0f)

@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   GridSize: 100
-  CellSize: 0.2
+  CellSize: 0.5
   MeshFilter: {fileID: 2185292543409745995}
   WaterRenderer: {fileID: 3339993930268071993}
   MeshSavePath: Assets/Generated/WaterTileMesh.asset

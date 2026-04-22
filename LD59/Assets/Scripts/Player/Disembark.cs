@@ -4,6 +4,18 @@ using UnityEngine.AI;
 public class Disembark : Interactable
 {
     public float SampleDistance = 1.0f;
+    public float InteractionDistanceWhenDisembarked = 10.0f;
+    private float interactionDistanceWhenBoated;
+
+    private void Start()
+    {
+        interactionDistanceWhenBoated = InteractDistance;
+    }
+
+    private void Update()
+    {
+        InteractDistance = GameManager.Get().Player.Boated ? interactionDistanceWhenBoated : InteractionDistanceWhenDisembarked;
+    }
 
     public override void Interact(Transform interactorTransform)
     {

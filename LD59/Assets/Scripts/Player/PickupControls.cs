@@ -4,6 +4,7 @@ using UnityEngine;
 public class PickupControls : MonoBehaviour
 {
     public string ExtraText = "Pin to Signal Scope: F";
+    public string ExtraTextWhenCanDelete = "Destroy Picture: Delete";
     public TextMeshProUGUI Text;
 
     private string commonText;
@@ -17,13 +18,16 @@ public class PickupControls : MonoBehaviour
 
     private void Update()
     {
+        string targetText = commonText;
         if(HoldingPolaroid)
         {
-            Text.text = commonText + "\n" + ExtraText;
+            targetText += "\n" + ExtraText;
+        
+            if(GameManager.Get().Book.IsOpen && GameManager.Get().Book.IsInteractingWithPolaroid)
+            {
+                targetText += "\n" + ExtraTextWhenCanDelete;
+            }
         }
-        else
-        {
-            Text.text = commonText;
-        }
+        Text.text = targetText;
     }
 }
