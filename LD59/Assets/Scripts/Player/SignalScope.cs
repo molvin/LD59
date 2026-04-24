@@ -192,7 +192,7 @@ public class SignalScope : Interactable
                 }
             }
 
-            if (bestSetting >= 0 && error < 0.10f)
+            if (bestSetting >= 0 && error < 0.08f)
             {
                 Transform destination = WorldManager.Get().Destinations[bestSetting].transform;
                 Transform origin = GameManager.Get().Boat.transform;
@@ -212,6 +212,7 @@ public class SignalScope : Interactable
                     t = 0;
                 }
                 UpdateBeep(GameManager.Get().IsDay ? t : 0);
+                
             }
             else
             {

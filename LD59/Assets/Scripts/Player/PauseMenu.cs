@@ -14,14 +14,20 @@ public class PauseMenu : MonoBehaviour
     public Slider MasterSlider;
     public Slider SFXSlider;
     public Slider MusicSlider;
+    public Slider MouseSensitivitySlider;
     public TMP_Dropdown FullscreenDropdown;
     public TMP_Dropdown ResolutionDropdown;
     public Button UnstuckButton;
     public Button QuitButton;
+    public Button BackToGameButton;
 
     public string MasterBusPath;
     public string SFXBusPath;
     public string MusicBusPath;
+
+    public float MinMouseSensitivity = 150;
+    public float MaxMouseSensitivity = 10;
+    public float MouseSensitivity => GameManager.Get().Player.MouseSensitivity;
 
     private Bus masterBus;
     private Bus sfxBus;
@@ -57,6 +63,12 @@ public class PauseMenu : MonoBehaviour
         ResolutionDropdown.value = currentIndex;
         ResolutionDropdown.onValueChanged.AddListener(SetResolution);
 
+        MouseSensitivitySlider.minValue = Mathf.Min(MinMouseSensitivity, MaxMouseSensitivity);
+        MouseSensitivitySlider.maxValue = Mathf.Max(MinMouseSensitivity, MaxMouseSensitivity);
+        MouseSensitivitySlider.SetValueWithoutNotify(MouseSensitivity);
+        MouseSensitivitySlider.onValueChanged.AddListener(SetMouseSensitivity);
+
+        BackToGameButton.onClick.AddListener(CloseMenu);
         UnstuckButton.onClick.AddListener(Unstuck);
         QuitButton.onClick.AddListener(Quit);
 
@@ -88,6 +100,16 @@ public class PauseMenu : MonoBehaviour
     private void SetMasterVolume(float value) => masterBus.setVolume(value);
     private void SetSFXVolume(float value) => sfxBus.setVolume(value);
     private void SetMusicVolume(float value) => musicBus.setVolume(value);
+    private void SetMouseSensitivity(float value) => GameManager.Get().Player.MouseSensitivity = value;
+
+    private void CloseMenu()
+    {
+        Open = false;
+        GameManager.Get().Player.MovementEnabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Root.SetActive(false);
+    }
 
     private void SetFullscreen(int index)
     {
